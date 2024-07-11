@@ -2,13 +2,16 @@
 
 Common CMS for documentation using [Lark Docs](https://www.larksuite.com/en_us/product/creation).
 
-- [About The Project](#about-the-project)
-- [Getting Started](#getting-started)
-  - [Subsection 1](#subsection-1)
-- [Examples](#examples)
-  - [Example 1](#example-1)
-- [Contributing](#contributing)
-- [License](#license)
+- [Docs CMS](#docs-cms)
+  - [About The Project](#about-the-project)
+  - [Getting Started](#getting-started)
+    - [Set up](#set-up)
+    - [Set environment variables](#set-environment-variables)
+    - [Run the development server](#run-the-development-server)
+  - [Learn More](#learn-more)
+  - [Deploy on Vercel](#deploy-on-vercel)
+  - [Contributing](#contributing)
+  - [License](#license)
 
 ## About The Project
 
