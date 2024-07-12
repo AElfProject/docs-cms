@@ -1,3 +1,4 @@
+import type GithubSlugger from "github-slugger";
 import { Heading1 } from "./heading1";
 import { Heading3 } from "./heading3";
 import { Text } from "./text";
@@ -42,7 +43,11 @@ export type AnyItem =
   | Synched;
 
 export default function Renderer(
-  props: AnyItem & { allItems: AnyItem[]; nested?: boolean }
+  props: AnyItem & {
+    allItems: AnyItem[];
+    nested?: boolean;
+    slugger: GithubSlugger;
+  }
 ) {
   const first = props.allItems[0];
   if (

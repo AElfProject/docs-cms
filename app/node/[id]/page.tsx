@@ -1,5 +1,6 @@
 import Renderer, { AnyItem } from "@/components/blocks/renderer";
 import { fetcher } from "../../../lib/api";
+import GithubSlugger from "github-slugger";
 
 interface NodeData {
   node: {
@@ -52,11 +53,17 @@ export default async function Document({
   params: { id: string };
 }) {
   const data = await getData(id);
+  const slugger = new GithubSlugger();
 
   return (
     <main>
       {data?.items.map((item: AnyItem) => (
-        <Renderer key={item.block_id} {...item} allItems={data.items} />
+        <Renderer
+          key={item.block_id}
+          {...item}
+          allItems={data.items}
+          slugger={slugger}
+        />
       ))}
       {process.env.NODE_ENV === "development" && (
         <pre className="mt-5">
