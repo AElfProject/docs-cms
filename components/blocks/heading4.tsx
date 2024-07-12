@@ -11,7 +11,7 @@ export interface Heading4 extends Item {
 
 export function Heading4(props: Heading4) {
   return (
-    <h4 className="scroll-m-20 text-xl font-semibold tracking-tight">
+    <h4 className="text-3xl font-bold tracking-tight">
       {props.heading4.elements.map((i) => (
         <Element key={key()} {...i} />
       ))}

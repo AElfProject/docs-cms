@@ -1,4 +1,5 @@
 import { clsx } from "clsx";
+import Link from "next/link";
 
 export interface Element {
   text_run: {
@@ -7,6 +8,9 @@ export interface Element {
       bold: boolean;
       inline_code: boolean;
       italic: boolean;
+      link?: {
+        url?: string;
+      };
       strikethrough: boolean;
       underline: boolean;
     };
@@ -15,11 +19,24 @@ export interface Element {
 
 export function Element(props: Element) {
   const { content, text_element_style } = props.text_run;
-  const { bold, italic, strikethrough, underline, inline_code } =
+  const { bold, italic, strikethrough, underline, inline_code, link } =
     text_element_style;
 
   if (inline_code)
     return <pre className="inline p-1 bg-slate-300 rounded-md">{content}</pre>;
+
+  if (link && link?.url) {
+    return (
+      <Link
+        href={decodeURIComponent(link.url)}
+        target="_blank"
+        rel="noopener noreferrer"
+        className="underline hover:no-underline"
+      >
+        {content}
+      </Link>
+    );
+  }
 
   return (
     <span
