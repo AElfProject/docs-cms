@@ -2,7 +2,6 @@ import { getTenantAccessToken } from "../services/larkServices";
 
 export const fetcher = async (url: string) => {
   const tenantAccessToken = await getTenantAccessToken();
-  console.log(tenantAccessToken, "tenantAccessToken");
   const res = await fetch(url, {
     method: "GET",
     headers: {
