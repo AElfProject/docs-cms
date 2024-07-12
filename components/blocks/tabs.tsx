@@ -51,7 +51,13 @@ export function Tabs(props: Tabs) {
   ) as Tab[];
 
   return (
-    <TabsLib defaultValue="account" className="mt-8">
+    <TabsLib
+      defaultValue={
+        getFirstItem(allChildren[0].block_id, props.allItems)?.text.elements[0]
+          .text_run.content || "Tab 0"
+      }
+      className="mt-8"
+    >
       <TabsList>
         {allChildren.map((i, index) => {
           const value =
