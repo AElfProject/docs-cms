@@ -1,7 +1,7 @@
 import GithubSlugger from "github-slugger";
 import { AnyItem } from "./renderer";
-import Link from "next/link";
 import clsx from "clsx";
+import { HighlightLink } from "./highlight-link";
 
 export default function TableOfContents(props: { allItems: AnyItem[] }) {
   const slugger = new GithubSlugger();
@@ -79,7 +79,7 @@ export default function TableOfContents(props: { allItems: AnyItem[] }) {
                 "ml-16": i.block_type === 11,
               })}
             >
-              <Link href={`#${anchor}`}>{title}</Link>
+              <HighlightLink title={title} anchor={anchor} />
             </li>
           );
         })}
