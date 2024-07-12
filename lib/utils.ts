@@ -15,7 +15,7 @@ export function findTopLevelItems(data: NodesData, key: string) {
       }
       if (item.children) {
         for (let child of item.children) {
-          if (search(child.items, key)) {
+          if (search(child?.items, key)) {
             return true;
           }
         }
@@ -40,7 +40,7 @@ export function findPathByKey(data: NodesData, key: string) {
         return true;
       } else if (item.has_child && item.children.length > 0) {
         for (let child of item.children) {
-          if (find(child.items)) {
+          if (find(child?.items)) {
             // Add item to the beginning of path array
             path.unshift(item);
             return true;
@@ -65,7 +65,7 @@ export function findKeyInData(data: NodesData, key: string) {
       }
       if (item.children) {
         for (let child of item.children) {
-          if (search(child.items)) {
+          if (search(child?.items)) {
             return true;
           }
         }
@@ -78,10 +78,13 @@ export function findKeyInData(data: NodesData, key: string) {
 }
 
 export async function getFileByFolderToken(folderNodes?: NodesItem[]) {
-  let data, items;
+  let data = {} as NodesData,
+    items;
   if (!folderNodes) {
     data = await getNodeToken();
-    items = data?.items;
+    items = data?.items.filter(ele => {
+      return ele.title !== "Configurations" && ele.obj_type !== "bitable";
+    });
   } else {
     items = folderNodes;
   }
@@ -96,6 +99,7 @@ export async function getFileByFolderToken(folderNodes?: NodesItem[]) {
       await getFileByFolderToken(child.items);
     }
   }
+  data.items = items;
   return data as NodesData;
 }
 

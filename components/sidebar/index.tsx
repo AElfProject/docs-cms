@@ -119,7 +119,7 @@ export default function Sidebar({ menu }: Props) {
   return (
     <>
       {isKeyInMenu ? (
-        <aside className="z-30 pl-2 shrink-0 top-[46px] block max-w-[300px] h-[calc(100vh-46px)]">
+        <aside className="z-30 pl-2 shrink-0 top-[46px] block max-w-[300px] h-[calc(100vh-60px)]">
           <ConfigProvider
             theme={{
               token: {

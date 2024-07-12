@@ -34,7 +34,7 @@ export async function getNodeToken(token?: string) {
     }/nodes?parent_node_token=${token ? token : ""}`
   );
   const { data } = res;
-  return data;
+  return data as NodesData;
 }
 
 export async function getTenantAccessToken() {
@@ -61,4 +61,37 @@ export async function getTenantAccessToken() {
     throw new Error("Unable to get tenant access token.");
   }
   return data.tenant_access_token;
+}
+
+interface ResponseData<T> {
+  has_more: boolean;
+  items: T[];
+  page_token: string;
+  total: number;
+}
+interface TableItem {
+  name: string;
+  revision: number;
+  table_id: string;
+}
+export async function getTables(app_token: string) {
+  const res = await fetcher(
+    `https://open.larksuite.com/open-apis/bitable/v1/apps/${app_token}/tables`
+  );
+  const { data } = res;
+  return data as ResponseData<TableItem>;
+}
+interface RecordItem {
+  fields: {
+    key?: string;
+    value?: string;
+  };
+  id: string;
+  record_id: string;
+}
+export async function getRecord(app_token: string, table_id: string) {
+  const res = await fetcher(`	
+https://open.larksuite.com/open-apis/bitable/v1/apps/${app_token}/tables/${table_id}/records`);
+  const { data } = res;
+  return data as ResponseData<RecordItem>;
 }

@@ -8,6 +8,12 @@ const nextConfig = {
         port: "",
         pathname: "**",
       },
+      {
+        protocol: "https",
+        hostname: "docs.aelf.dev",
+        port: "",
+        pathname: "**",
+      },
     ],
   },
 };
