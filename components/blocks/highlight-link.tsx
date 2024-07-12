@@ -32,7 +32,7 @@ export function HighlightLink({
     return () => {
       if (!!el1) observer.unobserve(el1);
     };
-  }, []);
+  }, [anchor]);
 
   return (
     <Link
