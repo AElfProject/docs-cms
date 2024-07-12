@@ -1,3 +1,4 @@
+import type GithubSlugger from "github-slugger";
 import { Heading1 } from "./heading1";
 import { Heading3 } from "./heading3";
 import { Text } from "./text";
@@ -13,27 +14,41 @@ import { Callout } from "./callout";
 import { Tab, Tabs } from "./tabs";
 import { Synched } from "./synched";
 import { Divider } from "./divider";
+import { Heading5 } from "./heading5";
+import { Heading6 } from "./heading6";
+import { Heading7 } from "./heading7";
+import { Heading8 } from "./heading8";
+import { Heading9 } from "./heading9";
 
 export type AnyItem =
-  | Code
+  | Page
   | Text
   | Heading1
   | Heading2
   | Heading3
   | Heading4
-  | Ordered
+  | Heading5
+  | Heading6
+  | Heading7
+  | Heading8
+  | Heading9
   | Bullet
-  | Quote
-  | Page
-  | Image
+  | Ordered
+  | Code
   | Callout
-  | Tabs
+  | Divider
   | Tab
-  | Synched
-  | Divider;
+  | Tabs
+  | Image
+  | Quote
+  | Synched;
 
 export default function Renderer(
-  props: AnyItem & { allItems: AnyItem[]; nested?: boolean }
+  props: AnyItem & {
+    allItems: AnyItem[];
+    nested?: boolean;
+    slugger: GithubSlugger;
+  }
 ) {
   const first = props.allItems[0];
   if (
@@ -62,6 +77,21 @@ export default function Renderer(
 
     case 6:
       return <Heading4 {...props} />;
+
+    case 7:
+      return <Heading5 {...props} />;
+
+    case 8:
+      return <Heading6 {...props} />;
+
+    case 9:
+      return <Heading7 {...props} />;
+
+    case 10:
+      return <Heading8 {...props} />;
+
+    case 11:
+      return <Heading9 {...props} />;
 
     case 12:
       return <Bullet {...props} />;
