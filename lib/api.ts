@@ -1,4 +1,4 @@
-import { getTenantAccessToken } from "../app/api/token/route";
+import { getTenantAccessToken } from "../services/larkServices";
 
 export const fetcher = async (url: string) => {
   const tenantAccessToken = await getTenantAccessToken();
