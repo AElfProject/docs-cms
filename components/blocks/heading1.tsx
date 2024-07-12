@@ -1,5 +1,6 @@
 import { key } from "@/lib/utils";
 import { Item, TextStyle, Element } from "./common";
+import { Anchor } from "./anchor";
 
 export interface Heading1 extends Item {
   block_type: 3;
@@ -10,11 +11,16 @@ export interface Heading1 extends Item {
 }
 
 export function Heading1(props: Heading1) {
+  const anchor = props.slugger.slug(
+    props.heading1.elements.map((i) => i.text_run.content).join(" ")
+  );
+
   return (
-    <h1 className="text-6xl font-bold tracking-tight">
+    <h1 className="text-6xl font-bold tracking-tight" id={anchor}>
       {props.heading1.elements.map((i) => (
         <Element key={key()} {...i} />
       ))}
+      <Anchor anchor={anchor} />
     </h1>
   );
 }
