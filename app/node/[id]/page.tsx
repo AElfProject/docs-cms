@@ -1,4 +1,5 @@
 import Renderer, { AnyItem } from "@/components/blocks/renderer";
+import { fetcher } from "../../../lib/api";
 
 interface NodeData {
   node: {
@@ -27,36 +28,18 @@ interface DocData {
 }
 
 async function getData(id: string) {
-  const res = await fetch(
-    `https://open.larksuite.com/open-apis/wiki/v2/spaces/get_node?obj_type=wiki&token=${id}`,
-    {
-      method: "GET",
-      headers: {
-        Authorization: `Bearer ${process.env.USER_TOKEN}`,
-      },
-      // next: { revalidate: 1 },
-    }
+  const { data } = await fetcher(
+    `https://open.larksuite.com/open-apis/wiki/v2/spaces/get_node?obj_type=wiki&token=${id}`
   );
-
-  const { data } = await res.json();
 
   const node = data as NodeData;
 
   if (node?.node?.obj_type === "docx") {
     const id = node.node.obj_token;
 
-    const res = await fetch(
-      `https://open.larksuite.com/open-apis/docx/v1/documents/${id}/blocks?document_revision_id=-1&page_size=500`,
-      {
-        method: "GET",
-        headers: {
-          Authorization: `Bearer ${process.env.USER_TOKEN}`,
-        },
-        // next: { revalidate: 1 },
-      }
+    const { data } = await fetcher(
+      `https://open.larksuite.com/open-apis/docx/v1/documents/${id}/blocks?document_revision_id=-1&page_size=500`
     );
-
-    const { data } = await res.json();
     return data as DocData;
   } else {
     throw new Error("not supported");
