@@ -7,6 +7,7 @@ import Sidebar from "@/components/sidebar/index";
 import { getNodeToken, NodesData, NodesItem } from "../services/larkServices";
 import Header from "../components/Header";
 import Breadcrumb from "../components/Breadcrumb";
+import { Footer } from "@/components/footer";
 
 const fontSans = FontSans({
   subsets: ["latin"],
@@ -46,6 +47,7 @@ export default async function RootLayout({
                 </div>
               </div>
             </div>
+            <Footer />
           </main>
         </AntdRegistry>
       </body>

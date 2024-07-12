@@ -1,13 +1,16 @@
 import { fetcher } from "@/lib/api";
 import { z } from "zod";
 
+/**
+ * https://open.larksuite.com/document/server-docs/docs/wiki-v2/space-node/list
+ */
 export const nodeSchema = z.object({
   space_id: z.string(),
   node_token: z.string(),
   obj_token: z.string(),
-  obj_type: z.string(),
+  obj_type: z.enum(["doc", "sheet", "mindnote", "bitable", "file", "docx"]),
   parent_node_token: z.string(),
-  node_type: z.string(),
+  node_type: z.enum(["origin", "shortcut"]),
   origin_node_token: z.string(),
   origin_space_id: z.string(),
   has_child: z.boolean(),
