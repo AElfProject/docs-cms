@@ -12,6 +12,7 @@ import { Image } from "./image";
 import { Callout } from "./callout";
 import { Tab, Tabs } from "./tabs";
 import { Synched } from "./synched";
+import { Divider } from "./divider";
 
 export type AnyItem =
   | Code
@@ -28,7 +29,8 @@ export type AnyItem =
   | Callout
   | Tabs
   | Tab
-  | Synched;
+  | Synched
+  | Divider;
 
 export default function Renderer(
   props: AnyItem & { allItems: AnyItem[]; nested?: boolean }
@@ -72,6 +74,9 @@ export default function Renderer(
 
     case 19:
       return <Callout {...props} />;
+
+    case 22:
+      return <Divider {...props} />;
 
     case 24:
       return <Tabs {...props} />;
