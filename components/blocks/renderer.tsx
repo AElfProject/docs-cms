@@ -11,7 +11,7 @@ import { Page } from "./page";
 import { Heading2 } from "./heading2";
 import { Image } from "./image";
 import { Callout } from "./callout";
-import { Tabs } from "./tabs";
+import { Tab, Tabs } from "./tabs";
 import { Synched } from "./synched";
 import { Divider } from "./divider";
 import { Heading5 } from "./heading5";
@@ -37,6 +37,7 @@ export type AnyItem =
   | Code
   | Callout
   | Divider
+  | Tab
   | Tabs
   | Image
   | Quote
