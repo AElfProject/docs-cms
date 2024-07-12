@@ -11,7 +11,7 @@ export interface Heading2 extends Item {
 
 export function Heading2(props: Heading2) {
   return (
-    <h2 className="scroll-m-20 border-b pb-2 text-3xl font-semibold tracking-tight first:mt-0">
+    <h2 className="text-5xl font-bold tracking-tight">
       {props.heading2.elements.map((i) => (
         <Element key={key()} {...i} />
       ))}

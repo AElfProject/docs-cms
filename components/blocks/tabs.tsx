@@ -83,7 +83,7 @@ export function Tabs(props: Tabs) {
           <TabsContent
             key={i.block_id}
             value={value}
-            className="rounded-md border px-4 pb-2 mb-8"
+            className="rounded-md border p-4 mb-8"
           >
             {allChildren?.map((i) => (
               <Renderer
