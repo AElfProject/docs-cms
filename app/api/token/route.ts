@@ -31,8 +31,7 @@ async function getAppAccessToken() {
 
   return data.app_access_token;
 }
-
-export async function getUserAccessToken(code: string) {
+async function getUserAccessToken(code: string) {
   const res = await fetch(
     `https://open.larksuite.com/open-apis/authen/v1/oidc/access_token`,
     {
