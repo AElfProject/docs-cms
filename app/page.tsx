@@ -7,7 +7,7 @@ const getChildList = (ele: NodesItem, index: number) => {
   return ele.children.map(element => {
     return element.items.map(item => {
       return (
-        <li className="ml-4">
+        <li className="ml-4" key={item.node_token}>
           <Link href={`/node/${item.node_token}`} className="text-blue-500">
             {item.title}
           </Link>

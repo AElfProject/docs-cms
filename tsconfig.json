@@ -17,8 +17,18 @@
         "name": "next"
       }
     ],
+    "baseUrl": ".",
     "paths": {
-      "@/*": ["./*"]
+      "@/*": ["./*"],
+      "prismjs/components/prism-csharp": [
+        "node_modules/@types/prismjs/components/index.d.ts"
+      ],
+      "prismjs/components/prism-bash": [
+        "node_modules/@types/prismjs/components/index.d.ts"
+      ],
+      "prismjs/components/prism-json": [
+        "node_modules/@types/prismjs/components/index.d.ts"
+      ]
     }
   },
   "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", ".next/types/**/*.ts"],
