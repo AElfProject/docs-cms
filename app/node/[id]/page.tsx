@@ -2,6 +2,7 @@ import Renderer, { AnyItem } from "@/components/blocks/renderer";
 import { fetcher } from "../../../lib/api";
 import GithubSlugger from "github-slugger";
 import TableOfContents from "@/components/blocks/table-of-contents";
+import { PrevNext } from "@/components/prev-next";
 
 interface NodeData {
   node: {
@@ -67,6 +68,7 @@ export default async function Document({
             slugger={slugger}
           />
         ))}
+        <PrevNext />
         {process.env.NODE_ENV === "development" && (
           <pre className="mt-5">
             For developer use, only visible in development <br />
