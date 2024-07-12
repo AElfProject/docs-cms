@@ -3,13 +3,13 @@ import Renderer from "./renderer";
 
 export interface Synched extends Item {
   block_type: 999;
-  children: string[];
+  children?: string[];
   undefined: {};
 }
 
 export function Synched(props: Synched) {
   const allChildren = props.allItems.filter((i) =>
-    props.children.includes(i.block_id)
+    props.children?.includes(i.block_id)
   );
 
   return (
