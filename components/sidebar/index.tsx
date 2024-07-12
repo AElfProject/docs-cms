@@ -39,10 +39,14 @@ type MenuItem = Required<MenuProps>["items"][number];
 export default function Sidebar({ menu }: Props) {
   const params = useParams();
   const { id } = params;
-  const [isKeyInMenu, setisKeyInMenu] = useState(false);
+  const [isKeyInMenu, setisKeyInMenu] = useState(
+    findKeyInData(menu, id as string)
+  );
   let temp: any = {};
   temp.items = findTopLevelItems(menu, id as string);
-  const [openKeys, setOpenKeys] = useState([] as string[]);
+  const [openKeys, setOpenKeys] = useState(
+    findPathByKey(temp, id as string)?.map(ele => ele.node_token)
+  );
   // click icon to open or close submenu
   const onIconClick = ({ key }: { key: string }) => {
     if (openKeys.includes(key)) {
@@ -78,7 +82,7 @@ export default function Sidebar({ menu }: Props) {
 
   // convert to menu items format
   const getMenuList = (data: NodesData) => {
-    const items = data.items;
+    const items = data?.items;
     const arr = [];
     for (let i = 0; i < items?.length; i++) {
       let obj: any = {
@@ -135,7 +139,7 @@ export default function Sidebar({ menu }: Props) {
               defaultOpenKeys={openKeys}
               inlineCollapsed={false}
               style={{ width: 256 }}
-              selectedKeys={[id]}
+              selectedKeys={[id as string]}
               mode="inline"
               items={menuItems}
               expandIcon={null}

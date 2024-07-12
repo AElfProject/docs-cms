@@ -50,8 +50,11 @@ export function findPathByKey(data: NodesData, key: string) {
     }
     return false;
   }
-  find(data.items);
-  return path.length > 0 ? path : null;
+  if (Array.isArray(data.items)) {
+    find(data.items);
+  }
+
+  return path;
 }
 
 export function findKeyInData(data: NodesData, key: string) {
@@ -78,7 +81,7 @@ export async function getFileByFolderToken(folderNodes?: NodesItem[]) {
   let data, items;
   if (!folderNodes) {
     data = await getNodeToken();
-    items = data.items;
+    items = data?.items;
   } else {
     items = folderNodes;
   }

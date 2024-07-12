@@ -42,7 +42,7 @@ async function getData(id: string) {
 
   const node = data as NodeData;
 
-  if (node.node.obj_type === "docx") {
+  if (node?.node?.obj_type === "docx") {
     const id = node.node.obj_token;
 
     const res = await fetch(
