@@ -1,30 +1,47 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+# Docs CMS
+
+Common CMS for documentation using [Lark Docs](https://www.larksuite.com/en_us/product/creation).
+
+- [Docs CMS](#docs-cms)
+  - [About The Project](#about-the-project)
+  - [Getting Started](#getting-started)
+    - [Set up](#set-up)
+    - [Set environment variables](#set-environment-variables)
+    - [Run the development server](#run-the-development-server)
+  - [Learn More](#learn-more)
+  - [Deploy on Vercel](#deploy-on-vercel)
+  - [Contributing](#contributing)
+  - [License](#license)
+
+## About The Project
+
+This is a [Next.js](https://nextjs.org/) project used to fetch documents using the [Lark Server APIs](https://open.larksuite.com/document/server-docs/getting-started/server-api-list) and to display them online as documentation.
 
 ## Getting Started
 
-Set the env var with your user token:
+### Set up
+
+Before installing, you need to install [Node.js](https://nodejs.org/en). Run the following command to install it in the current project:
+
+```sh
+npm install
+```
+
+### Set environment variables
+
+Run the following command to copy the default example and replace with your own variables:
 
 ```bash
 cp .env.example .env
 ```
 
-First, run the development server:
+### Run the development server
 
 ```bash
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
-
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
-
-This project uses [`next/font`](https://nextjs.org/docs/basic-features/font-optimization) to automatically optimize and load Inter, a custom Google Font.
+Open http://localhost:3000 with your browser to see the result.
 
 ## Learn More
 
@@ -39,6 +56,12 @@ You can check out [the Next.js GitHub repository](https://github.com/vercel/next
 
 The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+Check out the [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
 
-<!-- TODO: https://www.npmjs.com/package/iron-session -->
+## Contributing
+
+If you encounter a bug or have a feature request, please use the [Issue Tracker](https://github.com/AElfProject/aelf-dapp-factory/issues/new). The project is also open to contributions, so feel free to fork the project and open pull requests.
+
+## License
+
+Distributed under the MIT License. See [License](LICENSE) for more information.
