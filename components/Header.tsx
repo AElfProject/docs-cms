@@ -36,12 +36,12 @@ export default function Header({ menu }: Props) {
     setCurrent(e.key);
   };
   return (
-    <div className="fixed w-full bg-white z-50 flex mx-5">
+    <div className="fixed w-full bg-white z-50 flex mx-5 h-[60px]">
       <Link href="/" className="mr-8 flex">
         <Image src="/aelf-logo.svg" width={115} height={32} alt="logo"></Image>
       </Link>
       <Menu
-        className="w-full"
+        className="w-full flex items-center"
         onClick={onClick}
         selectedKeys={[current]}
         mode="horizontal"
