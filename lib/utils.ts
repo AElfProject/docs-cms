@@ -23,7 +23,7 @@ export function findTopLevelItems(data: NodesData, key: string) {
     }
     return false;
   }
-  for (let item of data.items) {
+  for (let item of data?.items) {
     if (search([item], key)) {
       return [item];
     }
@@ -86,7 +86,7 @@ export async function getFileByFolderToken(folderNodes?: NodesItem[]) {
     items = folderNodes;
   }
 
-  for (let i = 0; i < items.length; i++) {
+  for (let i = 0; i < items?.length; i++) {
     if (!items[i].children) {
       items[i].children = [];
     }

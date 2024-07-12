@@ -1,6 +1,7 @@
 import { default as NxImage } from "next/image";
 
 import { Item } from "./common";
+import { fetcher } from "../../lib/api";
 
 export interface Image extends Item {
   block_type: 27;
@@ -13,26 +14,9 @@ export interface Image extends Item {
 }
 
 async function getLink(token: string) {
-  const res = await fetch(
-    `https://open.larksuite.com/open-apis/drive/v1/medias/batch_get_tmp_download_url?file_tokens=${token}`,
-    {
-      headers: {
-        Authorization: `Bearer ${process.env.USER_TOKEN}`,
-      },
-    }
+  const { data } = await fetcher(
+    `https://open.larksuite.com/open-apis/drive/v1/medias/batch_get_tmp_download_url?file_tokens=${token}`
   );
-
-  const {
-    data,
-  }: {
-    code: number;
-    data: {
-      tmp_download_urls: {
-        file_token: string;
-        tmp_download_url: string;
-      }[];
-    };
-  } = await res.json();
 
   return data.tmp_download_urls[0].tmp_download_url;
 }

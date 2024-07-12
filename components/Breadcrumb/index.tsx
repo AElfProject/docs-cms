@@ -21,7 +21,7 @@ const getitemsById = (menu: NodesData, id: string) => {
   const pathArr = findPathByKey(temp, id);
   return pathArr?.map(ele => {
     let obj: any = {};
-    if (ele.has_child) {
+    if (ele.node_token !== id) {
       obj.href = `/node/${ele.node_token}`;
     }
     obj.title = ele.title;
