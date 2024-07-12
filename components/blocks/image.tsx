@@ -27,18 +27,20 @@ async function getLink(token: string) {
   }: {
     code: number;
     data: {
-      tmp_download_urls: {
+      tmp_download_urls?: {
         file_token: string;
-        tmp_download_url: string;
+        tmp_download_url?: string;
       }[];
     };
   } = await res.json();
 
-  return data.tmp_download_urls[0].tmp_download_url;
+  return data?.tmp_download_urls?.[0]?.tmp_download_url;
 }
 
 export async function Image(props: Image) {
   const src = await getLink(props.image.token);
+
+  if (!src) return <></>;
 
   return (
     <NxImage
