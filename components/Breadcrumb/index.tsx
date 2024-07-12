@@ -14,28 +14,40 @@ import { ItemType } from "antd/es/breadcrumb/Breadcrumb";
 interface Props {
   menu: NodesData;
 }
+
+const getitemsById = (menu: NodesData, id: string) => {
+  let temp: any = {};
+  temp.items = findTopLevelItems(menu, id);
+  const pathArr = findPathByKey(temp, id);
+  return pathArr?.map(ele => {
+    let obj: any = {};
+    if (ele.has_child) {
+      obj.href = `/node/${ele.node_token}`;
+    }
+    obj.title = ele.title;
+    return obj;
+  })!;
+};
 export default function BreadcrumbComponent({ menu }: Props) {
   const params = useParams();
   const { id } = params;
-  const [isKeyInMenu, setisKeyInMenu] = useState(false);
+  const [isKeyInMenu, setisKeyInMenu] = useState(
+    findKeyInData(menu, id as string)
+  );
   const home = {
     href: "/",
     title: <HomeOutlined />,
   };
-  const [items, setItems] = useState([] as ItemType[]);
+  const [items, setItems] = useState([
+    home,
+    ...getitemsById(menu, id as string),
+  ] as ItemType[]);
+
   useEffect(() => {
     const keyFlag = findKeyInData(menu, id as string);
     setisKeyInMenu(keyFlag);
     if (keyFlag) {
-      let temp: any = {};
-      temp.items = findTopLevelItems(menu, id as string);
-      const pathArr = findPathByKey(temp, id as string);
-      const itemList: ItemType[] = pathArr?.map(ele => {
-        let obj: any = {};
-        obj.href = `/node/${ele.node_token}`;
-        obj.title = <span>{ele.title}</span>;
-        return obj;
-      })!;
+      const itemList = getitemsById(menu, id as string);
       setItems([home, ...itemList]);
     }
   }, [id]);

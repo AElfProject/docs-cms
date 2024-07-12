@@ -7,7 +7,6 @@ import { useState } from "react";
 import Link from "next/link";
 import { useParams } from "next/navigation";
 import { findTopLevelItems } from "../lib/utils";
-import { useRouter } from "next/router";
 
 interface Props {
   menu: NodesData;
@@ -34,7 +33,6 @@ export default function Header({ menu }: Props) {
     temp.items && temp.items[0]?.node_token
   );
   const onClick: MenuProps["onClick"] = e => {
-    console.log("click ", e);
     setCurrent(e.key);
   };
   return (
