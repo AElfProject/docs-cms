@@ -1,6 +1,7 @@
 import Renderer, { AnyItem } from "@/components/blocks/renderer";
 import { fetcher } from "../../../lib/api";
 import GithubSlugger from "github-slugger";
+import TableOfContents from "@/components/blocks/table-of-contents";
 
 interface NodeData {
   node: {
@@ -56,21 +57,26 @@ export default async function Document({
   const slugger = new GithubSlugger();
 
   return (
-    <main>
-      {data?.items.map((item: AnyItem) => (
-        <Renderer
-          key={item.block_id}
-          {...item}
-          allItems={data.items}
-          slugger={slugger}
-        />
-      ))}
-      {process.env.NODE_ENV === "development" && (
-        <pre className="mt-5">
-          For developer use, only visible in development <br />
-          {JSON.stringify(data.items, undefined, 2)}
-        </pre>
-      )}
+    <main className="flex overflow-x-hidden">
+      <div className="w-2/3">
+        {data?.items.map((item: AnyItem) => (
+          <Renderer
+            key={item.block_id}
+            {...item}
+            allItems={data.items}
+            slugger={slugger}
+          />
+        ))}
+        {process.env.NODE_ENV === "development" && (
+          <pre className="mt-5">
+            For developer use, only visible in development <br />
+            {JSON.stringify(data.items, undefined, 2)}
+          </pre>
+        )}
+      </div>
+      <aside className="w-1/3">
+        <TableOfContents allItems={data.items} />
+      </aside>
     </main>
   );
 }
