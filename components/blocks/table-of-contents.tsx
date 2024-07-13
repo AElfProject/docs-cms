@@ -7,7 +7,7 @@ export default function TableOfContents(props: { allItems: AnyItem[] }) {
   const slugger = new GithubSlugger();
 
   return (
-    <ul className="list-none p-8 absolute">
+    <ul className="list-none p-8 lg:fixed">
       {props.allItems
         .filter((i) => [3, 4, 5, 6, 7, 8, 9, 10, 11].includes(i.block_type))
         .map((i) => {
