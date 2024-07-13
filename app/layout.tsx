@@ -4,7 +4,6 @@ import { Inter as FontSans } from "next/font/google";
 import { AntdRegistry } from "@ant-design/nextjs-registry";
 import { cn, getMenu } from "@/lib/utils";
 import Sidebar from "@/components/sidebar/index";
-import { getNodeToken, NodesData, NodesItem } from "../services/larkServices";
 import Header from "../components/Header";
 import Breadcrumb from "../components/Breadcrumb";
 import { Footer } from "@/components/footer";
@@ -39,9 +38,11 @@ export default async function RootLayout({
               <Header menu={menu} />
               <div className="pt-[60px] flex w-full">
                 <Sidebar menu={menu} />
-                <div className="container">
-                  <Breadcrumb menu={menu}></Breadcrumb>
-                  {children}
+                <div className="h-[calc(100vh-60px)] flex-1 overflow-auto">
+                  <div className="container">
+                    <Breadcrumb menu={menu}></Breadcrumb>
+                    {children}
+                  </div>
                 </div>
               </div>
             </div>
