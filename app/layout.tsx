@@ -38,11 +38,9 @@ export default async function RootLayout({
               <Header menu={menu} />
               <div className="pt-[60px] flex w-full">
                 <Sidebar menu={menu} />
-                <div className="h-[calc(100vh-60px)] flex-1 overflow-auto">
-                  <div className="container">
-                    <Breadcrumb menu={menu}></Breadcrumb>
-                    {children}
-                  </div>
+                <div className="container">
+                  <Breadcrumb menu={menu}></Breadcrumb>
+                  {children}
                 </div>
               </div>
             </div>
