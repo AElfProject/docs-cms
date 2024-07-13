@@ -1,4 +1,4 @@
-import { getTenantAccessToken } from "../services/larkServices";
+import { getTenantAccessToken } from "@/services/get-tenant-access-token";
 
 export const fetcher = async (url: string) => {
   const tenantAccessToken = await getTenantAccessToken();
