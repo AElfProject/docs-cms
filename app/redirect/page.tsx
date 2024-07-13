@@ -2,7 +2,7 @@
 "use client";
 import { useSearchParams } from "next/navigation";
 import { Suspense, useEffect, useRef } from "react";
-export default async function Redirect() {
+export default function Redirect() {
   return (
     <Suspense>
       <_Redirect />
