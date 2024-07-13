@@ -1,9 +1,19 @@
 import Renderer, { AnyItem } from "@/components/blocks/renderer";
-import { fetcher } from "../../../lib/api";
 import GithubSlugger from "github-slugger";
 import TableOfContents from "@/components/blocks/table-of-contents";
-import { PrevNext } from "@/components/prev-next";
+import { fetcher } from "../../../lib/api";
+import {
+  findIdByPath,
+  findPathByTitles,
+  formatStringArray,
+  getMenu,
+} from "../../../lib/utils";
 
+interface Props {
+  params: {
+    id: string[];
+  };
+}
 interface NodeData {
   node: {
     creator: string;
@@ -49,11 +59,11 @@ async function getData(id: string) {
   }
 }
 
-export default async function Document({
-  params: { id },
-}: {
-  params: { id: string };
-}) {
+export default async function Document({ params }: Props) {
+  const menu = await getMenu();
+  const titleArr = formatStringArray(params.id);
+  const item = findPathByTitles(menu, titleArr);
+  const id = findIdByPath(item!);
   const data = await getData(id);
   const slugger = new GithubSlugger();
 

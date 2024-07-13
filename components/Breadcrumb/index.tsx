@@ -7,6 +7,10 @@ import {
   findTopLevelItems,
   findPathByKey,
   findKeyInData,
+  formatStringArray,
+  findPathByTitles,
+  findIdByPath,
+  findTitlesById,
 } from "../../lib/utils";
 import { Breadcrumb } from "antd";
 import { ItemType } from "antd/es/breadcrumb/Breadcrumb";
@@ -20,9 +24,11 @@ const getitemsById = (menu: NodesData, id: string) => {
   temp.items = findTopLevelItems(menu, id);
   const pathArr = findPathByKey(temp, id);
   return pathArr?.map(ele => {
+    const titles = findTitlesById(menu, ele.node_token);
+    const url = titles?.join("/");
     let obj: any = {};
     if (ele.node_token !== id) {
-      obj.href = `/node/${ele.node_token}`;
+      obj.href = `/wiki/${url}`;
     }
     obj.title = ele.title;
     return obj;
@@ -30,7 +36,9 @@ const getitemsById = (menu: NodesData, id: string) => {
 };
 export default function BreadcrumbComponent({ menu }: Props) {
   const params = useParams();
-  const { id } = params;
+  const titleArr = formatStringArray(params.id as string[]);
+  const nodeItem = findPathByTitles(menu, titleArr);
+  const id = findIdByPath(nodeItem!);
   const [isKeyInMenu, setisKeyInMenu] = useState(
     findKeyInData(menu, id as string)
   );
