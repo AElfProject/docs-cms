@@ -45,7 +45,7 @@ export default async function Home() {
     configObj[ele.fields.key!] = ele.fields.value;
   });
   return (
-    <main className="p-8">
+    <main className="p-8 container">
       <div className="p-[0 6 6] bg-white">
         <div className="relative w-full h-[322px] mb-6">
           <Image
@@ -59,7 +59,7 @@ export default async function Home() {
         <p className="text-gray-700">{configObj.description}</p>
       </div>
       <div className="grid grid-flow-row-dense grid-cols-1 md:grid-cols-2 lg:grid-cols-3 mt-20">
-        {menu.items.map(ele => {
+        {menu.items.map((ele) => {
           const url = `/wiki/${toKebabCase(ele.title)}`;
           return (
             <ul key={ele.node_token} className="m-4 list-disc">
