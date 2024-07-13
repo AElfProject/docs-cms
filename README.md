@@ -51,7 +51,7 @@ Search is using Typesense.
 
 #### Updating the search index
 
-The scraper configuration is at [typesense.json](./typesense.json).
+The scraper configuration is at [scraper/typesense.json](./scraper/typesense.json).
 
 Minimum you need to edit the following:
 
@@ -73,6 +73,7 @@ To scrape the site and update the index:
 First, copy the default example and edit it:
 
 ```bash
+cd scraper
 cp .env.typesense.example .env.typesense
 ```
 
