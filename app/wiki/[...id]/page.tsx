@@ -83,12 +83,12 @@ export default async function Document({ params }: Props) {
           />
         ))}
         <PrevNext />
-        {process.env.NODE_ENV === "development" && (
+        {/* {process.env.NODE_ENV === "development" && (
           <pre className="mt-5">
             For developer use, only visible in development <br />
             {JSON.stringify(data.items, undefined, 2)}
           </pre>
-        )}
+        )} */}
       </div>
       <aside className="w-1/3">
         <TableOfContents allItems={data.items} />
