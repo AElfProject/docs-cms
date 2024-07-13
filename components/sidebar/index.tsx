@@ -43,8 +43,7 @@ type MenuItem = Required<MenuProps>["items"][number];
 export default function Sidebar({ menu }: Props) {
   const params = useParams();
   const titleArr = formatStringArray(params.id as string[]);
-  const nodeItem = findPathByTitles(menu, titleArr);
-  const id = findIdByPath(nodeItem!);
+  const { lastItemId: id } = findPathByTitles(menu, titleArr);
   const [isKeyInMenu, setisKeyInMenu] = useState(
     findKeyInData(menu, id as string)
   );
@@ -129,32 +128,36 @@ export default function Sidebar({ menu }: Props) {
   return (
     <>
       {isKeyInMenu ? (
-        <aside className="z-30 pl-2 shrink-0 block top-[60px] max-w-[300px] h-[calc(100vh-60px)] sticky">
-          <ConfigProvider
-            theme={{
-              token: {
-                colorLink: "#000",
-              },
-              components: {
-                Menu: {
-                  subMenuItemBg: "#fff",
-                  itemSelectedBg: "#fff",
+        <aside className="z-30 pl-2 shrink-0 block top-[60px] max-w-[300px] ">
+          <div className="sticky h-full max-h-[100vh] top-0">
+            <ConfigProvider
+              theme={{
+                token: {
+                  colorLink: "#000",
                 },
-              },
-            }}
-          >
-            <Menu
-              className="h-full"
-              openKeys={openKeys}
-              defaultOpenKeys={openKeys}
-              inlineCollapsed={false}
-              style={{ width: 256 }}
-              selectedKeys={[id as string]}
-              mode="inline"
-              items={menuItems}
-              expandIcon={null}
-            />
-          </ConfigProvider>
+                components: {
+                  Menu: {
+                    subMenuItemBg: "#fff",
+                    itemSelectedBg: "#fff",
+                  },
+                },
+              }}
+            >
+              <div className="pt-[60px]">
+                <Menu
+                  className="h-full "
+                  openKeys={openKeys}
+                  defaultOpenKeys={openKeys}
+                  inlineCollapsed={false}
+                  style={{ width: 256 }}
+                  selectedKeys={[id as string]}
+                  mode="inline"
+                  items={menuItems}
+                  expandIcon={null}
+                />
+              </div>
+            </ConfigProvider>
+          </div>
         </aside>
       ) : (
         <></>

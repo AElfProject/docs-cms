@@ -122,40 +122,52 @@ export function formatStringArray(ids: string[]): string[] {
       .join(" ");
   });
 }
-
-export function findPathByTitles(data: NodesData, targetTitles: string[]) {
-  function search(nodesData: NodesData, targetIndex: number): NodesItem | null {
-    if (targetIndex >= targetTitles?.length) {
-      return null;
+interface FindPathByTitlesResult {
+  path: NodesItem | null;
+  lastItemId: string | null;
+}
+export function findPathByTitles(
+  data: NodesData,
+  targetTitles: string[]
+): FindPathByTitlesResult {
+  function search(
+    nodesData: NodesData,
+    targetIndex: number
+  ): FindPathByTitlesResult {
+    if (targetIndex >= targetTitles?.length || !Array.isArray(targetTitles)) {
+      return { path: null, lastItemId: null };
     }
 
     for (const item of nodesData.items) {
-      if (item.title === targetTitles?.[targetIndex]) {
+      if (capitalizeFirstLetter(item.title) === targetTitles?.[targetIndex]) {
         if (targetIndex === targetTitles?.length - 1) {
           return {
-            ...item,
-            children: [],
+            path: { ...item, children: [] },
+            lastItemId: item.node_token,
           };
         } else if (item.children) {
           for (const child of item.children) {
             const result = search(child, targetIndex + 1);
-            if (result) {
+            if (result.path) {
               return {
-                ...item,
-                children: [
-                  {
-                    has_more: false,
-                    items: [result],
-                    page_token: "",
-                  },
-                ],
+                path: {
+                  ...item,
+                  children: [
+                    {
+                      has_more: false,
+                      items: [result.path],
+                      page_token: "",
+                    },
+                  ],
+                },
+                lastItemId: result.lastItemId,
               };
             }
           }
         }
       }
     }
-    return null;
+    return { path: null, lastItemId: null };
   }
 
   return search(data, 0);
@@ -175,10 +187,18 @@ export function findIdByPath(item: NodesItem) {
 export function toKebabCase(title: string): string {
   const words = title.split(" ");
   const kebabWords = words.map(word => {
-    return word.charAt(0).toLowerCase() + word.slice(1);
+    return word.toLowerCase();
   });
   return kebabWords.join("-");
 }
+// hello World contract -> Hello World Contract
+export function capitalizeFirstLetter(str: string) {
+  return str
+    .split(" ")
+    .map(word => word.charAt(0).toUpperCase() + word.slice(1).toLowerCase())
+    .join(" ");
+}
+
 export function findTitlesById(menu: NodesData, id: string) {
   function search(
     nodesData: NodesData,

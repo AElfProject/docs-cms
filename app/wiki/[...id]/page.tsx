@@ -1,5 +1,6 @@
 import Renderer, { AnyItem } from "@/components/blocks/renderer";
 import GithubSlugger from "github-slugger";
+import { redirect } from "next/navigation";
 import TableOfContents from "@/components/blocks/table-of-contents";
 import { fetcher } from "../../../lib/api";
 import {
@@ -63,9 +64,11 @@ async function getData(id: string) {
 export default async function Document({ params }: Props) {
   const menu = await getMenu();
   const titleArr = formatStringArray(params.id);
-  const item = findPathByTitles(menu, titleArr);
-  const id = findIdByPath(item!);
-  const data = await getData(id);
+  const { lastItemId: id } = findPathByTitles(menu, titleArr);
+  if (!id) {
+    redirect("/404");
+  }
+  const data = await getData(id!);
   const slugger = new GithubSlugger();
 
   return (
