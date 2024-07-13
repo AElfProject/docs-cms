@@ -8,6 +8,7 @@ import {
   formatStringArray,
   getMenu,
 } from "../../../lib/utils";
+import { PrevNext } from "../../../components/prev-next";
 
 interface Props {
   params: {
@@ -78,7 +79,7 @@ export default async function Document({ params }: Props) {
             slugger={slugger}
           />
         ))}
-        {/* <PrevNext /> */}
+        <PrevNext />
         {process.env.NODE_ENV === "development" && (
           <pre className="mt-5">
             For developer use, only visible in development <br />
