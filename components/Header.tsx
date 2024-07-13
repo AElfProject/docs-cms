@@ -7,12 +7,12 @@ import { useState } from "react";
 import Link from "next/link";
 import { useParams } from "next/navigation";
 import {
-  findIdByPath,
   findPathByTitles,
   findTitlesById,
   findTopLevelItems,
   formatStringArray,
 } from "../lib/utils";
+import Search from "./search";
 
 interface Props {
   menu: NodesData;
@@ -26,7 +26,7 @@ export default function Header({ menu }: Props) {
   let temp: any = {};
   temp.items = findTopLevelItems(menu, id as string);
   const items = menu.items;
-  const menuItems: MenuItem[] = items.map(ele => {
+  const menuItems: MenuItem[] = items.map((ele) => {
     const titles = findTitlesById(menu, ele.node_token);
     const url = titles?.join("/");
     let obj: any = {};
@@ -41,7 +41,7 @@ export default function Header({ menu }: Props) {
   const [current, setCurrent] = useState(
     temp.items && temp.items[0]?.node_token
   );
-  const onClick: MenuProps["onClick"] = e => {
+  const onClick: MenuProps["onClick"] = (e) => {
     setCurrent(e.key);
   };
   return (
@@ -56,6 +56,9 @@ export default function Header({ menu }: Props) {
         mode="horizontal"
         items={menuItems}
       />
+      <div className="flex flex-1 items-center justify-between space-x-2 md:justify-end mr-12">
+        <Search />
+      </div>
     </div>
   );
 }

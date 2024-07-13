@@ -45,7 +45,7 @@ export default async function Home() {
     configObj[ele.fields.key!] = ele.fields.value;
   });
   return (
-    <main className="p-8">
+    <main className="p-8 container min-h-[calc(100vh-225px)]">
       <div className="p-[0 6 6] bg-white">
         <div className="relative w-full h-[322px] mb-6">
           <Image
