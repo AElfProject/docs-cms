@@ -11,26 +11,13 @@ import {
 } from "typesense-docsearch-react";
 
 import "typesense-docsearch-css";
-
-const docSearchConfig: DocSearchProps = {
-  typesenseCollectionName: process.env.NEXT_PUBLIC_DOCSEARCH_INDEX_NAME!,
-  typesenseSearchParameters: {},
-  typesenseServerConfig: {
-    nodes: [
-      {
-        host: process.env.NEXT_PUBLIC_DOCSEARCH_APP_HOST!,
-        port: 443,
-        protocol: "https",
-      },
-    ],
-    apiKey: process.env.NEXT_PUBLIC_DOCSEARCH_API_KEY!,
-  },
-};
+import { searchConfigSchema } from "@/services/search-config-schema";
 
 export default function Search() {
   const searchButtonRef = useRef(null);
   const [isOpen, setIsOpen] = useState(false);
   const [initialQuery, setInitialQuery] = useState<string | null>(null);
+  const [docSearchConfig, setDocSearchConfig] = useState<DocSearchProps>();
 
   const onOpen = useCallback(() => {
     setIsOpen(true);
@@ -67,10 +54,38 @@ export default function Search() {
     return () => document.removeEventListener("keydown", down);
   }, []);
 
+  useEffect(() => {
+    (async () => {
+      const res = await fetch(`/api/search`);
+      const data = await res.json();
+
+      const config = searchConfigSchema.parse(data);
+
+      const docSearchConfig: DocSearchProps = {
+        typesenseCollectionName: config.index,
+        typesenseSearchParameters: {},
+        typesenseServerConfig: {
+          nodes: [
+            {
+              host: config.host,
+              port: 443,
+              protocol: "https",
+            },
+          ],
+          apiKey: config.apikey,
+        },
+        initialQuery: initialQuery || undefined,
+      };
+
+      setDocSearchConfig(docSearchConfig);
+    })();
+  }, [initialQuery]);
+
   return (
     <div className="w-full flex-1 md:w-auto md:flex-none">
       <DocSearchButton ref={searchButtonRef} onClick={onOpen} />
       {isOpen &&
+        docSearchConfig &&
         createPortal(
           <DocSearchModal {...docSearchConfig} initialScrollY={0} />,
           document.body
