@@ -1,3 +1,5 @@
+"use server";
+
 import { getTenantAccessToken } from "@/services/get-tenant-access-token";
 
 export const fetcher = async (url: string) => {
