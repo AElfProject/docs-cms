@@ -37,8 +37,7 @@ const getitemsById = (menu: NodesData, id: string) => {
 export default function BreadcrumbComponent({ menu }: Props) {
   const params = useParams();
   const titleArr = formatStringArray(params.id as string[]);
-  const nodeItem = findPathByTitles(menu, titleArr);
-  const id = findIdByPath(nodeItem!);
+  const { lastItemId: id } = findPathByTitles(menu, titleArr);
   const [isKeyInMenu, setisKeyInMenu] = useState(
     findKeyInData(menu, id as string)
   );

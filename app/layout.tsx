@@ -37,9 +37,9 @@ export default async function RootLayout({
           <main>
             <div className="border-b flex">
               <Header menu={menu} />
-              <div className="pt-[60px] flex w-full">
+              <div className="flex w-full">
                 <Sidebar menu={menu} />
-                <div className="container">
+                <div className="container pt-[60px]">
                   <Breadcrumb menu={menu}></Breadcrumb>
                   {children}
                 </div>

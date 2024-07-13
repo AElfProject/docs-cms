@@ -63,9 +63,8 @@ async function getData(id: string) {
 export default async function Document({ params }: Props) {
   const menu = await getMenu();
   const titleArr = formatStringArray(params.id);
-  const item = findPathByTitles(menu, titleArr);
-  const id = findIdByPath(item!);
-  const data = await getData(id);
+  const { lastItemId: id } = findPathByTitles(menu, titleArr);
+  const data = await getData(id!);
   const slugger = new GithubSlugger();
 
   return (

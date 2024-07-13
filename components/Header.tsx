@@ -22,8 +22,7 @@ type MenuItem = Required<MenuProps>["items"][number];
 export default function Header({ menu }: Props) {
   const params = useParams();
   const titleArr = formatStringArray(params.id as string[]);
-  const item = findPathByTitles(menu, titleArr);
-  const id = findIdByPath(item!);
+  const { lastItemId: id } = findPathByTitles(menu, titleArr);
   let temp: any = {};
   temp.items = findTopLevelItems(menu, id as string);
   const items = menu.items;
