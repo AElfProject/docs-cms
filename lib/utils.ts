@@ -134,13 +134,13 @@ export function findPathByTitles(
     nodesData: NodesData,
     targetIndex: number
   ): FindPathByTitlesResult {
-    if (targetIndex >= targetTitles.length) {
+    if (targetIndex >= targetTitles?.length || !Array.isArray(targetTitles)) {
       return { path: null, lastItemId: null };
     }
 
     for (const item of nodesData.items) {
-      if (capitalizeFirstLetter(item.title) === targetTitles[targetIndex]) {
-        if (targetIndex === targetTitles.length - 1) {
+      if (capitalizeFirstLetter(item.title) === targetTitles?.[targetIndex]) {
+        if (targetIndex === targetTitles?.length - 1) {
           return {
             path: { ...item, children: [] },
             lastItemId: item.node_token,
@@ -187,7 +187,7 @@ export function findIdByPath(item: NodesItem) {
 export function toKebabCase(title: string): string {
   const words = title.split(" ");
   const kebabWords = words.map(word => {
-    return word.charAt(0).toLowerCase() + word.slice(1);
+    return word.toLowerCase();
   });
   return kebabWords.join("-");
 }
@@ -195,7 +195,7 @@ export function toKebabCase(title: string): string {
 export function capitalizeFirstLetter(str: string) {
   return str
     .split(" ")
-    .map(word => word.charAt(0).toUpperCase() + word.slice(1))
+    .map(word => word.charAt(0).toUpperCase() + word.slice(1).toLowerCase())
     .join(" ");
 }
 

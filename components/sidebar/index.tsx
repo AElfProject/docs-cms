@@ -143,17 +143,19 @@ export default function Sidebar({ menu }: Props) {
                 },
               }}
             >
-              <Menu
-                className="h-full pt-[60px]"
-                openKeys={openKeys}
-                defaultOpenKeys={openKeys}
-                inlineCollapsed={false}
-                style={{ width: 256 }}
-                selectedKeys={[id as string]}
-                mode="inline"
-                items={menuItems}
-                expandIcon={null}
-              />
+              <div className="pt-[60px]">
+                <Menu
+                  className="h-full "
+                  openKeys={openKeys}
+                  defaultOpenKeys={openKeys}
+                  inlineCollapsed={false}
+                  style={{ width: 256 }}
+                  selectedKeys={[id as string]}
+                  mode="inline"
+                  items={menuItems}
+                  expandIcon={null}
+                />
+              </div>
             </ConfigProvider>
           </div>
         </aside>

@@ -9,7 +9,7 @@ export const fetcher = async (url: string) => {
     headers: {
       Authorization: `Bearer ${tenantAccessToken}`,
     },
-    next: { revalidate: 60 },
+    next: { revalidate: 6000 },
   });
   return res.json();
 };
