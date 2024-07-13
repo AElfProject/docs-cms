@@ -111,3 +111,95 @@ export async function getMenu() {
 export function key() {
   return nanoid();
 }
+
+export function formatStringArray(ids: string[]): string[] {
+  return ids?.map(id => {
+    return id
+      .split("-")
+      .map(word => {
+        return word.charAt(0).toUpperCase() + word.slice(1);
+      })
+      .join(" ");
+  });
+}
+
+export function findPathByTitles(data: NodesData, targetTitles: string[]) {
+  function search(nodesData: NodesData, targetIndex: number): NodesItem | null {
+    if (targetIndex >= targetTitles?.length) {
+      return null;
+    }
+
+    for (const item of nodesData.items) {
+      if (item.title === targetTitles?.[targetIndex]) {
+        if (targetIndex === targetTitles?.length - 1) {
+          return {
+            ...item,
+            children: [],
+          };
+        } else if (item.children) {
+          for (const child of item.children) {
+            const result = search(child, targetIndex + 1);
+            if (result) {
+              return {
+                ...item,
+                children: [
+                  {
+                    has_more: false,
+                    items: [result],
+                    page_token: "",
+                  },
+                ],
+              };
+            }
+          }
+        }
+      }
+    }
+    return null;
+  }
+
+  return search(data, 0);
+}
+
+export function findIdByPath(item: NodesItem) {
+  let temp = JSON.parse(JSON.stringify(item));
+  let id;
+  while (temp?.children?.length) {
+    id = temp.node_token;
+    for (let ele of temp.children[0].items) {
+      temp = ele;
+    }
+  }
+  return temp?.node_token;
+}
+export function toKebabCase(title: string): string {
+  const words = title.split(" ");
+  const kebabWords = words.map(word => {
+    return word.charAt(0).toLowerCase() + word.slice(1);
+  });
+  return kebabWords.join("-");
+}
+export function findTitlesById(menu: NodesData, id: string) {
+  function search(
+    nodesData: NodesData,
+    currentPath: string[]
+  ): string[] | null {
+    for (const item of nodesData.items) {
+      const newPath = [...currentPath, toKebabCase(item.title)];
+      if (item.node_token === id || item.obj_token === id) {
+        return newPath;
+      }
+      if (item.children) {
+        for (const child of item.children) {
+          const result = search(child, newPath);
+          if (result) {
+            return result;
+          }
+        }
+      }
+    }
+    return null;
+  }
+
+  return search(menu, []);
+}

@@ -8,9 +8,13 @@ import { NodesData, NodesItem } from "../../services/larkServices";
 import { useEffect, useState } from "react";
 import { DownOutlined, RightOutlined } from "@ant-design/icons";
 import {
+  findIdByPath,
   findKeyInData,
   findPathByKey,
+  findPathByTitles,
+  findTitlesById,
   findTopLevelItems,
+  formatStringArray,
 } from "../../lib/utils";
 import "./index.css";
 
@@ -38,7 +42,9 @@ const MenuItem = ({ item }: { item: NodesItem }) => {
 type MenuItem = Required<MenuProps>["items"][number];
 export default function Sidebar({ menu }: Props) {
   const params = useParams();
-  const { id } = params;
+  const titleArr = formatStringArray(params.id as string[]);
+  const nodeItem = findPathByTitles(menu, titleArr);
+  const id = findIdByPath(nodeItem!);
   const [isKeyInMenu, setisKeyInMenu] = useState(
     findKeyInData(menu, id as string)
   );
@@ -56,29 +62,33 @@ export default function Sidebar({ menu }: Props) {
     }
   };
   // not use the original open/close
-  const renderTitle = (title: string, key: string, hasChild: boolean) => (
-    <div className="flex items-center justify-between">
-      <Link href={`/node/${key}`} className="w-[90%]">
-        <span>{title}</span>
-      </Link>
-      {hasChild &&
-        (openKeys.includes(key) ? (
-          <DownOutlined
-            onClick={e => {
-              e.stopPropagation();
-              onIconClick({ key });
-            }}
-          />
-        ) : (
-          <RightOutlined
-            onClick={e => {
-              e.stopPropagation();
-              onIconClick({ key });
-            }}
-          />
-        ))}
-    </div>
-  );
+  const renderTitle = (title: string, key: string, hasChild: boolean) => {
+    const titles = findTitlesById(menu, key);
+    const url = titles?.join("/");
+    return (
+      <div className="flex items-center justify-between">
+        <Link href={`/wiki/${url}`} className="w-[90%]">
+          <span>{title}</span>
+        </Link>
+        {hasChild &&
+          (openKeys.includes(key) ? (
+            <DownOutlined
+              onClick={e => {
+                e.stopPropagation();
+                onIconClick({ key });
+              }}
+            />
+          ) : (
+            <RightOutlined
+              onClick={e => {
+                e.stopPropagation();
+                onIconClick({ key });
+              }}
+            />
+          ))}
+      </div>
+    );
+  };
 
   // convert to menu items format
   const getMenuList = (data: NodesData) => {
@@ -119,7 +129,7 @@ export default function Sidebar({ menu }: Props) {
   return (
     <>
       {isKeyInMenu ? (
-        <aside className="z-30 pl-2 shrink-0 top-[46px] block max-w-[300px] h-[calc(100vh-60px)]">
+        <aside className="z-30 pl-2 shrink-0 block top-[60px] max-w-[300px] h-[calc(100vh-60px)] sticky">
           <ConfigProvider
             theme={{
               token: {
