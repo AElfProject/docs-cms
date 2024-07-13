@@ -23,7 +23,9 @@ export function Element(props: Element) {
     text_element_style;
 
   if (inline_code)
-    return <pre className="inline p-1 bg-slate-300 rounded-md">{content}</pre>;
+    return (
+      <span className="inline p-1 bg-slate-300 rounded-md">{content}</span>
+    );
 
   if (link && link?.url) {
     return (
