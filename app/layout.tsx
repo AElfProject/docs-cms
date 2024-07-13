@@ -1,12 +1,7 @@
 import type { Metadata } from "next";
 import "./globals.css";
 import { Inter as FontSans } from "next/font/google";
-import { AntdRegistry } from "@ant-design/nextjs-registry";
-import { cn, getMenu } from "@/lib/utils";
-import Sidebar from "@/components/sidebar/index";
-import Header from "../components/Header";
-import Breadcrumb from "../components/Breadcrumb";
-import { Footer } from "@/components/footer";
+import { cn } from "@/lib/utils";
 
 const fontSans = FontSans({
   subsets: ["latin"],
@@ -23,7 +18,6 @@ export default async function RootLayout({
 }: Readonly<{
   children: React.ReactNode;
 }>) {
-  const menu = await getMenu();
   return (
     <html lang="en">
       <body
@@ -32,21 +26,7 @@ export default async function RootLayout({
           fontSans.variable
         )}
       >
-        <AntdRegistry>
-          <main>
-            <div className="border-b flex">
-              <Header menu={menu} />
-              <div className="flex w-full">
-                <Sidebar menu={menu} />
-                <div className="container pt-[60px]">
-                  <Breadcrumb menu={menu}></Breadcrumb>
-                  {children}
-                </div>
-              </div>
-            </div>
-            <Footer />
-          </main>
-        </AntdRegistry>
+        {children}
       </body>
     </html>
   );
