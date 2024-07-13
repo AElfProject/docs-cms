@@ -44,6 +44,7 @@ export default function Header({ menu }: Props) {
   const onClick: MenuProps["onClick"] = (e) => {
     setCurrent(e.key);
   };
+
   return (
     <div className="fixed w-full bg-white z-50 flex mx-5 h-[60px]">
       <Link href="/" className="mr-8 flex">

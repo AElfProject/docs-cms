@@ -8,7 +8,6 @@ import {
   CommandItem,
   CommandList,
 } from "@/components/ui/command";
-import { search } from "@/services/search";
 import { useEffect, useState } from "react";
 
 export default function Search() {
@@ -41,8 +40,8 @@ export default function Search() {
         <CommandInput placeholder="Enter your query..." />
         <CommandList>
           <CommandEmpty>No results found.</CommandEmpty>
-          <CommandGroup heading="Suggestions">
-            <CommandItem>Getting Started</CommandItem>
+          <CommandGroup heading="Results">
+            <CommandItem>Example</CommandItem>
           </CommandGroup>
         </CommandList>
       </CommandDialog>
