@@ -1,6 +1,6 @@
 import { fetcher } from "@/lib/api";
 import { z } from "zod";
-import { nodeSchema } from "./get-node";
+import { nodeSchema } from "./node-schema";
 
 const schema = z.object({
   code: z.number(),
