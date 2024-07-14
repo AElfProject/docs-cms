@@ -11,5 +11,6 @@ export const fetcher = async (url: string, next?: NextFetchRequestConfig) => {
     },
     next: next || { revalidate: 6000 },
   });
-  return res.json();
+
+  return await res.json();
 };
