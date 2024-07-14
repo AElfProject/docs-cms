@@ -14,7 +14,8 @@ const schema = z.object({
 
 export async function getChildNodes(parentId: string) {
   const res = await fetcher(
-    `https://open.larksuite.com/open-apis/wiki/v2/spaces/${process.env.SPACE_ID}/nodes?parent_node_token=${parentId}`
+    `https://open.larksuite.com/open-apis/wiki/v2/spaces/${process.env.SPACE_ID}/nodes?parent_node_token=${parentId}`,
+    { tags: [parentId] }
   );
 
   return schema.parse(res);

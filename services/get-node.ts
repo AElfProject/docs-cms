@@ -15,7 +15,8 @@ const schema = z.object({
 
 export async function getNode(id: string) {
   const res = await fetcher(
-    `https://open.larksuite.com/open-apis/wiki/v2/spaces/get_node?token=${id}`
+    `https://open.larksuite.com/open-apis/wiki/v2/spaces/get_node?token=${id}`,
+    { tags: [id] }
   );
 
   return schema.parse(res);

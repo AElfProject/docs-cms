@@ -19,8 +19,10 @@ import { Heading6 } from "./heading6";
 import { Heading7 } from "./heading7";
 import { Heading8 } from "./heading8";
 import { Heading9 } from "./heading9";
+import { ChildPages } from "./child-pages";
 
 export type AnyItem =
+  | ChildPages
   | Page
   | Text
   | Heading1
@@ -116,6 +118,9 @@ export default function Renderer(
 
     case 34:
       return <Quote {...props} />;
+
+    case 42:
+      return <ChildPages {...props} />;
 
     case 999:
       return <Synched {...props} />;
