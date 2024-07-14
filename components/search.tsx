@@ -44,17 +44,6 @@ export default function Search() {
   });
 
   useEffect(() => {
-    const down = (e: KeyboardEvent) => {
-      if (e.key === "k" && (e.metaKey || e.ctrlKey)) {
-        e.preventDefault();
-        setIsOpen((open) => !open);
-      }
-    };
-    document.addEventListener("keydown", down);
-    return () => document.removeEventListener("keydown", down);
-  }, []);
-
-  useEffect(() => {
     (async () => {
       const res = await fetch(`/api/search`);
       const data = await res.json();
@@ -87,7 +76,11 @@ export default function Search() {
       {isOpen &&
         docSearchConfig &&
         createPortal(
-          <DocSearchModal {...docSearchConfig} initialScrollY={0} />,
+          <DocSearchModal
+            {...docSearchConfig}
+            initialScrollY={0}
+            onClose={onClose}
+          />,
           document.body
         )}
     </div>
