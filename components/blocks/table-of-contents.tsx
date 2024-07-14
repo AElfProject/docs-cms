@@ -3,13 +3,23 @@ import { AnyItem } from "./renderer";
 import clsx from "clsx";
 import { HighlightLink } from "./highlight-link";
 
-export default function TableOfContents(props: { allItems: AnyItem[] }) {
+export default function TableOfContents({
+  allItems,
+  level = 3, // display up to h3
+}: {
+  allItems: AnyItem[];
+  level?: number;
+}) {
   const slugger = new GithubSlugger();
 
   return (
     <ul className="list-none p-8 lg:fixed">
-      {props.allItems
-        .filter((i) => [3, 4, 5, 6, 7, 8, 9, 10, 11].includes(i.block_type))
+      {allItems
+        .filter((i) =>
+          [3, 4, 5, 6, 7, 8, 9, 10, 11]
+            .filter((i) => (level ? i < level + 3 : true))
+            .includes(i.block_type)
+        )
         .map((i) => {
           let anchor = "";
 

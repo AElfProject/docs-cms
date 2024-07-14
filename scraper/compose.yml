@@ -1,0 +1,7 @@
+services:
+  scraper:
+    image: typesense/docsearch-scraper:0.9.1
+    env_file:
+      - .env.typesense
+    volumes:
+      - ./typesense.json:/tmp/search/typesense.json
