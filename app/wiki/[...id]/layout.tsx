@@ -1,6 +1,8 @@
 import { getMenu } from "@/lib/utils";
 import Sidebar from "@/components/sidebar/index";
 import Breadcrumb from "@/components/Breadcrumb";
+import { Suspense } from "react";
+import Loading from "./loading";
 
 export default async function WikiLayout({
   children,
@@ -15,7 +17,7 @@ export default async function WikiLayout({
           <Sidebar menu={menu} />
           <div className="container pt-[60px] min-h-[calc(100vh-225px)]">
             <Breadcrumb menu={menu}></Breadcrumb>
-            {children}
+            <Suspense fallback={<Loading />}>{children}</Suspense>
           </div>
         </div>
       </div>

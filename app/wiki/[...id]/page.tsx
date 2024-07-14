@@ -10,6 +10,7 @@ import {
 import { PrevNext } from "../../../components/prev-next";
 import { getNode } from "@/services/get-node";
 import { getDocBlocks } from "@/services/get-doc-blocks";
+import Link from "next/link";
 
 interface Props {
   params: {
@@ -58,6 +59,16 @@ export default async function Document({ params }: Props) {
             {JSON.stringify(data.items, undefined, 2)}
           </pre>
         )} */}
+        {process.env.NODE_ENV === "development" ? (
+          <Link
+            href={`/api/revalidate?tag=${id}`}
+            className="bg-red-700 text-white rounded-sm p-2 mb-8 inline-block"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            invalidate page
+          </Link>
+        ) : null}
       </div>
       <aside className="w-1/3">
         <TableOfContents allItems={data} />

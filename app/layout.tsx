@@ -5,6 +5,8 @@ import { Inter as FontSans } from "next/font/google";
 import { cn, getMenu } from "@/lib/utils";
 import { Footer } from "@/components/footer";
 import Header from "@/components/Header";
+import { Suspense } from "react";
+import Loading from "./loading";
 
 const fontSans = FontSans({
   subsets: ["latin"],
@@ -33,7 +35,7 @@ export default async function RootLayout({
       >
         <AntdRegistry>
           <Header menu={menu} />
-          {children}
+          <Suspense fallback={<Loading />}>{children}</Suspense>
           <Footer />
         </AntdRegistry>
       </body>
