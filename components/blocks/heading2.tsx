@@ -16,7 +16,7 @@ export function Heading2(props: Heading2) {
   );
 
   return (
-    <h2 className="text-5xl font-bold tracking-tight" id={anchor}>
+    <h2 className="text-3xl font-bold tracking-tight my-4" id={anchor}>
       {props.heading2.elements.map((i) => (
         <Element key={key()} {...i} />
       ))}

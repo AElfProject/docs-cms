@@ -1,9 +1,5 @@
 import { Item } from "./common";
 import Renderer from "./renderer";
-import {
-  Table as _Table,
-  TableCell as _TableCell,
-} from "@/components/ui/table";
 
 export interface TableCell extends Item {
   block_type: 32;
@@ -16,10 +12,10 @@ export function TableCell(props: TableCell) {
   const allChildren = allItems.filter((i) => children.includes(i.block_id));
 
   return (
-    <_TableCell>
+    <>
       {allChildren.map((i) => (
         <Renderer key={i.block_id} {...i} allItems={allItems} nested />
       ))}
-    </_TableCell>
+    </>
   );
 }

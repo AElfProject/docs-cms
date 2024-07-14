@@ -58,7 +58,7 @@ export function Table(props: Table) {
   );
 
   return (
-    <_Table>
+    <_Table className="my-8">
       {header_row ? (
         <TableHeader>
           <TableRow>
