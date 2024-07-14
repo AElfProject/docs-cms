@@ -16,7 +16,7 @@ export function Heading6(props: Heading6) {
   );
 
   return (
-    <h6 className="text-xl font-bold tracking-tight" id={anchor}>
+    <h6 className="text-base font-bold tracking-tight" id={anchor}>
       {props.heading6.elements.map((i) => (
         <Element key={key()} {...i} />
       ))}

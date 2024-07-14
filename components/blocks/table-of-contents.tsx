@@ -13,7 +13,7 @@ export default function TableOfContents({
   const slugger = new GithubSlugger();
 
   return (
-    <ul className="list-none p-8 lg:fixed">
+    <ul className="list-none p-8 lg:fixed max-h-[80vh] overflow-auto">
       {allItems
         .filter((i) =>
           [3, 4, 5, 6, 7, 8, 9, 10, 11]
