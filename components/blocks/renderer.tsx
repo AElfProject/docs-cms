@@ -19,8 +19,12 @@ import { Heading6 } from "./heading6";
 import { Heading7 } from "./heading7";
 import { Heading8 } from "./heading8";
 import { Heading9 } from "./heading9";
+import { ChildPages } from "./child-pages";
+import { Table } from "./table";
+import { TableCell } from "./table-cell";
 
 export type AnyItem =
+  | ChildPages
   | Page
   | Text
   | Heading1
@@ -40,6 +44,8 @@ export type AnyItem =
   | Tab
   | Tabs
   | Image
+  | Table
+  | TableCell
   | Quote
   | Synched;
 
@@ -114,8 +120,17 @@ export default function Renderer(
     case 27:
       return <Image {...props} />;
 
+    case 31:
+      return <Table {...props} />;
+
+    case 32:
+      return <TableCell {...props} />;
+
     case 34:
       return <Quote {...props} />;
+
+    case 42:
+      return <ChildPages {...props} />;
 
     case 999:
       return <Synched {...props} />;

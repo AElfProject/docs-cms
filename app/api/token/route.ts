@@ -60,8 +60,6 @@ async function getUserAccessToken(code: string) {
     };
   } = await res.json();
 
-  console.log(data);
-
   if (data.code !== 0) {
     throw new Error("Unable to get user access token.");
   }

@@ -22,7 +22,8 @@ const schema = z.object({
 
 export async function listTableRecords(bitableId: string, tableId: string) {
   const res = await fetcher(
-    `https://open.larksuite.com/open-apis/bitable/v1/apps/${bitableId}/tables/${tableId}/records?page_size=100`
+    `https://open.larksuite.com/open-apis/bitable/v1/apps/${bitableId}/tables/${tableId}/records?page_size=100`,
+    { tags: [bitableId, tableId] }
   );
 
   return schema.parse(res);
