@@ -12,6 +12,7 @@ export async function getTenantAccessToken() {
         app_id: process.env.APP_ID,
         app_secret: process.env.APP_SECRET,
       }),
+      next: { revalidate: 360 },
     }
   );
   const data: {
