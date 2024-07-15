@@ -13,19 +13,21 @@ export async function getNode(id: string) {
   return node;
 }
 
-function findNodeInData(data: NodesData, key: string) {
-  function search(items: NodesItem[]) {
+function findNodeInData(data: NodesData, key: string): NodesItem | null {
+  function search(items: NodesItem[]): NodesItem | null {
     for (let item of items) {
       if (item.node_token === key) {
         return item;
       }
       if (item.children) {
         for (let child of item.children) {
-          return search(child?.items);
+          const result = search(child?.items);
+          if (result) {
+            return result;
+          }
         }
       }
     }
-
     return null;
   }
 
