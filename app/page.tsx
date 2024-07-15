@@ -46,7 +46,7 @@ export default async function Home() {
   });
   return (
     <main className="p-8 container min-h-[calc(100vh-225px)]">
-      <div className="p-[0 6 6] bg-white">
+      <div className="mt-[60px] bg-white">
         <div className="relative w-full h-[322px] mb-6">
           <Image
             src={configObj.image}
