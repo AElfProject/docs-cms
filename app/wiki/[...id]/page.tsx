@@ -22,9 +22,7 @@ interface Props {
 }
 
 async function getData(id: string) {
-  const {
-    data: { node },
-  } = await getNode(id);
+  const node = await getNode(id);
 
   if (node.obj_type === "docx") {
     return {

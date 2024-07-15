@@ -10,7 +10,7 @@ export async function getNextNode(id: string) {
 
   const {
     data: { items },
-  } = await getChildNodes(parentNode.data.node.node_token);
+  } = await getChildNodes(parentNode.node_token);
 
   const siblingNodes = items;
 

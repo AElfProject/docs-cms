@@ -1,23 +1,33 @@
-import { fetcher } from "@/lib/api";
-import { z } from "zod";
-import { nodeSchema } from "./node-schema";
-
-/**
- * https://open.larksuite.com/document/server-docs/docs/wiki-v2/space-node/list
- */
-const schema = z.object({
-  code: z.number(),
-  msg: z.string(),
-  data: z.object({
-    node: nodeSchema,
-  }),
-});
+import { NodesData, NodesItem } from "./larkServices";
+import { getMenu } from "@/lib/utils";
 
 export async function getNode(id: string) {
-  const res = await fetcher(
-    `https://open.larksuite.com/open-apis/wiki/v2/spaces/get_node?token=${id}`,
-    { tags: [id] }
-  );
+  const menu = await getMenu();
 
-  return schema.parse(res);
+  const node = findNodeInData(menu, id);
+
+  if (!node) {
+    throw new Error(`${id} not found...`);
+  }
+
+  return node;
+}
+
+function findNodeInData(data: NodesData, key: string) {
+  function search(items: NodesItem[]) {
+    for (let item of items) {
+      if (item.node_token === key) {
+        return item;
+      }
+      if (item.children) {
+        for (let child of item.children) {
+          return search(child?.items);
+        }
+      }
+    }
+
+    return null;
+  }
+
+  return search(data.items);
 }
