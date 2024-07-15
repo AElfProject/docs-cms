@@ -18,9 +18,9 @@ const getChildList = (ele: NodesItem, index: number, url: string = "") => {
           <Link href={newUrl} className="text-blue-500">
             {item.title}
           </Link>
-          <ul className="list-[circle] pl-4">
+          {/* <ul className="list-[circle] pl-4">
             {index <= 2 && getChildList(item, index, newUrl)}
-          </ul>
+          </ul> */}
         </li>
       );
     });
