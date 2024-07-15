@@ -18,9 +18,9 @@ const getChildList = (ele: NodesItem, index: number, url: string = "") => {
           <Link href={newUrl} className="text-blue-500">
             {item.title}
           </Link>
-          <ul className="list-[circle] pl-4">
+          {/* <ul className="list-[circle] pl-4">
             {index <= 2 && getChildList(item, index, newUrl)}
-          </ul>
+          </ul> */}
         </li>
       );
     });
@@ -46,7 +46,7 @@ export default async function Home() {
   });
   return (
     <main className="p-8 container min-h-[calc(100vh-225px)]">
-      <div className="p-[0 6 6] bg-white">
+      <div className="mt-[60px] bg-white">
         <div className="relative w-full h-[322px] mb-6">
           <Image
             src={configObj.image}
