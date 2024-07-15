@@ -31,7 +31,8 @@ export async function getNodeToken(token?: string) {
   const res = await fetcher(
     `https://open.larksuite.com/open-apis/wiki/v2/spaces/${
       process.env.SPACE_ID
-    }/nodes?parent_node_token=${token ? token : ""}`
+    }/nodes?parent_node_token=${token ? token : ""}`,
+    { tags: [`getNodeToken-${token || "root"}`] }
   );
   const { data } = res;
   return data as NodesData;

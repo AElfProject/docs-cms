@@ -4,15 +4,12 @@ import { redirect } from "next/navigation";
 
 async function getData(id: string, path: string[] = []) {
   const node = await getNode(id);
-  const parentId = node.data.node.parent_node_token;
+  const parentId = node.parent_node_token;
 
   if (parentId) {
-    return await getData(parentId, [
-      toKebabCase(node.data.node.title),
-      ...path,
-    ]);
+    return await getData(parentId, [toKebabCase(node.title), ...path]);
   } else {
-    return ["/wiki", toKebabCase(node.data.node.title), ...path].join("/");
+    return ["/wiki", toKebabCase(node.title), ...path].join("/");
   }
 }
 

@@ -65,7 +65,7 @@ export default function Code(props: CodeBlockProps) {
   return (
     <CodeBlock code={code} language={language}>
       <div className="relative my-4">
-        <CodeBlock.Code className="bg-gray-900 !p-6 rounded-xl shadow-lg">
+        <CodeBlock.Code className="bg-gray-900 !p-6 rounded-xl shadow-lg overflow-auto">
           <div className="table-row">
             <CodeBlock.LineNumber className="table-cell pr-4 text-sm text-gray-500 text-right select-none" />
             <CodeBlock.LineContent className="table-cell text-wrap">
