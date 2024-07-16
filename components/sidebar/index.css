@@ -5,3 +5,11 @@
   a {
   color: #1677ff !important;
 }
+.side-bar .ant-menu-title-content {
+  overflow-x: auto !important;
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+}
+.side-bar .ant-menu-title-content::-webkit-scrollbar {
+  display: none;
+}
