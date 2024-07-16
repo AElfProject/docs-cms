@@ -1,5 +1,3 @@
-"use server";
-
 import { getTopLevelNodes } from "./get-top-level-nodes";
 import { listTableRecords } from "./list-table-records";
 import { listTables } from "./list-tables";
