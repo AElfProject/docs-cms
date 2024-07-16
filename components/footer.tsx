@@ -10,7 +10,12 @@ export async function Footer() {
     <footer className="bg-slate-100">
       <div className="container p-8 lg:grid grid-cols-5 gap-4">
         <div className="hidden lg:block">
-          <Image src="/aelf-logo.svg" width={115} height={32} alt="logo" />
+          <Image
+            src={`${process.env.SITE_URL}/aelf-logo.svg`}
+            width={115}
+            height={32}
+            alt="logo"
+          />
         </div>
         {Object.keys(footerData).map((category) => (
           <div key={category} className="mb-4">

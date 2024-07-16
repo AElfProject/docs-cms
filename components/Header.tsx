@@ -51,7 +51,12 @@ export default function Header({ menu }: Props) {
   return (
     <div className="fixed w-full bg-white z-50 flex px-5 h-[60px]">
       <Link href="/" className="mr-8 flex">
-        <Image src="/aelf-logo.svg" width={115} height={32} alt="logo"></Image>
+        <Image
+          src={`${process.env.SITE_URL}/aelf-logo.svg`}
+          width={115}
+          height={32}
+          alt="logo"
+        ></Image>
       </Link>
       <Menu
         className="w-full flex items-center"
