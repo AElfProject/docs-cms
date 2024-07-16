@@ -56,6 +56,8 @@ export default async function Document({ params }: Props) {
 
     const docx_token = formData.get("docx_token");
     if (typeof docx_token === "string") revalidateTag(docx_token);
+
+    console.log("revalidating", id, docx_token);
   }
 
   return (
