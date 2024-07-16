@@ -27,6 +27,15 @@ COPY . .
 # Uncomment the following line in case you want to disable telemetry during the build.
 # ENV NEXT_TELEMETRY_DISABLED 1
 
+ARG APP_ID
+ENV APP_ID=$APP_ID
+ARG APP_SECRET
+ENV APP_SECRET=$APP_SECRET
+ARG SPACE_ID
+ENV SPACE_ID=$SPACE_ID
+ARG SITE_URL
+ENV SITE_URL=$SITE_URL
+
 RUN \
   if [ -f yarn.lock ]; then yarn run build; \
   elif [ -f package-lock.json ]; then npm run build; \
