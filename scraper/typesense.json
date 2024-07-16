@@ -1,10 +1,10 @@
 {
-  "index_name": "docs-cms-three-vercel-app",
+  "index_name": "aelf-docs-cms-github-pages",
   "start_urls": [
-    "https://docs-cms-three.vercel.app"
+    "https://aelfproject.github.io/docs-cms"
   ],
   "sitemap_urls": [
-    "https://docs-cms-three.vercel.app/sitemap.xml"
+    "https://aelfproject.github.io/docs-cms/sitemap.xml"
   ],
   "selectors": {
     "lvl0": "main h1",
@@ -19,5 +19,5 @@
   "custom_settings": {
     "separatorsToIndex": "_"
   },
-  "nb_hits": 3348
+  "nb_hits": 7379
 }
