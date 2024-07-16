@@ -2,6 +2,7 @@ import { type ClassValue, clsx } from "clsx";
 import { twMerge } from "tailwind-merge";
 import { getNodeToken, NodesData, NodesItem } from "../services/larkServices";
 import { nanoid } from "nanoid";
+import { convertArrToUrl } from "./url";
 
 export function cn(...inputs: ClassValue[]) {
   return twMerge(clsx(inputs));
@@ -117,6 +118,8 @@ export function formatStringArray(ids: string[]): string[] {
     return id
       .split("-")
       .map(word => {
+        // URL cannot contain a # symbol
+        word = word.replace("csharp", "c#");
         return word.charAt(0).toUpperCase() + word.slice(1);
       })
       .join(" ");
@@ -189,7 +192,7 @@ export function toKebabCase(title: string): string {
   const kebabWords = words.map(word => {
     return word.toLowerCase();
   });
-  return kebabWords.join("-");
+  return convertArrToUrl(kebabWords);
 }
 // hello World contract -> Hello World Contract
 export function capitalizeFirstLetter(str: string) {

@@ -129,7 +129,7 @@ export default function Sidebar({ menu }: Props) {
     <>
       {isKeyInMenu ? (
         <aside className="z-30 pl-2 shrink-0 block top-[60px] max-w-[300px] ">
-          <div className="sticky h-full max-h-[100vh] top-0">
+          <div className="sticky h-full top-0">
             <ConfigProvider
               theme={{
                 token: {
@@ -145,7 +145,7 @@ export default function Sidebar({ menu }: Props) {
             >
               <div className="pt-[60px]">
                 <Menu
-                  className="h-full "
+                  className="h-full side-bar"
                   openKeys={openKeys}
                   defaultOpenKeys={openKeys}
                   inlineCollapsed={false}
