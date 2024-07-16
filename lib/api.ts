@@ -2,7 +2,7 @@
 
 import { getTenantAccessToken } from "@/services/get-tenant-access-token";
 
-export const fetcher = async <T>(
+export const fetcher = async <T = any>(
   url: string,
   next?: NextFetchRequestConfig
 ): Promise<T> => {
