@@ -58,7 +58,7 @@ export function Table(props: Table) {
   );
 
   return (
-    <_Table className="my-8">
+    <_Table className="my-8 overflow-x-auto w-max">
       {header_row ? (
         <TableHeader>
           <TableRow>

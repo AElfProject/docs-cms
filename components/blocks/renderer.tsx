@@ -22,6 +22,7 @@ import { Heading9 } from "./heading9";
 import { ChildPages } from "./child-pages";
 import { Table } from "./table";
 import { TableCell } from "./table-cell";
+import { Sheet } from "./sheet";
 
 export type AnyItem =
   | ChildPages
@@ -47,7 +48,8 @@ export type AnyItem =
   | Table
   | TableCell
   | Quote
-  | Synched;
+  | Synched
+  | Sheet;
 
 export default function Renderer(
   props: AnyItem & {
@@ -119,6 +121,9 @@ export default function Renderer(
 
     case 27:
       return <Image {...props} />;
+
+    case 30:
+      return <Sheet {...props} />;
 
     case 31:
       return <Table {...props} />;
