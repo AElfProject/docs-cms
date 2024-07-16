@@ -38,8 +38,8 @@ async function getData(id: string) {
 export async function ChildPages(props: ChildPages) {
   const data = await getData(props.wiki_catalog.wiki_token);
   return (
-    <div className="grid lg:grid-cols-3 gap-2 my-8">
-      {data.map((i) => (
+    <div className="grid lg:grid-cols-2 gap-2 my-8">
+      {data.map(i => (
         <Link key={key()} href={i.href}>
           <Card className="hover:border-black h-full">
             <CardHeader>
