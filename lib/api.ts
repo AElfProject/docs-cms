@@ -6,6 +6,11 @@ export const fetcher = async <T = any>(
   url: string,
   next?: NextFetchRequestConfig
 ): Promise<T> => {
+  if (process.env.CI) {
+    // throttle build in CI to avoid rate-limiting errors
+    await sleep();
+  }
+
   const tenantAccessToken = await getTenantAccessToken();
   const res = await fetch(url, {
     method: "GET",
@@ -17,3 +22,8 @@ export const fetcher = async <T = any>(
 
   return await res.json();
 };
+
+const sleep = async (delay = 500) =>
+  new Promise((resolve) => {
+    setTimeout(resolve, delay);
+  });
