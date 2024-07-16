@@ -6,14 +6,16 @@ import {
   findPathByTitles,
   formatStringArray,
   getMenu,
-} from "../../../lib/utils";
-import { PrevNext } from "../../../components/prev-next";
+  toKebabCase,
+} from "@/lib/utils";
+import { PrevNext } from "@/components/prev-next";
 import { getNode } from "@/services/get-node";
 import { getDocBlocks } from "@/services/get-doc-blocks";
 import { revalidateTag } from "next/cache";
 import { FormLoading } from "@/components/form-loading";
 import { DateModified } from "@/components/date-modified";
 import { Admin } from "@/components/admin";
+import { NodesData } from "@/services/larkServices";
 
 interface Props {
   params: {
@@ -84,4 +86,36 @@ export default async function Document({ params }: Props) {
       </aside>
     </main>
   );
+}
+
+export async function generateStaticParams() {
+  const menu = await getMenu();
+
+  let paths: { id: string[] }[] = [];
+
+  async function getParams(data: NodesData) {
+    for (const i of data.items) {
+      paths.push({ id: await getPath(i.node_token) });
+
+      if (i.has_child) {
+        for (const j of i.children) {
+          await getParams(j);
+        }
+      }
+    }
+  }
+
+  await getParams(menu);
+
+  return paths;
+}
+
+async function getPath(id: string, path: string[] = []) {
+  const { parent_node_token, title } = await getNode(id);
+
+  if (parent_node_token) {
+    return await getPath(parent_node_token, [toKebabCase(title), ...path]);
+  } else {
+    return [toKebabCase(title), ...path];
+  }
 }
