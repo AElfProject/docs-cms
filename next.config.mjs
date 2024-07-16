@@ -21,6 +21,7 @@ const nextConfig = {
     workerThreads: false,
     cpus: 1,
   },
+  output: "standalone",
 };
 
 export default nextConfig;
