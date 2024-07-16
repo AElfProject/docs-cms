@@ -52,7 +52,7 @@ export default function Header({ menu }: Props) {
     <div className="fixed w-full bg-white z-50 flex px-5 h-[60px]">
       <Link href="/" className="mr-8 flex">
         <Image
-          src={`${process.env.SITE_URL}/aelf-logo.svg`}
+          src={`${process.env.NEXT_PUBLIC_SITE_URL}/aelf-logo.svg`}
           width={115}
           height={32}
           alt="logo"

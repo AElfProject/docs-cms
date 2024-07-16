@@ -11,7 +11,7 @@ export async function Footer() {
       <div className="container p-8 lg:grid grid-cols-5 gap-4">
         <div className="hidden lg:block">
           <Image
-            src={`${process.env.SITE_URL}/aelf-logo.svg`}
+            src={`${process.env.NEXT_PUBLIC_SITE_URL}/aelf-logo.svg`}
             width={115}
             height={32}
             alt="logo"

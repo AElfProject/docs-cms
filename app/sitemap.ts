@@ -17,7 +17,9 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     if (nodes) {
       for (const node of nodes) {
         map.push({
-          url: `${process.env.SITE_URL}${await getPath(node.node_token)}`,
+          url: `${process.env.NEXT_PUBLIC_SITE_URL}${await getPath(
+            node.node_token
+          )}`,
           lastModified: new Date(Number(node.obj_edit_time) * 1000),
           changeFrequency: "weekly",
           priority: 0.5,

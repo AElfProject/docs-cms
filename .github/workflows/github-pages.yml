@@ -80,7 +80,7 @@ jobs:
           echo APP_ID=${{ secrets.APP_ID }} >> .env
           echo APP_SECRET=${{ secrets.APP_SECRET }} >> .env
           echo SPACE_ID=${{ secrets.SPACE_ID }} >> .env
-          echo SITE_URL=${{ vars.SITE_URL }} >> .env
+          echo NEXT_PUBLIC_SITE_URL=${{ vars.SITE_URL }} >> .env
       - name: Build with Next.js
         run: ${{ steps.detect-package-manager.outputs.runner }} next build
       - name: Upload artifact
