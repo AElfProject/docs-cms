@@ -2,15 +2,11 @@ import { toKebabCase } from "@/lib/utils";
 import { getNode } from "./get-node";
 
 export async function getPath(id: string, path: string[] = []) {
-  const node = await getNode(id);
-  const parentId = node.data.node.parent_node_token;
+  const { parent_node_token, title } = await getNode(id);
 
-  if (parentId) {
-    return await getPath(parentId, [
-      toKebabCase(node.data.node.title),
-      ...path,
-    ]);
+  if (parent_node_token) {
+    return await getPath(parent_node_token, [toKebabCase(title), ...path]);
   } else {
-    return ["/wiki", toKebabCase(node.data.node.title), ...path].join("/");
+    return ["/wiki", toKebabCase(title), ...path].join("/");
   }
 }
