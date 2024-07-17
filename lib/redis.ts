@@ -1,3 +1,4 @@
+"use server";
 import Redis, { RedisOptions } from "ioredis";
 import configuration from "../configuration";
 
@@ -9,7 +10,7 @@ function getRedisConfiguration(): {
   return configuration.redis;
 }
 
-export function createRedisInstance(config = getRedisConfiguration()) {
+function createRedisInstance(config = getRedisConfiguration()) {
   try {
     const options: RedisOptions = {
       host: config.host,
@@ -45,3 +46,17 @@ export function createRedisInstance(config = getRedisConfiguration()) {
     throw new Error(`[Redis] Could not create a Redis instance`);
   }
 }
+const redis: Redis = createRedisInstance();
+export const getRedisData = async (key: string) => {
+  const cached = await redis.get(key);
+  if (cached) {
+    return JSON.parse(cached) as any;
+  }
+};
+
+export const setRedisData = async (key: string, data: any) => {
+  const MAX_AGE = 60_000 * 60; // 1 hour
+  const EXPIRY_MS = `PX`; // milliseconds
+  // cache data
+  await redis.set(key, JSON.stringify(data), EXPIRY_MS, MAX_AGE);
+};

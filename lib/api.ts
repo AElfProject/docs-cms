@@ -1,21 +1,21 @@
 "use server";
 import { getTenantAccessToken } from "@/services/get-tenant-access-token";
 import { backOff } from "exponential-backoff";
-import { createRedisInstance } from "./redis";
-// get redis instance
-const redis = createRedisInstance();
+import { getRedisData, setRedisData } from "./redis";
+
 export const fetcher = async <T = any>(
   url: string,
   next?: NextFetchRequestConfig
 ): Promise<T> => {
   const startTime = new Date();
   let elapsedTime;
-  // try fetch cached data
-  const cached = await redis.get(url);
-  if (cached) {
-    elapsedTime = new Date().getTime() - startTime.getTime();
-    console.log(url, "=======yyyyyyyyyy=====", elapsedTime);
-    return JSON.parse(cached) as any;
+  if (process.env.NODE_ENV === "development") {
+    const result = await getRedisData(url);
+    if (result) {
+      elapsedTime = new Date().getTime() - startTime.getTime();
+      console.log(url, "=======yyyyyyyyyy=====", elapsedTime);
+      return result;
+    }
   }
   // fetch fresh data
   const tenantAccessToken = await getTenantAccessToken();
@@ -28,15 +28,11 @@ export const fetcher = async <T = any>(
       next: next || { revalidate: 6000 },
     })
   );
-  elapsedTime = new Date().getTime() - startTime.getTime();
-  console.log(url, "=======xxxxxxxxxx=====", elapsedTime);
   const result = await res.json();
-  // cache data setting an expiry of 1 hour
-  // this means that the cached data will remain alive for 60 minutes
-  // after that, we'll get fresh data from the DB
-  const MAX_AGE = 60_000 * 60; // 1 hour
-  const EXPIRY_MS = `PX`; // milliseconds
-  // cache data
-  await redis.set(url, JSON.stringify(result), EXPIRY_MS, MAX_AGE);
+  if (process.env.NODE_ENV === "development") {
+    elapsedTime = new Date().getTime() - startTime.getTime();
+    console.log(url, "=======xxxxxxxxxx=====", elapsedTime);
+    await setRedisData(url, result);
+  }
   return result;
 };
