@@ -5,7 +5,7 @@
   "type": "module",
   "scripts": {
     "dev": "next dev",
-    "build": "next build",
+    "build": "rm -rf .next && next build",
     "start": "next start",
     "lint": "next lint"
   },
@@ -25,7 +25,6 @@
     "date-fns": "^3.6.0",
     "exponential-backoff": "^3.1.1",
     "github-slugger": "^2.0.0",
-    "ioredis": "^5.4.1",
     "iron-session": "^8.0.2",
     "lucide-react": "^0.408.0",
     "nanoid": "^5.0.7",
