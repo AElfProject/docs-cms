@@ -17,6 +17,5 @@ export async function getChildNodes(parentId: string) {
     `https://open.larksuite.com/open-apis/wiki/v2/spaces/${process.env.SPACE_ID}/nodes?parent_node_token=${parentId}`,
     { tags: [parentId] }
   );
-
   return schema.parse(res);
 }
