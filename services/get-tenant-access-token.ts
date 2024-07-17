@@ -1,5 +1,3 @@
-"use server";
-
 export async function getTenantAccessToken() {
   const res = await fetch(
     `https://open.larksuite.com/open-apis/auth/v3/tenant_access_token/internal`,

@@ -1,19 +1,10 @@
-"use server";
-
 import { key } from "@/lib/utils";
 import { Item } from "./common";
 import { getChildNodes } from "@/services/get-child-nodes";
 import { getPath } from "@/services/get-path";
 import Link from "next/link";
 
-import {
-  Card,
-  CardContent,
-  CardDescription,
-  CardFooter,
-  CardHeader,
-  CardTitle,
-} from "@/components/ui/card";
+import { Card, CardHeader, CardTitle } from "@/components/ui/card";
 
 export interface ChildPages extends Item {
   block_type: 42;

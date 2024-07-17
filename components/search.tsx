@@ -45,7 +45,7 @@ export default function Search() {
 
   useEffect(() => {
     (async () => {
-      const res = await fetch(`/api/search`);
+      const res = await fetch(`${process.env.NEXT_PUBLIC_SITE_URL}/api/search`);
       const data = await res.json();
 
       const config = searchConfigSchema.parse(data);
