@@ -100,7 +100,10 @@ export async function getFileByFolderToken(folderNodes?: NodesItem[]) {
       await getFileByFolderToken(child.items);
     }
   }
-  data.items = items;
+  if (data) {
+    data.items = items;
+  }
+
   return data as NodesData;
 }
 
