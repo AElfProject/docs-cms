@@ -1,6 +1,6 @@
 import { getTenantAccessToken } from "@/services/get-tenant-access-token";
 import { backOff } from "exponential-backoff";
-import { getRedisData, setRedisData } from "./redis";
+import { getWebdisData, setWebdisData } from "./webdis";
 
 export const fetcher = async <T = any>(
   url: string,
@@ -9,11 +9,11 @@ export const fetcher = async <T = any>(
   const startTime = new Date();
   let elapsedTime;
   if (process.env.NODE_ENV === "development") {
-    const result = await getRedisData(url);
+    const result = await getWebdisData(url);
     if (result) {
       elapsedTime = new Date().getTime() - startTime.getTime();
       console.log(url, "=======yyyyyyyyyy=====", elapsedTime);
-      return result;
+      return JSON.parse(result);
     }
   }
   // fetch fresh data
@@ -31,7 +31,7 @@ export const fetcher = async <T = any>(
   if (process.env.NODE_ENV === "development") {
     elapsedTime = new Date().getTime() - startTime.getTime();
     console.log(url, "=======xxxxxxxxxx=====", elapsedTime);
-    await setRedisData(url, result);
+    await setWebdisData(url, result);
   }
   return result;
 };
