@@ -1,4 +1,3 @@
-"use server";
 import { getTenantAccessToken } from "@/services/get-tenant-access-token";
 import { backOff } from "exponential-backoff";
 import { getRedisData, setRedisData } from "./redis";
