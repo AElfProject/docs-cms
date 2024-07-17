@@ -37,6 +37,18 @@ Run the following command to copy the default example and replace with your own 
 cp .env.example .env
 ```
 
+### Redis
+
+We use Redis optimized for fast reads locally. We do not need to use Redis in the production environment because we are using static exports.
+
+First, install Redis locally by running brew install redis.
+Start the Redis service by running redis-server. You will see the Redis port number at this point.
+Replace <REDIS_HOST>, <REDIS_PORT>, and <REDIS_PASSWORD> in the .env file with your local Redis host address, port number, and password, respectively.
+
+- <REDIS_HOST>: If running on the local machine, you can use 127.0.0.1 or localhost.
+- <REDIS_PORT>: The default Redis port number is 6379. If you have not changed Redis's default configuration, you can use 6379.
+- <REDIS_PASSWORD>: If your Redis server has password protection enabled, use the set password. If no password is set, you can leave it blank.
+
 ### Run the development server
 
 ```bash
