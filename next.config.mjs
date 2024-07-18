@@ -16,6 +16,7 @@ const nextConfig = {
         pathname: "**",
       },
     ],
+    unoptimized: true,
   },
   experimental: {
     workerThreads: false,
