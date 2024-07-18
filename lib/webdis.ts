@@ -5,7 +5,7 @@ export const getWebdisData = async (key: string) => {
       body: `GET/${encodeURIComponent(key)}`,
     });
     const cached = await res.json();
-    console.log(cached, "cached");
+    // console.log(cached, "cached");
     if (typeof cached.GET === "string") {
       return cached.GET as string;
     }

@@ -12,7 +12,7 @@ export const fetcher = async <T = any>(
     const result = await getWebdisData(url);
     if (result) {
       elapsedTime = new Date().getTime() - startTime.getTime();
-      console.log(url, "=======yyyyyyyyyy=====", elapsedTime);
+      // console.log(url, "=======yyyyyyyyyy=====", elapsedTime);
       return JSON.parse(result);
     }
   }
