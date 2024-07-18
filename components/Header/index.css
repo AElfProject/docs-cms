@@ -1,0 +1,11 @@
+.home-drawer-content {
+  a {
+    color: black;
+  }
+}
+.wiki-drawer-content {
+  .ant-menu-inline {
+    width: 100% !important;
+    border-inline-end: 0 !important;
+  }
+}

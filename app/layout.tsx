@@ -6,7 +6,9 @@ import { cn, getMenu } from "@/lib/utils";
 import { Footer } from "@/components/footer";
 import Header from "@/components/Header";
 import { Suspense } from "react";
+import { headers } from "next/headers";
 import Loading from "./loading";
+import { isMobile } from "../lib/isMobile";
 
 const fontSans = FontSans({
   subsets: ["latin"],
@@ -24,7 +26,8 @@ export default async function RootLayout({
   children: React.ReactNode;
 }>) {
   const menu = await getMenu();
-
+  const userAgent = headers().get("user-agent") || "";
+  const isMobileDevice = isMobile(userAgent);
   return (
     <html lang="en">
       <body
@@ -34,7 +37,7 @@ export default async function RootLayout({
         )}
       >
         <AntdRegistry>
-          <Header menu={menu} />
+          <Header menu={menu} isMobileDevice={isMobileDevice} />
           <Suspense fallback={<Loading />}>{children}</Suspense>
           <Footer />
         </AntdRegistry>

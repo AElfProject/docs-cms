@@ -71,7 +71,7 @@ export default function Search() {
   }, [initialQuery]);
 
   return (
-    <div className="w-full flex-1 md:w-auto md:flex-none">
+    <div className="md:w-full md:flex-1 w-auto flex-none">
       <DocSearchButton ref={searchButtonRef} onClick={onOpen} />
       {isOpen &&
         docSearchConfig &&
