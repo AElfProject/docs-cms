@@ -5,6 +5,7 @@ export const fetcher = async <T = any>(
   url: string,
   next?: NextFetchRequestConfig
 ): Promise<T> => {
+  const startTime = new Date().getTime();
   const tenantAccessToken = await getTenantAccessToken();
   const res = await backOff(() =>
     fetch(url, {
@@ -12,9 +13,13 @@ export const fetcher = async <T = any>(
       headers: {
         Authorization: `Bearer ${tenantAccessToken}`,
       },
-      next: next || { revalidate: 6000 },
+      next: { revalidate: 6000, ...next },
     })
   );
+  const endTime = new Date().getTime();
+  if (process.env.NODE_ENV === "development") {
+    // console.log(endTime - startTime, "===TIME===");
+  }
 
   return await res.json();
 };

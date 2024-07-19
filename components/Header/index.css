@@ -1,0 +1,18 @@
+.home-drawer-content {
+  a {
+    color: black;
+  }
+}
+.wiki-drawer-content {
+  .ant-menu-inline {
+    width: 100% !important;
+    border-inline-end: 0 !important;
+  }
+}
+.ant-drawer {
+  .header-drawer-container {
+    .ant-drawer-body {
+      padding: 10px;
+    }
+  }
+}
