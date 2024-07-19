@@ -74,7 +74,7 @@ export default async function Document({ params }: Props) {
     [3, 4, 5, 6, 7, 8, 9, 10, 11].includes(i.block_type)
   ).length;
   return (
-    <main className="flex overflow-x-hidden flex-col-reverse sm:flex-row">
+    <main className="flex flex-col-reverse sm:flex-row">
       <div className="sm:w-2/3 w-full">
         {data?.map((item: AnyItem) => (
           <Renderer
@@ -101,6 +101,9 @@ export default async function Document({ params }: Props) {
           ifShowCollapse ? (
             <ConfigProvider
               theme={{
+                token: {
+                  colorLink: "#000",
+                },
                 components: {
                   Collapse: {
                     contentPadding: "2px",
@@ -115,7 +118,9 @@ export default async function Document({ params }: Props) {
             </ConfigProvider>
           ) : null
         ) : (
-          <TableOfContents allItems={data} />
+          <div className="overflow-y-auto max-h-[calc(100vh-60px)] sticky top-20">
+            <TableOfContents allItems={data} />
+          </div>
         )}
       </aside>
     </main>
