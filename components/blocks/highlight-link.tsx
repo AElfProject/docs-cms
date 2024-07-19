@@ -17,10 +17,10 @@ export function HighlightLink({
     // get your elements
     const el1 = document.getElementById(anchor);
 
-    const observer = new IntersectionObserver((entries) => {
+    const observer = new IntersectionObserver(entries => {
       // do something with the entries
 
-      entries.forEach((entry) => {
+      entries.forEach(entry => {
         setIsIntersecting(entry.isIntersecting);
       });
     });
@@ -38,7 +38,7 @@ export function HighlightLink({
     <Link
       href={`#${anchor}`}
       className={clsx({
-        "font-bold": isIntersecting,
+        "sm:font-bold": isIntersecting,
       })}
     >
       {title}
