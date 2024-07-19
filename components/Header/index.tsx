@@ -52,10 +52,18 @@ export default function Header({ menu, isMobileDevice }: Props) {
   };
   const [drawerOpen, setDrawerOpen] = useState(false);
   const [showHome, setShowHome] = useState(!id);
+  const closeDrawer = () => {
+    setDrawerOpen(false);
+  };
   const drawerContent = (
     <div className="wiki-drawer-content">
-      <div onClick={() => setShowHome(true)}>← Back to main menu</div>
-      <Sidebar menu={menu}></Sidebar>
+      <div
+        onClick={() => setShowHome(true)}
+        className="font-bold text-[15px] px-[1.5rem] py-[0.5rem] bg-[#ebedf0] mx-[-10px]"
+      >
+        ← Back to main menu
+      </div>
+      <Sidebar menu={menu} closeDrawer={closeDrawer}></Sidebar>
     </div>
   );
   const homeDrawerContent = (
@@ -76,22 +84,23 @@ export default function Header({ menu, isMobileDevice }: Props) {
     </div>
   );
   return (
-    <div className="fixed w-full bg-white z-50 flex px-5 h-[60px] border-b-[1px]">
+    <div className="fixed w-full bg-white z-50 flex px-5 h-[60px] border-b-[1px] items-center">
       {isMobileDevice && (
         <div className="flex w-[30px] mr-2" onClick={() => setDrawerOpen(true)}>
           <MenuFoldOutlined
             width={"30px"}
             height={"30px"}
-            className="text-[30px]"
+            className="text-[30px] !text-[#1c1e21]"
           />
         </div>
       )}
       <Drawer
+        className="header-drawer-container"
         title={
           <Image
             src="/aelf-logo.svg"
             width={115}
-            height={32}
+            height={59}
             alt="logo"
           ></Image>
         }
@@ -100,12 +109,10 @@ export default function Header({ menu, isMobileDevice }: Props) {
           <CloseOutlined
             width={"30px"}
             height={"30px"}
-            className="text-[30px]"
+            className="text-[30px] !text-[#1c1e21]"
             onClick={() => {
               setDrawerOpen(false);
-              setTimeout(() => {
-                setShowHome(!id);
-              }, 100);
+              setShowHome(!id);
             }}
           />
         }

@@ -13,60 +13,60 @@ export default function TableOfContents({
   const slugger = new GithubSlugger();
 
   return (
-    <ul className="list-none p-8 lg:fixed max-h-[65vh] overflow-auto">
+    <ul className="list-none sm:p-8 p-1 lg:fixed max-h-[65vh] overflow-auto">
       {allItems
-        .filter((i) =>
+        .filter(i =>
           [3, 4, 5, 6, 7, 8, 9, 10, 11]
-            .filter((i) => (level ? i < level + 3 : true))
+            .filter(i => (level ? i < level + 3 : true))
             .includes(i.block_type)
         )
-        .map((i) => {
+        .map(i => {
           let anchor = "";
 
           switch (i.block_type) {
             case 3:
               anchor = i.heading1.elements
-                .map((i) => i.text_run.content)
+                .map(i => i.text_run.content)
                 .join(" ");
               break;
             case 4:
               anchor = i.heading2.elements
-                .map((i) => i.text_run.content)
+                .map(i => i.text_run.content)
                 .join(" ");
               break;
             case 5:
               anchor = i.heading3.elements
-                .map((i) => i.text_run.content)
+                .map(i => i.text_run.content)
                 .join(" ");
               break;
             case 6:
               anchor = i.heading4.elements
-                .map((i) => i.text_run.content)
+                .map(i => i.text_run.content)
                 .join(" ");
               break;
             case 7:
               anchor = i.heading5.elements
-                .map((i) => i.text_run.content)
+                .map(i => i.text_run.content)
                 .join(" ");
               break;
             case 8:
               anchor = i.heading6.elements
-                .map((i) => i.text_run.content)
+                .map(i => i.text_run.content)
                 .join(" ");
               break;
             case 9:
               anchor = i.heading7.elements
-                .map((i) => i.text_run.content)
+                .map(i => i.text_run.content)
                 .join(" ");
               break;
             case 10:
               anchor = i.heading8.elements
-                .map((i) => i.text_run.content)
+                .map(i => i.text_run.content)
                 .join(" ");
               break;
             case 11:
               anchor = i.heading9.elements
-                .map((i) => i.text_run.content)
+                .map(i => i.text_run.content)
                 .join(" ");
               break;
           }

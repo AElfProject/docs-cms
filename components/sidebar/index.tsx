@@ -20,6 +20,7 @@ import "./index.css";
 
 interface Props {
   menu: NodesData;
+  closeDrawer?: () => void;
 }
 
 const MenuItem = ({ item }: { item: NodesItem }) => {
@@ -40,7 +41,7 @@ const MenuItem = ({ item }: { item: NodesItem }) => {
 };
 
 type MenuItem = Required<MenuProps>["items"][number];
-export default function Sidebar({ menu }: Props) {
+export default function Sidebar({ menu, closeDrawer = () => {} }: Props) {
   const params = useParams();
   const titleArr = formatStringArray(params.id as string[]);
   const { lastItemId: id } = findPathByTitles(menu, titleArr);
@@ -66,7 +67,11 @@ export default function Sidebar({ menu }: Props) {
     const url = titles?.join("/");
     return (
       <div className="flex items-center justify-between">
-        <Link href={`/wiki/${url}`} className="w-[90%]">
+        <Link
+          href={`/wiki/${url}`}
+          className="w-[90%]"
+          onClick={() => closeDrawer()}
+        >
           <span>{title}</span>
         </Link>
         {hasChild &&

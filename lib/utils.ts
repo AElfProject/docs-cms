@@ -3,6 +3,7 @@ import { twMerge } from "tailwind-merge";
 import { getNodeToken, NodesData, NodesItem } from "../services/larkServices";
 import { nanoid } from "nanoid";
 import { convertArrToUrl } from "./url";
+import { AnyItem } from "../components/blocks/renderer";
 
 export function cn(...inputs: ClassValue[]) {
   return twMerge(clsx(inputs));
@@ -96,8 +97,10 @@ export async function getFileByFolderToken(folderNodes?: NodesItem[]) {
     }
     if (items[i].has_child) {
       const child = (await getNodeToken(items[i].node_token)) as NodesData;
-      items[i].children?.push(child);
-      await getFileByFolderToken(child.items);
+      if (child) {
+        items[i].children?.push(child);
+        await getFileByFolderToken(child?.items);
+      }
     }
   }
   if (data) {

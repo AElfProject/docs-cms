@@ -16,7 +16,9 @@ import { FormLoading } from "@/components/form-loading";
 import { DateModified } from "@/components/date-modified";
 import { Admin } from "@/components/admin";
 import { NodesData } from "@/services/larkServices";
-
+import { headers } from "next/headers";
+import { isMobile } from "../../../lib/isMobile";
+import { Collapse, ConfigProvider } from "antd";
 interface Props {
   params: {
     id: string[];
@@ -59,10 +61,21 @@ export default async function Document({ params }: Props) {
 
     console.log("revalidating", id, docx_token);
   }
-
+  const userAgent = headers().get("user-agent") || "";
+  const isMobileDevice = isMobile(userAgent);
+  const contentItems = [
+    {
+      key: "1",
+      label: "On this page",
+      children: <TableOfContents allItems={data} />,
+    },
+  ];
+  const ifShowCollapse = data.filter(i =>
+    [3, 4, 5, 6, 7, 8, 9, 10, 11].includes(i.block_type)
+  ).length;
   return (
-    <main className="flex overflow-x-hidden">
-      <div className="w-2/3">
+    <main className="flex overflow-x-hidden flex-col-reverse sm:flex-row">
+      <div className="sm:w-2/3 w-full">
         {data?.map((item: AnyItem) => (
           <Renderer
             key={item.block_id}
@@ -83,8 +96,27 @@ export default async function Document({ params }: Props) {
           </form>
         </Admin>
       </div>
-      <aside className="w-1/3">
-        <TableOfContents allItems={data} />
+      <aside className="sm:w-1/3 w-full">
+        {isMobileDevice ? (
+          ifShowCollapse ? (
+            <ConfigProvider
+              theme={{
+                components: {
+                  Collapse: {
+                    contentPadding: "2px",
+                  },
+                },
+              }}
+            >
+              <Collapse
+                className="wiki-collapse-container !mb-4"
+                items={contentItems}
+              ></Collapse>
+            </ConfigProvider>
+          ) : null
+        ) : (
+          <TableOfContents allItems={data} />
+        )}
       </aside>
     </main>
   );
