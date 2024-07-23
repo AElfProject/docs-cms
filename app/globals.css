@@ -83,3 +83,7 @@ li > ul {
 .ant-menu.ant-menu-horizontal {
   border-bottom: none;
 }
+
+html {
+  scroll-padding-top: 70px;
+}
