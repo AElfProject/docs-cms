@@ -1,8 +1,8 @@
 import { AntdRegistry } from "@ant-design/nextjs-registry";
 import type { Metadata } from "next";
 import "./globals.css";
-import { Inter as FontSans } from "next/font/google";
 import { cn, getConfigContent, getMenu } from "@/lib/utils";
+import { Poppins as FontSans } from "next/font/google";
 import { Footer } from "@/components/footer";
 import Header from "@/components/Header";
 import { Suspense } from "react";
@@ -14,6 +14,7 @@ import { getNodeToken, NodesItem } from "../services/larkServices";
 const fontSans = FontSans({
   subsets: ["latin"],
   variable: "--font-sans",
+  weight: ["100", "200", "300", "400", "500", "600", "700", "800", "900"],
 });
 
 export const metadata: Metadata = {

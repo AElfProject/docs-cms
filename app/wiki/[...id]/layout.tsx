@@ -16,7 +16,7 @@ export default async function WikiLayout({
   const isMobileDevice = isMobile(userAgent);
   return (
     <main>
-      <div className="border-b flex">
+      <div className="flex">
         <div className="flex w-full">
           {!isMobileDevice && <Sidebar menu={menu} />}
           <div className="container pt-[60px] min-h-[calc(100vh-225px)] break-words">
