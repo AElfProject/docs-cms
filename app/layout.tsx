@@ -35,7 +35,7 @@ export default async function RootLayout({
     return ele.title === "Configurations" && ele.obj_type === "bitable";
   })?.obj_token;
   let configObj: { [key: string]: any } = appToken
-    ? await getConfigContent(appToken)
+    ? await getConfigContent(appToken, "Base")
     : {};
   return (
     <html lang="en">

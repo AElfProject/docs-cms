@@ -78,7 +78,8 @@ export async function getRecord(app_token: string, table_id: string) {
   const res = await fetcher(`	
 https://open.larksuite.com/open-apis/bitable/v1/apps/${app_token}/tables/${table_id}/records`);
   const { data } = res;
-  for (const ele of data.items) {
+  if (!data) return;
+  for (const ele of data?.items) {
     if (ele.fields.image) {
       const url = ele.fields.image[0].tmp_url;
       const token = getFileTokens(url);

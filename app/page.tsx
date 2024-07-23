@@ -33,10 +33,10 @@ export default async function Home() {
   const appToken = nodes.items.find((ele: NodesItem) => {
     return ele.title === "Configurations" && ele.obj_type === "bitable";
   })?.obj_token;
-  let configObj: { [key: string]: any } = appToken
-    ? await getConfigContent(appToken)
+  const configObj: { [key: string]: any } = appToken
+    ? await getConfigContent(appToken, "Base")
     : {};
-
+  const emojiObj = appToken ? await getConfigContent(appToken, "Emoji") : {};
   return (
     <main className="pt-8 container min-h-[calc(100vh-225px)]">
       <div className="sm:mt-[60px] mt-10 bg-white">
@@ -57,6 +57,9 @@ export default async function Home() {
           return (
             <ul key={ele.node_token} className="m-4 list-disc">
               <h2 className="font-bold text-[20px] mb-4 ">
+                {emojiObj[ele.title] && (
+                  <span className="mr-2">{emojiObj[ele.title]}</span>
+                )}
                 <Link href={`/wiki/${toKebabCase(ele.title)}`}>
                   {ele.title}
                 </Link>
