@@ -243,10 +243,11 @@ export function getFileTokens(url: string): string | undefined {
   const match = url.match(regex);
   return match ? match[1] : undefined;
 }
-export const getConfigContent = async (appToken: string) => {
+export const getConfigContent = async (appToken: string, tableName: string) => {
+  if (!appToken) return {};
   // get table id
-  const tableId = (await getTables(appToken!)).items.find(
-    ele => ele.name === "Base"
+  const tableId = (await getTables(appToken)).items.find(
+    ele => ele.name === tableName
   )?.table_id!;
   // get record
   const record = (await getRecord(appToken!, tableId))?.items;
@@ -255,7 +256,7 @@ export const getConfigContent = async (appToken: string) => {
     return ele.fields.key;
   });
   let configObj: { [key: string]: any } = {};
-  config.forEach(ele => {
+  config?.forEach(ele => {
     configObj[ele.fields.key!] = ele.fields.value;
   });
   return configObj;
