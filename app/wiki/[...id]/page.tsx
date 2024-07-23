@@ -84,6 +84,7 @@ export default async function Document({ params }: Props) {
             slugger={slugger}
           />
         ))}
+        <pre>{JSON.stringify(data, undefined, 2)}</pre>
         <PrevNext />
         <DateModified date={new Date(Number(edit_time) * 1000)} />
         <Admin>

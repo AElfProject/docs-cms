@@ -74,3 +74,8 @@
     @apply bg-background text-foreground;
   }
 }
+
+li > ul {
+  list-style-type: disc;
+  margin-left: 2.2rem;
+}
