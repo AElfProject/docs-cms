@@ -79,3 +79,7 @@ li > ul {
   list-style-type: disc;
   margin-left: 2.2rem;
 }
+
+.ant-menu.ant-menu-horizontal {
+  border-bottom: none;
+}
