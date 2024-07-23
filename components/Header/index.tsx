@@ -13,16 +13,21 @@ import {
   formatStringArray,
 } from "../../lib/utils";
 import Search from "../search";
-import { CloseOutlined, MenuFoldOutlined } from "@ant-design/icons";
+import {
+  CloseOutlined,
+  GithubOutlined,
+  MenuFoldOutlined,
+} from "@ant-design/icons";
 import "./index.css";
 import Sidebar from "../sidebar";
 interface Props {
   menu: NodesData;
   isMobileDevice: boolean;
+  baseConfig: { [key: string]: any };
 }
 type MenuItem = Required<MenuProps>["items"][number];
 
-export default function Header({ menu, isMobileDevice }: Props) {
+export default function Header({ menu, isMobileDevice, baseConfig }: Props) {
   const params = useParams();
   const titleArr = formatStringArray(params.id as string[]);
   const { lastItemId: id } = findPathByTitles(menu, titleArr);
@@ -98,7 +103,7 @@ export default function Header({ menu, isMobileDevice }: Props) {
         className="header-drawer-container"
         title={
           <Image
-            src="/aelf-logo.svg"
+            src={baseConfig.logoLight}
             width={115}
             height={59}
             alt="logo"
@@ -122,18 +127,39 @@ export default function Header({ menu, isMobileDevice }: Props) {
         {showHome ? homeDrawerContent : drawerContent}
       </Drawer>
       <Link href="/" className="mr-8 flex">
-        <Image src="/aelf-logo.svg" width={115} height={32} alt="logo"></Image>
+        <Image
+          src={baseConfig.logoLight}
+          width={115}
+          height={32}
+          alt="logo"
+        ></Image>
       </Link>
       {!isMobileDevice && (
         <Menu
-          className="w-full flex items-center"
+          className="w-full flex items-center header-menu"
           onClick={onClick}
           selectedKeys={[current]}
           mode="horizontal"
           items={menuItems}
         />
       )}
-      <div className="flex flex-1 items-center space-x-2 justify-end md:mr-12">
+      <div className="flex items-center space-x-4 justify-end md:mr-5">
+        {baseConfig.blog && (
+          <a
+            href={baseConfig.blog}
+            target="_blank"
+            className="hover:text-blue-500 text-[18px]"
+          >
+            Blog
+          </a>
+        )}
+        {baseConfig.github && (
+          <a href={baseConfig.github} target="_blank">
+            <GithubOutlined className="text-[18px] hover:text-blue-500" />
+          </a>
+        )}
+      </div>
+      <div className="flex flex-1 items-center space-x-2 justify-end">
         <Search />
       </div>
     </div>
