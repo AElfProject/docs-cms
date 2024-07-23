@@ -103,6 +103,7 @@ export default async function Document({ params }: Props) {
               theme={{
                 token: {
                   colorLink: "#000",
+                  fontFamily: "inherit",
                 },
                 components: {
                   Collapse: {

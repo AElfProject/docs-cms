@@ -139,6 +139,7 @@ export default function Sidebar({ menu, closeDrawer = () => {} }: Props) {
               theme={{
                 token: {
                   colorLink: "#000",
+                  fontFamily: "inherit",
                 },
                 components: {
                   Menu: {
