@@ -79,7 +79,7 @@ export async function getRecord(app_token: string, table_id: string) {
 https://open.larksuite.com/open-apis/bitable/v1/apps/${app_token}/tables/${table_id}/records`);
   const { data } = res;
   if (!data) return;
-  for (const ele of data?.items) {
+  for (const ele of data.items) {
     if (ele.fields.image) {
       const url = ele.fields.image[0].tmp_url;
       const token = getFileTokens(url);
