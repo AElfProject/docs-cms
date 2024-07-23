@@ -249,7 +249,8 @@ export const getConfigContent = async (appToken: string) => {
     ele => ele.name === "Base"
   )?.table_id!;
   // get record
-  const record = (await getRecord(appToken!, tableId)).items;
+  const record = (await getRecord(appToken!, tableId))?.items;
+  if (!record) return {};
   const config = record.filter(ele => {
     return ele.fields.key;
   });
