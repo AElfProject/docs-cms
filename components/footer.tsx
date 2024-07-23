@@ -7,7 +7,7 @@ export async function Footer() {
   const footerData = await listFooterLinks();
 
   return (
-    <footer className="bg-slate-100">
+    <footer className="bg-slate-100 mt-[32px]">
       <div className="container p-8 lg:grid grid-cols-5 gap-4">
         <div className="hidden lg:block">
           <Image src="/aelf-logo.svg" width={115} height={32} alt="logo" />
