@@ -2,13 +2,14 @@ import { AntdRegistry } from "@ant-design/nextjs-registry";
 import type { Metadata } from "next";
 import "./globals.css";
 import { Inter as FontSans } from "next/font/google";
-import { cn, getMenu } from "@/lib/utils";
+import { cn, getConfigContent, getMenu } from "@/lib/utils";
 import { Footer } from "@/components/footer";
 import Header from "@/components/Header";
 import { Suspense } from "react";
 import { headers } from "next/headers";
 import Loading from "./loading";
 import { isMobile } from "../lib/isMobile";
+import { getNodeToken, NodesItem } from "../services/larkServices";
 
 const fontSans = FontSans({
   subsets: ["latin"],
@@ -28,6 +29,13 @@ export default async function RootLayout({
   const menu = await getMenu();
   const userAgent = headers().get("user-agent") || "";
   const isMobileDevice = isMobile(userAgent);
+  const nodes = await getNodeToken();
+  const appToken = nodes.items.find((ele: NodesItem) => {
+    return ele.title === "Configurations" && ele.obj_type === "bitable";
+  })?.obj_token;
+  let configObj: { [key: string]: any } = appToken
+    ? await getConfigContent(appToken)
+    : {};
   return (
     <html lang="en">
       <body
@@ -37,9 +45,13 @@ export default async function RootLayout({
         )}
       >
         <AntdRegistry>
-          <Header menu={menu} isMobileDevice={isMobileDevice} />
+          <Header
+            menu={menu}
+            isMobileDevice={isMobileDevice}
+            baseConfig={configObj}
+          />
           <Suspense fallback={<Loading />}>{children}</Suspense>
-          <Footer />
+          <Footer baseConfig={configObj} />
         </AntdRegistry>
       </body>
     </html>

@@ -1,6 +1,12 @@
 import { type ClassValue, clsx } from "clsx";
 import { twMerge } from "tailwind-merge";
-import { getNodeToken, NodesData, NodesItem } from "../services/larkServices";
+import {
+  getNodeToken,
+  getRecord,
+  getTables,
+  NodesData,
+  NodesItem,
+} from "../services/larkServices";
 import { nanoid } from "nanoid";
 import { convertArrToUrl } from "./url";
 import { AnyItem } from "../components/blocks/renderer";
@@ -232,3 +238,24 @@ export function findTitlesById(menu: NodesData, id: string) {
 
   return search(menu, []);
 }
+export function getFileTokens(url: string): string | undefined {
+  const regex = /[?&]file_tokens=([^&]+)/;
+  const match = url.match(regex);
+  return match ? match[1] : undefined;
+}
+export const getConfigContent = async (appToken: string) => {
+  // get table id
+  const tableId = (await getTables(appToken!)).items.find(
+    ele => ele.name === "Base"
+  )?.table_id!;
+  // get record
+  const record = (await getRecord(appToken!, tableId)).items;
+  const config = record.filter(ele => {
+    return ele.fields.key;
+  });
+  let configObj: { [key: string]: any } = {};
+  config.forEach(ele => {
+    configObj[ele.fields.key!] = ele.fields.value;
+  });
+  return configObj;
+};
