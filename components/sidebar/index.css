@@ -13,3 +13,32 @@
 .side-bar .ant-menu-title-content::-webkit-scrollbar {
   display: none;
 }
+.side-bar {
+  .ant-menu-submenu {
+    padding: 8px;
+  }
+  .ant-menu-submenu-title {
+    padding: 6px 6px 6px 12px !important;
+    margin: 0 !important;
+    line-height: 32px !important;
+    height: 32px !important;
+    .ant-menu-title-content {
+      line-height: 20px !important;
+    }
+  }
+  .ant-menu-item {
+    padding-left: 20px !important;
+    padding-right: 0;
+    line-height: 32px !important;
+    height: 32px !important;
+  }
+  .ant-menu-submenu {
+    padding: 0 0 0 8px;
+  }
+  &.ant-menu-root > .ant-menu-submenu {
+    padding: 8px;
+  }
+}
+.thin-scrollbar {
+  scrollbar-width: thin;
+}

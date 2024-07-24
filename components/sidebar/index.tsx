@@ -151,21 +151,21 @@ export default function Sidebar({ menu, closeDrawer = () => {} }: Props) {
                 },
               }}
             >
-              <div className=" h-full  min-w-8">
-                <Menu
-                  className={clsx(
-                    !showMenu && "hidden",
-                    "h-full side-bar sm:!pt-[60px]"
-                  )}
-                  openKeys={openKeys}
-                  defaultOpenKeys={openKeys}
-                  inlineCollapsed={false}
-                  style={{ width: 256 }}
-                  selectedKeys={[id as string]}
-                  mode="inline"
-                  items={menuItems}
-                  expandIcon={null}
-                />
+              <div className=" h-full  min-w-8 sm:!pt-[60px]">
+                <div className="overflow-y-auto overflow-x-hidden h-[calc(100%-40px)] thin-scrollbar">
+                  <Menu
+                    className={clsx(!showMenu && "hidden", "h-full side-bar")}
+                    openKeys={openKeys}
+                    defaultOpenKeys={openKeys}
+                    inlineCollapsed={false}
+                    style={{ width: 300 }}
+                    selectedKeys={[id as string]}
+                    mode="inline"
+                    items={menuItems}
+                    expandIcon={null}
+                  />
+                </div>
+
                 <button
                   onClick={() => setShowMenu(!showMenu)}
                   id="sidebar-toggle"
