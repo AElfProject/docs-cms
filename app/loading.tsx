@@ -1,10 +1,10 @@
+"use client";
+
 import { Skeleton } from "@/components/ui/skeleton";
-import { headers } from "next/headers";
-import { isMobile } from "../lib/isMobile";
+import { useIsMobile } from "@/lib/isMobile";
 
 export default function Loading() {
-  const userAgent = headers().get("user-agent") || "";
-  const isMobileDevice = isMobile(userAgent);
+  const isMobileDevice = useIsMobile();
   return (
     <div className="flex-1 px-4 sm:px-6 lg:px-8">
       <div className="grid  gap-8 py-8 min-h-[calc(100vh-225px)] grid-cols-[300px_1fr]">

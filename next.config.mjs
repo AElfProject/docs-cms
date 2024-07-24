@@ -27,6 +27,8 @@ const nextConfig = {
     workerThreads: false,
     cpus: 1,
   },
+  output: "export",
+  exportTrailingSlash: true,
 };
 
 export default nextConfig;

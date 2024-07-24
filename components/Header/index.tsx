@@ -20,21 +20,22 @@ import {
 } from "@ant-design/icons";
 import "./index.css";
 import Sidebar from "../sidebar";
+import { useIsMobile } from "@/lib/isMobile";
 interface Props {
   menu: NodesData;
-  isMobileDevice: boolean;
   baseConfig: { [key: string]: any };
 }
 type MenuItem = Required<MenuProps>["items"][number];
 
-export default function Header({ menu, isMobileDevice, baseConfig }: Props) {
+export default function Header({ menu, baseConfig }: Props) {
   const params = useParams();
+  const isMobileDevice = useIsMobile();
   const titleArr = formatStringArray(params.id as string[]);
   const { lastItemId: id } = findPathByTitles(menu, titleArr);
   let temp: any = {};
   temp.items = findTopLevelItems(menu, id as string) as NodesItem[];
   const items = menu.items;
-  const menuItems: MenuItem[] = items.map(ele => {
+  const menuItems: MenuItem[] = items.map((ele) => {
     const titles = findTitlesById(menu, ele.node_token);
     const url = titles?.join("/");
     let obj: any = {};
@@ -52,7 +53,7 @@ export default function Header({ menu, isMobileDevice, baseConfig }: Props) {
   useEffect(() => {
     setCurrent(temp.items && temp.items[0]?.node_token);
   }, [id]);
-  const onClick: MenuProps["onClick"] = e => {
+  const onClick: MenuProps["onClick"] = (e) => {
     setCurrent(e.key);
   };
   const [drawerOpen, setDrawerOpen] = useState(false);
@@ -73,7 +74,7 @@ export default function Header({ menu, isMobileDevice, baseConfig }: Props) {
   );
   const homeDrawerContent = (
     <div className="home-drawer-content">
-      {menu.items.map(item => {
+      {menu.items.map((item) => {
         const titles = findTitlesById(menu, item.node_token);
         const url = titles?.join("/");
         return (
