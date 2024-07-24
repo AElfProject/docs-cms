@@ -29,22 +29,6 @@ export default function Loading() {
               <Skeleton className="h-6 w-full" />
             </div>
           </div>
-          <div>
-            <Skeleton className="h-8 w-64" />
-            <div className="mt-4 space-y-4">
-              <Skeleton className="h-6 w-full" />
-              <Skeleton className="h-6 w-full" />
-              <Skeleton className="h-6 w-full" />
-            </div>
-          </div>
-          <div>
-            <Skeleton className="h-8 w-64" />
-            <div className="mt-4 space-y-4">
-              <Skeleton className="h-6 w-full" />
-              <Skeleton className="h-6 w-full" />
-              <Skeleton className="h-6 w-full" />
-            </div>
-          </div>
         </div>
       </div>
     </div>

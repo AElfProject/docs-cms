@@ -7,8 +7,8 @@ import { Menu, ConfigProvider } from "antd";
 import { NodesData, NodesItem } from "../../services/larkServices";
 import { useEffect, useState } from "react";
 import { DownOutlined, RightOutlined } from "@ant-design/icons";
+import clsx from "clsx";
 import {
-  findIdByPath,
   findKeyInData,
   findPathByKey,
   findPathByTitles,
@@ -130,11 +130,13 @@ export default function Sidebar({ menu, closeDrawer = () => {} }: Props) {
     }
   }, [id]);
 
+  const [showMenu, setShowMenu] = useState(true);
+
   return (
     <>
       {isKeyInMenu ? (
-        <aside className="z-30 pl-2 shrink-0 block top-[60px] sm:max-w-[300px]">
-          <div className="sticky top-0">
+        <aside className="z-30 relative shrink-0 block sm:max-w-[300px]">
+          <div className="sticky top-0 h-full max-h-full">
             <ConfigProvider
               theme={{
                 token: {
@@ -149,18 +151,31 @@ export default function Sidebar({ menu, closeDrawer = () => {} }: Props) {
                 },
               }}
             >
-              <div className="sm:pt-[60px]">
-                <Menu
-                  className="h-full side-bar"
-                  openKeys={openKeys}
-                  defaultOpenKeys={openKeys}
-                  inlineCollapsed={false}
-                  style={{ width: 256 }}
-                  selectedKeys={[id as string]}
-                  mode="inline"
-                  items={menuItems}
-                  expandIcon={null}
-                />
+              <div className=" h-full  min-w-8 sm:!pt-[60px]">
+                <div className="overflow-y-auto overflow-x-hidden h-[calc(100%-40px)] thin-scrollbar">
+                  <Menu
+                    className={clsx(!showMenu && "hidden", "h-full side-bar")}
+                    openKeys={openKeys}
+                    defaultOpenKeys={openKeys}
+                    inlineCollapsed={false}
+                    style={{ width: 300 }}
+                    selectedKeys={[id as string]}
+                    mode="inline"
+                    items={menuItems}
+                    expandIcon={null}
+                  />
+                </div>
+
+                <button
+                  onClick={() => setShowMenu(!showMenu)}
+                  id="sidebar-toggle"
+                  className={clsx(
+                    !showMenu && "h-full",
+                    "absolute z-10 p-4 w-full bottom-0 h-10 flex justify-center items-center border-t-[1px] border-r-[1px]"
+                  )}
+                >
+                  <span className="text-xl">{showMenu ? ">>" : "<<"}</span>
+                </button>
               </div>
             </ConfigProvider>
           </div>
