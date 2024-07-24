@@ -76,7 +76,7 @@ export default function TableOfContents({
           anchor = slugger.slug(anchor);
 
           return (
-            <li
+            <HighlightLink
               key={anchor}
               className={clsx(
                 {
@@ -91,9 +91,9 @@ export default function TableOfContents({
                 },
                 "text-[13px] leading-[21px]"
               )}
-            >
-              <HighlightLink title={title} anchor={anchor} />
-            </li>
+              title={title}
+              anchor={anchor}
+            />
           );
         })}
     </ul>

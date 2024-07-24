@@ -7,9 +7,11 @@ import { useEffect, useState } from "react";
 export function HighlightLink({
   anchor,
   title,
+  className,
 }: {
   anchor: string;
   title: string;
+  className: string;
 }) {
   const [isIntersecting, setIsIntersecting] = useState(false);
 
@@ -17,13 +19,19 @@ export function HighlightLink({
     // get your elements
     const el1 = document.getElementById(anchor);
 
-    const observer = new IntersectionObserver(entries => {
-      // do something with the entries
+    const observer = new IntersectionObserver(
+      (entries) => {
+        // do something with the entries
 
-      entries.forEach(entry => {
-        setIsIntersecting(entry.isIntersecting);
-      });
-    });
+        entries.forEach((entry) => {
+          setIsIntersecting(entry.isIntersecting);
+        });
+      },
+      {
+        rootMargin: "-60px",
+        threshold: [1],
+      }
+    );
 
     // observe each element if it was found
     if (!!el1) observer.observe(el1);
@@ -35,13 +43,15 @@ export function HighlightLink({
   }, [anchor]);
 
   return (
-    <Link
-      href={`#${anchor}`}
-      className={clsx({
-        "sm:font-bold": isIntersecting,
-      })}
+    <li
+      className={clsx(
+        {
+          active: isIntersecting,
+        },
+        className
+      )}
     >
-      {title}
-    </Link>
+      <Link href={`#${anchor}`}>{title}</Link>
+    </li>
   );
 }

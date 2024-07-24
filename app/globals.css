@@ -87,3 +87,11 @@ li > ul {
 html {
   scroll-padding-top: 70px;
 }
+
+ul > .active {
+  font-weight: bold;
+}
+
+ul > .active ~ .active {
+  font-weight: normal;
+}
