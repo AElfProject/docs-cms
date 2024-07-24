@@ -82,7 +82,7 @@ jobs:
               workflow_id: 'docs-cms.yaml',
               ref: 'main',
               inputs: {
-                project: '${{ vars.PROJECT }}',
+                site_url: '${{ vars.SITE_URL }}',
                 commit_sha: 'sha-${{ steps.vars.outputs.short_sha }}',
               }
             })
