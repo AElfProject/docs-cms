@@ -51,7 +51,7 @@ export default async function Home() {
         <h1 className="text-4xl font-bold mb-4">{configObj.title}</h1>
         <p className="text-gray-700">{configObj.description}</p>
       </div>
-      <div className="grid grid-flow-row-dense grid-cols-1 md:grid-cols-2 lg:grid-cols-3 mt-20">
+      <div className="grid grid-flow-row-dense grid-cols-1 md:grid-cols-2 lg:grid-cols-3 mt-20 mb-16">
         {menu.items.map(ele => {
           const url = `/wiki/${toKebabCase(ele.title)}`;
           return (
