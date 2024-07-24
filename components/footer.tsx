@@ -9,7 +9,7 @@ export async function Footer({ baseConfig }: Props) {
   const footerData = await listFooterLinks();
   const icon = baseConfig.logoLight;
   return (
-    <footer className="bg-slate-100 mt-[32px]">
+    <footer className="bg-slate-100">
       <div className="container p-8 lg:grid grid-cols-5 gap-4">
         <div className="hidden lg:block">
           <Image src={icon} width={115} height={32} alt="logo" />
