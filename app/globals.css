@@ -83,3 +83,15 @@ li > ul {
 .ant-menu.ant-menu-horizontal {
   border-bottom: none;
 }
+
+html {
+  scroll-padding-top: 70px;
+}
+
+ul > .active {
+  font-weight: bold;
+}
+
+ul > .active ~ .active {
+  font-weight: normal;
+}
