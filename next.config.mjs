@@ -28,7 +28,7 @@ const nextConfig = {
     cpus: 1,
   },
   output: "export",
-  exportTrailingSlash: true,
+  trailingSlash: true,
 };
 
 export default nextConfig;
