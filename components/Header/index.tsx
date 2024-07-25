@@ -20,18 +20,14 @@ import {
 } from "@ant-design/icons";
 import "./index.css";
 import Sidebar from "../sidebar";
-<<<<<<< Updated upstream
-=======
 import { Desktop, Mobile } from "../provider";
->>>>>>> Stashed changes
 interface Props {
   menu: NodesData;
-  isMobileDevice: boolean;
   baseConfig: { [key: string]: any };
 }
 type MenuItem = Required<MenuProps>["items"][number];
 
-export default function Header({ menu, isMobileDevice, baseConfig }: Props) {
+export default function Header({ menu, baseConfig }: Props) {
   const params = useParams();
   const titleArr = formatStringArray(params.id as string[]);
   const { lastItemId: id } = findPathByTitles(menu, titleArr);

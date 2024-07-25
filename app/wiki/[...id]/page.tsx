@@ -19,6 +19,7 @@ import { NodesData } from "@/services/larkServices";
 import { headers } from "next/headers";
 import { isMobile } from "../../../lib/isMobile";
 import { Collapse, ConfigProvider } from "antd";
+import { Desktop, Mobile } from "../../../components/provider";
 interface Props {
   params: {
     id: string[];
@@ -61,8 +62,6 @@ export default async function Document({ params }: Props) {
 
     console.log("revalidating", id, docx_token);
   }
-  const userAgent = headers().get("user-agent") || "";
-  const isMobileDevice = isMobile(userAgent);
   const contentItems = [
     {
       key: "1",
@@ -97,8 +96,8 @@ export default async function Document({ params }: Props) {
         </Admin>
       </div>
       <aside className="sm:w-1/3 w-full">
-        {isMobileDevice ? (
-          ifShowCollapse ? (
+        <Mobile>
+          {ifShowCollapse ? (
             <ConfigProvider
               theme={{
                 token: {
@@ -117,12 +116,13 @@ export default async function Document({ params }: Props) {
                 items={contentItems}
               ></Collapse>
             </ConfigProvider>
-          ) : null
-        ) : (
+          ) : null}
+        </Mobile>
+        <Desktop>
           <div className="overflow-y-auto max-h-[calc(100vh-60px)] sticky top-20">
             <TableOfContents allItems={data} />
           </div>
-        )}
+        </Desktop>
       </aside>
     </main>
   );

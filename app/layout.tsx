@@ -6,9 +6,7 @@ import { Poppins as FontSans } from "next/font/google";
 import { Footer } from "@/components/footer";
 import Header from "@/components/Header";
 import { Suspense } from "react";
-import { headers } from "next/headers";
 import Loading from "./loading";
-import { isMobile } from "../lib/isMobile";
 import { getNodeToken, NodesItem } from "../services/larkServices";
 
 const fontSans = FontSans({
@@ -28,8 +26,6 @@ export default async function RootLayout({
   children: React.ReactNode;
 }>) {
   const menu = await getMenu();
-  const userAgent = headers().get("user-agent") || "";
-  const isMobileDevice = isMobile(userAgent);
   const nodes = await getNodeToken();
   const appToken = nodes.items.find((ele: NodesItem) => {
     return ele.title === "Configurations" && ele.obj_type === "bitable";
@@ -46,11 +42,7 @@ export default async function RootLayout({
         )}
       >
         <AntdRegistry>
-          <Header
-            menu={menu}
-            isMobileDevice={isMobileDevice}
-            baseConfig={configObj}
-          />
+          <Header menu={menu} baseConfig={configObj} />
           <Suspense fallback={<Loading />}>{children}</Suspense>
           <Footer baseConfig={configObj} />
         </AntdRegistry>
