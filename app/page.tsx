@@ -1,12 +1,7 @@
 import Link from "next/link";
-import Image from "next/image";
 import { getConfigContent, getMenu, toKebabCase } from "../lib/utils";
-import {
-  getNodeToken,
-  getRecord,
-  getTables,
-  NodesItem,
-} from "../services/larkServices";
+import { getNodeToken, NodesItem } from "../services/larkServices";
+import CustomImage from "../components/customImage";
 
 const getChildList = (ele: NodesItem, index: number, url: string = "") => {
   index++;
@@ -41,7 +36,7 @@ export default async function Home() {
     <main className="pt-8 container min-h-[calc(100vh-225px)]">
       <div className="sm:mt-[60px] mt-10 bg-white">
         <div className="relative w-full sm:h-[322px] h-[82px] mb-6">
-          <Image
+          <CustomImage
             src={configObj.image}
             alt="Banner Image"
             layout="fill"

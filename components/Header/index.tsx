@@ -1,7 +1,6 @@
 "use client";
 import type { MenuProps } from "antd";
 import { Drawer, Menu } from "antd";
-import Image from "next/image";
 import { NodesData, NodesItem } from "../../services/larkServices";
 import { useEffect, useState } from "react";
 import Link from "next/link";
@@ -21,6 +20,7 @@ import {
 import "./index.css";
 import Sidebar from "../sidebar";
 import { Desktop, Mobile } from "../provider";
+import CustomImage from "../customImage";
 interface Props {
   menu: NodesData;
   baseConfig: { [key: string]: any };
@@ -103,12 +103,12 @@ export default function Header({ menu, baseConfig }: Props) {
       <Drawer
         className="header-drawer-container"
         title={
-          <Image
+          <CustomImage
             src={baseConfig.logoLight}
             width={115}
             height={59}
             alt="logo"
-          ></Image>
+          ></CustomImage>
         }
         closeIcon={false}
         extra={
@@ -128,12 +128,12 @@ export default function Header({ menu, baseConfig }: Props) {
         {showHome ? homeDrawerContent : drawerContent}
       </Drawer>
       <Link href="/" className="mr-8 flex">
-        <Image
+        <CustomImage
           src={baseConfig.logoLight}
           width={115}
           height={32}
           alt="logo"
-        ></Image>
+        ></CustomImage>
       </Link>
       <Desktop>
         <Menu
