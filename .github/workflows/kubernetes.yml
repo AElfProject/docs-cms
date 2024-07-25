@@ -58,9 +58,7 @@ jobs:
         with:
           images: ${{ secrets.DOCKER_USERNAME }}/${{ github.event.repository.name }}
           tags: |
-            type=sha
-            # set latest tag for default branch
-            type=raw,value=latest,enable={{is_default_branch}}
+            type=schedule,pattern={{date 'YYYYMMDD-hhmmss' tz='Asia/Tokyo'}}
 
       - name: Build and push Docker image
         id: push
@@ -71,12 +69,6 @@ jobs:
           push: true
           tags: ${{ steps.meta.outputs.tags }}
           labels: ${{ steps.meta.outputs.labels }}
-      
-      - name: Set short git commit SHA
-        id: vars
-        run: |
-          calculatedSha=$(git rev-parse --short ${{ github.sha }})
-          echo "short_sha=$calculatedSha" >> "$GITHUB_OUTPUT"
       
       - name: Deploy
         uses: actions/github-script@v6
@@ -90,6 +82,6 @@ jobs:
               ref: 'main',
               inputs: {
                 site_url: '${{ vars.SITE_URL }}',
-                commit_sha: 'sha-${{ steps.vars.outputs.short_sha }}',
+                commit_sha: '${{ steps.meta.outputs.tags }}',
               }
             })
