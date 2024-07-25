@@ -11,17 +11,16 @@ name: Publish Docker image
 
 on:
   workflow_dispatch:
-    inputs:
-     environment:
-        type: environment
-        description: Select the environment
 
 jobs:
   build:
     name: Build and Push Docker image to Docker Hub
     runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        environment: [aelf-docs-dev, aefinder-docs-dev]
     environment: 
-      name: ${{ inputs.environment }}
+      name: ${{ matrix.environment }}
     permissions:
       contents: read
     steps:
@@ -81,7 +80,7 @@ jobs:
               workflow_id: 'docs-cms.yaml',
               ref: 'main',
               inputs: {
-                site_url: '${{ vars.SITE_URL }}',
+                appName: '${{ matrix.environment }}',
                 commit_sha: '${{ steps.meta.outputs.version }}',
               }
             })
