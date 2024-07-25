@@ -1,7 +1,6 @@
-import { default as NxImage } from "next/image";
-
 import { Item } from "./common";
 import { fetcher } from "../../lib/api";
+import CustomImage from "../customImage";
 
 export interface Image extends Item {
   block_type: 27;
@@ -28,7 +27,7 @@ export async function Image(props: Image) {
   if (!src) return <></>;
 
   return (
-    <NxImage
+    <CustomImage
       src={src}
       alt=""
       width={props.image.width}

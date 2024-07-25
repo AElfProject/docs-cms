@@ -1,7 +1,7 @@
 import { listFooterLinks } from "@/services/list-footer-links";
 import { key } from "@/lib/utils";
 import Link from "next/link";
-import Image from "next/image";
+import CustomImage from "./customImage";
 interface Props {
   baseConfig: { [key: string]: any };
 }
@@ -13,18 +13,18 @@ export async function Footer({ baseConfig }: Props) {
       <div className="container p-8 ">
         <div className="footer-links lg:grid grid-cols-5 gap-4">
           <div className="hidden lg:block">
-            <Image
+            <CustomImage
               src={baseConfig?.logoLight}
               width={115}
               height={32}
               alt="logo"
             />
           </div>
-          {Object.keys(footerData).map((category) => (
+          {Object.keys(footerData).map(category => (
             <div key={category} className="mb-4">
               <h3 className="font-bold mb-4">{category}</h3>
               <ul>
-                {footerData[category].map((item) => (
+                {footerData[category].map(item => (
                   <li key={key()} className="leading-[32px]">
                     <Link
                       className="hover:underline text-[#606770]"
@@ -45,42 +45,42 @@ export async function Footer({ baseConfig }: Props) {
           <span className="social flex gap-3">
             {baseConfig?.footerTwitter && (
               <Link href={baseConfig.footerTwitter}>
-                <Image
+                <CustomImage
                   src="./twitter.svg"
                   alt="X"
                   width={24}
                   height={24}
-                ></Image>
+                ></CustomImage>
               </Link>
             )}
             {baseConfig?.footerTelegram && (
               <Link href={baseConfig.footerTelegram}>
-                <Image
+                <CustomImage
                   src="./telegram.svg"
                   alt="telegram"
                   width={24}
                   height={24}
-                ></Image>
+                ></CustomImage>
               </Link>
             )}
             {baseConfig?.footerDiscord && (
               <Link href={baseConfig.footerDiscord}>
-                <Image
+                <CustomImage
                   src="./discord.svg"
                   alt="discord"
                   width={24}
                   height={24}
-                ></Image>
+                ></CustomImage>
               </Link>
             )}
             {baseConfig?.footerGitHub && (
               <Link href={baseConfig.footerGitHub}>
-                <Image
+                <CustomImage
                   src="./github.svg"
                   alt="github"
                   width={24}
                   height={24}
-                ></Image>
+                ></CustomImage>
               </Link>
             )}
           </span>
