@@ -130,8 +130,11 @@ export default function Sidebar({ menu, closeDrawer = () => {} }: Props) {
     }
   }, [id]);
 
+<<<<<<< Updated upstream
   const [showMenu, setShowMenu] = useState(true);
 
+=======
+>>>>>>> Stashed changes
   return (
     <>
       {isKeyInMenu ? (

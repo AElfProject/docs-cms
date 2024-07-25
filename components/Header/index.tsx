@@ -20,6 +20,10 @@ import {
 } from "@ant-design/icons";
 import "./index.css";
 import Sidebar from "../sidebar";
+<<<<<<< Updated upstream
+=======
+import { Desktop, Mobile } from "../provider";
+>>>>>>> Stashed changes
 interface Props {
   menu: NodesData;
   isMobileDevice: boolean;
@@ -68,6 +72,7 @@ export default function Header({ menu, isMobileDevice, baseConfig }: Props) {
       >
         ← Back to main menu
       </div>
+
       <Sidebar menu={menu} closeDrawer={closeDrawer}></Sidebar>
     </div>
   );
@@ -90,7 +95,7 @@ export default function Header({ menu, isMobileDevice, baseConfig }: Props) {
   );
   return (
     <div className="fixed w-full bg-white z-50 flex px-5 h-[60px] border-b-[1px] items-center">
-      {isMobileDevice && (
+      <Mobile>
         <div className="flex w-[30px] mr-2" onClick={() => setDrawerOpen(true)}>
           <MenuFoldOutlined
             width={"30px"}
@@ -98,7 +103,7 @@ export default function Header({ menu, isMobileDevice, baseConfig }: Props) {
             className="text-[30px] !text-[#1c1e21]"
           />
         </div>
-      )}
+      </Mobile>
       <Drawer
         className="header-drawer-container"
         title={
@@ -134,7 +139,7 @@ export default function Header({ menu, isMobileDevice, baseConfig }: Props) {
           alt="logo"
         ></Image>
       </Link>
-      {!isMobileDevice && (
+      <Desktop>
         <Menu
           className="w-full flex items-center header-menu"
           onClick={onClick}
@@ -142,7 +147,7 @@ export default function Header({ menu, isMobileDevice, baseConfig }: Props) {
           mode="horizontal"
           items={menuItems}
         />
-      )}
+      </Desktop>
       <div className="flex items-center space-x-4 justify-end md:mr-5">
         {baseConfig.blog && (
           <a
