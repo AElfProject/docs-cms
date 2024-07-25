@@ -70,7 +70,8 @@ export async function Sheet(props: Sheet) {
   const range = `${sheetId}!A1:${"ABCDEFGHIJKLMNOPQRSTUVWXYZ".charAt(
     sheet.grid_properties.column_count - 1
   )}${sheet.grid_properties.row_count}`;
-  const rangeData = await fetcher<{
+
+  interface RangeData {
     code: number;
     data: {
       revision: number;
@@ -83,9 +84,19 @@ export async function Sheet(props: Sheet) {
       };
     };
     msg: string;
-  }>(
-    `https://open.larksuite.com/open-apis/sheets/v2/spreadsheets/${tId}/values/${range}`
-  );
+  }
+
+  let rangeData: RangeData | undefined;
+
+  try {
+    rangeData = await fetcher<RangeData>(
+      `https://open.larksuite.com/open-apis/sheets/v2/spreadsheets/${tId}/values/${range}`
+    );
+  } catch (err) {
+    console.log(err);
+  }
+
+  if (!rangeData) return null;
 
   const [headerRow, ...rows] = rangeData.data.valueRange.values;
 
