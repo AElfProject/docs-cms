@@ -1,4 +1,4 @@
-"use server";
+import { APP_ID, APP_SECRET } from "@/environment";
 
 export async function getTenantAccessToken() {
   const res = await fetch(
@@ -9,8 +9,8 @@ export async function getTenantAccessToken() {
         "Content-Type": "application/json; charset=utf-8",
       },
       body: JSON.stringify({
-        app_id: process.env.APP_ID,
-        app_secret: process.env.APP_SECRET,
+        app_id: APP_ID(),
+        app_secret: APP_SECRET(),
       }),
       next: { revalidate: 360 },
     }

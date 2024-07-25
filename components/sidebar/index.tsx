@@ -17,6 +17,8 @@ import {
   formatStringArray,
 } from "../../lib/utils";
 import "./index.css";
+import { useIsMobile } from "@/lib/isMobile";
+import { Desktop } from "../provider";
 
 interface Props {
   menu: NodesData;
@@ -42,6 +44,7 @@ const MenuItem = ({ item }: { item: NodesItem }) => {
 
 type MenuItem = Required<MenuProps>["items"][number];
 export default function Sidebar({ menu, closeDrawer = () => {} }: Props) {
+  const isMobile = useIsMobile();
   const params = useParams();
   const titleArr = formatStringArray(params.id as string[]);
   const { lastItemId: id } = findPathByTitles(menu, titleArr);
@@ -166,16 +169,18 @@ export default function Sidebar({ menu, closeDrawer = () => {} }: Props) {
                   />
                 </div>
 
-                <button
-                  onClick={() => setShowMenu(!showMenu)}
-                  id="sidebar-toggle"
-                  className={clsx(
-                    !showMenu && "h-full",
-                    "absolute z-10 p-4 w-full bottom-0 h-10 flex justify-center items-center border-t-[1px] border-r-[1px]"
-                  )}
-                >
-                  <span className="text-xl">{showMenu ? ">>" : "<<"}</span>
-                </button>
+                <Desktop>
+                  <button
+                    onClick={() => setShowMenu(!showMenu)}
+                    id="sidebar-toggle"
+                    className={clsx(
+                      !showMenu && "h-full",
+                      "absolute z-10 p-4 w-full bottom-0 h-10 flex justify-center items-center border-t-[1px] border-r-[1px]"
+                    )}
+                  >
+                    <span className="text-xl">{showMenu ? ">>" : "<<"}</span>
+                  </button>
+                </Desktop>
               </div>
             </ConfigProvider>
           </div>

@@ -1,3 +1,4 @@
+import { SITE_URL } from "@/environment";
 import { getChildNodes } from "@/services/get-child-nodes";
 import { getPath } from "@/services/get-path";
 import { getTopLevelNodes } from "@/services/get-top-level-nodes";
@@ -17,7 +18,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     if (nodes) {
       for (const node of nodes) {
         map.push({
-          url: `${process.env.SITE_URL}${await getPath(node.node_token)}`,
+          url: `https://${SITE_URL()}${await getPath(node.node_token)}`,
           lastModified: new Date(Number(node.obj_edit_time) * 1000),
           changeFrequency: "weekly",
           priority: 0.5,

@@ -12,13 +12,11 @@ const fieldSchema = z.object({
   }),
 });
 
-const schema = z.array(
-  z.object({
-    fields: fieldSchema,
-    id: z.string(),
-    record_id: z.string(),
-  })
-);
+const schema = z.object({
+  fields: fieldSchema,
+  id: z.string(),
+  record_id: z.string(),
+});
 
 type Field = z.infer<typeof fieldSchema>;
 
@@ -48,10 +46,11 @@ export async function listFooterLinks() {
 
   const { items } = records.data;
 
-  const links = schema.parse(items);
+  const links = items.filter((i) => schema.safeParse(i).success);
 
   const res = links
     .map((link) => link.fields)
+    .map((field) => fieldSchema.parse(field))
     .reduce((acc, cur) => {
       if (!acc[cur.Category]) acc[cur.Category] = [cur];
       else acc[cur.Category].push(cur);

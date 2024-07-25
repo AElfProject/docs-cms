@@ -15,18 +15,15 @@ const nextConfig = {
         port: "",
         pathname: "**",
       },
-      {
-        protocol: "https",
-        hostname: "open.larksuite.com",
-        port: "",
-        pathname: "**",
-      },
     ],
+    unoptimized: true,
   },
   experimental: {
     workerThreads: false,
     cpus: 1,
   },
+  output: "export",
+  trailingSlash: true,
 };
 
 export default nextConfig;
