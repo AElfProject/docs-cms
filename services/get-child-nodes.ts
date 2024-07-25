@@ -1,6 +1,7 @@
 import { fetcher } from "@/lib/api";
 import { z } from "zod";
 import { nodeSchema } from "./node-schema";
+import { SPACE_ID } from "@/environment";
 
 const schema = z.object({
   code: z.number(),
@@ -14,7 +15,7 @@ const schema = z.object({
 
 export async function getChildNodes(parentId: string) {
   const res = await fetcher(
-    `https://open.larksuite.com/open-apis/wiki/v2/spaces/${process.env.SPACE_ID}/nodes?parent_node_token=${parentId}`,
+    `https://open.larksuite.com/open-apis/wiki/v2/spaces/${SPACE_ID()}/nodes?parent_node_token=${parentId}`,
     { tags: [parentId] }
   );
   return schema.parse(res);

@@ -1,8 +1,7 @@
-import { getSearchConfig } from "@/services/get-search-config";
-import { NextRequest } from "next/server";
-
-export async function GET(request: NextRequest) {
-  const config = await getSearchConfig();
-
-  return Response.json(config);
+export async function GET() {
+  return Response.json({
+    index: "index",
+    host: "host",
+    apikey: "apikey",
+  });
 }
