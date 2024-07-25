@@ -82,6 +82,6 @@ jobs:
               ref: 'main',
               inputs: {
                 site_url: '${{ vars.SITE_URL }}',
-                commit_sha: '${{ steps.meta.outputs.tags }}',
+                commit_sha: '${{ steps.meta.outputs.version }}',
               }
             })
