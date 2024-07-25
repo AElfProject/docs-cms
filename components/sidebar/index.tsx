@@ -17,7 +17,6 @@ import {
   formatStringArray,
 } from "../../lib/utils";
 import "./index.css";
-import { useIsMobile } from "@/lib/isMobile";
 import { Desktop } from "../provider";
 
 interface Props {
@@ -44,7 +43,6 @@ const MenuItem = ({ item }: { item: NodesItem }) => {
 
 type MenuItem = Required<MenuProps>["items"][number];
 export default function Sidebar({ menu, closeDrawer = () => {} }: Props) {
-  const isMobile = useIsMobile();
   const params = useParams();
   const titleArr = formatStringArray(params.id as string[]);
   const { lastItemId: id } = findPathByTitles(menu, titleArr);
@@ -54,12 +52,12 @@ export default function Sidebar({ menu, closeDrawer = () => {} }: Props) {
   let temp: any = {};
   temp.items = findTopLevelItems(menu, id as string);
   const [openKeys, setOpenKeys] = useState(
-    findPathByKey(temp, id as string)?.map(ele => ele.node_token)
+    findPathByKey(temp, id as string)?.map((ele) => ele.node_token)
   );
   // click icon to open or close submenu
   const onIconClick = ({ key }: { key: string }) => {
     if (openKeys.includes(key)) {
-      setOpenKeys(openKeys.filter(openKey => openKey !== key));
+      setOpenKeys(openKeys.filter((openKey) => openKey !== key));
     } else {
       setOpenKeys([...openKeys, key]);
     }
@@ -80,14 +78,14 @@ export default function Sidebar({ menu, closeDrawer = () => {} }: Props) {
         {hasChild &&
           (openKeys.includes(key) ? (
             <DownOutlined
-              onClick={e => {
+              onClick={(e) => {
                 e.stopPropagation();
                 onIconClick({ key });
               }}
             />
           ) : (
             <RightOutlined
-              onClick={e => {
+              onClick={(e) => {
                 e.stopPropagation();
                 onIconClick({ key });
               }}
@@ -127,7 +125,7 @@ export default function Sidebar({ menu, closeDrawer = () => {} }: Props) {
     setisKeyInMenu(keyFlag);
     if (keyFlag) {
       const defaultOpenKeys = findPathByKey(temp, id as string)?.map(
-        ele => ele.node_token
+        (ele) => ele.node_token
       );
       setOpenKeys(defaultOpenKeys!);
     }
