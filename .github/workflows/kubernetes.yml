@@ -42,6 +42,7 @@ jobs:
           echo APP_SECRET=${{ secrets.APP_SECRET }} >> .env
           echo SPACE_ID=${{ vars.SPACE_ID }} >> .env
           echo NEXT_PUBLIC_SITE_URL=${{ vars.SITE_URL }} >> .env
+          echo NEXT_PUBLIC_CLOUDINARY_CLOUD_NAME=${{ vars.CLOUDINARY_CLOUD_NAME }} >> .env
 
       - run: npm run build
 
