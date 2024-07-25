@@ -9,7 +9,7 @@ function isMobile(userAgent: string): boolean {
 }
 
 export function useIsMobile() {
-  const [mobile, setMobile] = useState(true);
+  const [mobile, setMobile] = useState(false);
 
   useLayoutEffect(() => {
     setMobile(isMobile(window.navigator.userAgent));
