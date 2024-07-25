@@ -58,7 +58,7 @@ jobs:
         with:
           images: ${{ secrets.DOCKER_USERNAME }}/${{ github.event.repository.name }}
           tags: |
-            type=raw,pattern={{date 'YYYYMMDD-hhmmss' tz='Asia/Tokyo'}}
+            type=raw,value={{date 'YYYYMMDD-hhmmss' tz='Asia/Tokyo'}}
 
       - name: Build and push Docker image
         id: push
