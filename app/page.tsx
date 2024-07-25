@@ -1,12 +1,7 @@
 import Link from "next/link";
-import Image from "next/image";
+import Image from "@/lib/image";
 import { getConfigContent, getMenu, toKebabCase } from "../lib/utils";
-import {
-  getNodeToken,
-  getRecord,
-  getTables,
-  NodesItem,
-} from "../services/larkServices";
+import { getNodeToken, NodesItem } from "../services/larkServices";
 
 const getChildList = (ele: NodesItem, index: number, url: string = "") => {
   index++;

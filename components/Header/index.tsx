@@ -1,7 +1,7 @@
 "use client";
 import type { MenuProps } from "antd";
 import { Drawer, Menu } from "antd";
-import Image from "next/image";
+import Image from "@/lib/image";
 import { NodesData, NodesItem } from "../../services/larkServices";
 import { useEffect, useState } from "react";
 import Link from "next/link";

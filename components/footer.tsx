@@ -1,7 +1,7 @@
 import { listFooterLinks } from "@/services/list-footer-links";
 import { key } from "@/lib/utils";
 import Link from "next/link";
-import Image from "next/image";
+import Image from "@/lib/image";
 interface Props {
   baseConfig: { [key: string]: any };
 }

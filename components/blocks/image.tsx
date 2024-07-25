@@ -1,4 +1,4 @@
-import { default as NxImage } from "next/image";
+import { default as NxImage } from "@/lib/image";
 
 import { Item } from "./common";
 import { fetcher } from "../../lib/api";
