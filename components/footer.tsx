@@ -2,6 +2,7 @@ import { listFooterLinks } from "@/services/list-footer-links";
 import { key } from "@/lib/utils";
 import Link from "next/link";
 import CustomImage from "./customImage";
+import Image from 'next/image';
 interface Props {
   baseConfig: { [key: string]: any };
 }
@@ -45,42 +46,42 @@ export async function Footer({ baseConfig }: Props) {
           <span className="social flex gap-3">
             {baseConfig?.footerTwitter && (
               <Link href={baseConfig.footerTwitter}>
-                <CustomImage
+                <Image
                   src="./twitter.svg"
                   alt="X"
                   width={24}
                   height={24}
-                ></CustomImage>
+                ></Image>
               </Link>
             )}
             {baseConfig?.footerTelegram && (
               <Link href={baseConfig.footerTelegram}>
-                <CustomImage
+                <Image
                   src="./telegram.svg"
                   alt="telegram"
                   width={24}
                   height={24}
-                ></CustomImage>
+                ></Image>
               </Link>
             )}
             {baseConfig?.footerDiscord && (
               <Link href={baseConfig.footerDiscord}>
-                <CustomImage
+                <Image
                   src="./discord.svg"
                   alt="discord"
                   width={24}
                   height={24}
-                ></CustomImage>
+                ></Image>
               </Link>
             )}
             {baseConfig?.footerGitHub && (
               <Link href={baseConfig.footerGitHub}>
-                <CustomImage
+                <Image
                   src="./github.svg"
                   alt="github"
                   width={24}
                   height={24}
-                ></CustomImage>
+                ></Image>
               </Link>
             )}
           </span>
