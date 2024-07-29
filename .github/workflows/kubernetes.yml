@@ -18,7 +18,7 @@ jobs:
     runs-on: ubuntu-latest
     strategy:
       matrix:
-        environment: [aelf-docs-dev, aefinder-docs-dev]
+        environment: [aelf-docs-dev, aefinder-docs-dev, tomorrowdao-docs-dev]
     environment: 
       name: ${{ matrix.environment }}
     permissions:
