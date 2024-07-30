@@ -150,8 +150,8 @@ export default function Sidebar({ menu, closeDrawer = () => {} }: Props) {
   return (
     <>
       {isKeyInMenu ? (
-        <aside className="z-30 relative shrink-0 block sm:max-w-[300px]">
-          <div className="sticky top-0 h-full max-h-full">
+        <aside className="z-30 shrink-0 block sm:max-w-[300px]">
+          <div className="sticky top-0 h-full max-h-[100vh]">
             <ConfigProvider
               theme={{
                 algorithm: getThemeConfig(theme, [
@@ -164,16 +164,26 @@ export default function Sidebar({ menu, closeDrawer = () => {} }: Props) {
                 },
                 components: {
                   Menu: {
-                    subMenuItemBg: getThemeConfig(theme, ["#fff", "#141414"]),
-                    itemSelectedBg: getThemeConfig(theme, ["#fff", "#141414"]),
+                    itemBg: getThemeConfig(theme, [
+                      "#fff",
+                      "hsl(var(--background))",
+                    ]),
+                    subMenuItemBg: getThemeConfig(theme, [
+                      "#fff",
+                      "hsl(var(--background))",
+                    ]),
+                    itemSelectedBg: getThemeConfig(theme, [
+                      "#fff",
+                      "hsl(var(--background))",
+                    ]),
                   },
                 },
               }}
             >
-              <div className=" h-full  min-w-8 sm:!pt-[60px]">
-                <div className="overflow-y-auto overflow-x-hidden h-[calc(100%-40px)] thin-scrollbar">
+              <div className=" h-full  min-w-8 sm:!pt-[60px] flex flex-col">
+                <div className="overflow-y-auto overflow-x-hidden thin-scrollbar pb-12 flex-grow sm:border-r">
                   <Menu
-                    className={clsx(!showMenu && "hidden", "h-full side-bar")}
+                    className={clsx(!showMenu && "hidden", "side-bar")}
                     openKeys={openKeys}
                     defaultOpenKeys={openKeys}
                     inlineCollapsed={false}
@@ -191,7 +201,7 @@ export default function Sidebar({ menu, closeDrawer = () => {} }: Props) {
                     id="sidebar-toggle"
                     className={clsx(
                       !showMenu && "h-full",
-                      "absolute z-10 p-4 w-full bottom-0 h-10 flex justify-center items-center border-t-[1px] border-r-[1px] bg-collapse-button-bg"
+                      "sticky z-10 p-4 w-full bottom-0 h-10 flex justify-center items-center border-t-[1px] border-r-[1px] bg-collapse-button-bg"
                     )}
                   >
                     <span className="text-xl">{showMenu ? "<<" : ">>"}</span>

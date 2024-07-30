@@ -12,6 +12,7 @@ import {
 
 import "typesense-docsearch-css";
 import { searchConfigSchema } from "@/services/search-config-schema";
+import { useTheme } from "next-themes";
 
 export default function Search() {
   const searchButtonRef = useRef(null);
@@ -70,6 +71,7 @@ export default function Search() {
     })();
   }, [initialQuery]);
 
+  const { theme } = useTheme();
   return (
     <div className="md:w-full md:flex-1 w-auto flex-none">
       <DocSearchButton ref={searchButtonRef} onClick={onOpen} />

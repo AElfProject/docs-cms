@@ -73,7 +73,7 @@ export function Footer({ baseConfig, footerData }: Props) {
             {baseConfig?.footerTwitter && (
               <Link href={baseConfig.footerTwitter} className="text-link">
                 <Image
-                  src="./twitter.svg"
+                  src="/twitter.svg"
                   alt="X"
                   width={24}
                   height={24}
@@ -83,7 +83,7 @@ export function Footer({ baseConfig, footerData }: Props) {
             {baseConfig?.footerTelegram && (
               <Link href={baseConfig.footerTelegram}>
                 <Image
-                  src="./telegram.svg"
+                  src="/telegram.svg"
                   alt="telegram"
                   width={24}
                   height={24}
@@ -93,7 +93,7 @@ export function Footer({ baseConfig, footerData }: Props) {
             {baseConfig?.footerDiscord && (
               <Link href={baseConfig.footerDiscord}>
                 <Image
-                  src="./discord.svg"
+                  src="/discord.svg"
                   alt="discord"
                   width={24}
                   height={24}
@@ -103,7 +103,7 @@ export function Footer({ baseConfig, footerData }: Props) {
             {baseConfig?.footerGitHub && (
               <Link href={baseConfig.footerGitHub}>
                 <Image
-                  src="./github.svg"
+                  src="/github.svg"
                   alt="github"
                   width={24}
                   height={24}

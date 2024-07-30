@@ -2,6 +2,8 @@ import Link from "next/link";
 import { getConfigContent, getMenu, toKebabCase } from "../lib/utils";
 import { getNodeToken, NodesItem } from "../services/larkServices";
 import CustomImage from "../components/customImage";
+import type { Metadata } from "next";
+import { getBaseConfig } from "../lib/getConfig";
 
 const getChildList = (ele: NodesItem, index: number, url: string = "") => {
   index++;
@@ -13,14 +15,20 @@ const getChildList = (ele: NodesItem, index: number, url: string = "") => {
           <Link href={newUrl} className="text-blue-500">
             {item.title}
           </Link>
-          {/* <ul className="list-[circle] pl-4">
-            {index <= 2 && getChildList(item, index, newUrl)}
-          </ul> */}
         </li>
       );
     });
   });
 };
+
+export async function generateMetadata(): Promise<Metadata> {
+  const configObj = await getBaseConfig();
+  return {
+    title: `Home | ${configObj.metaTitle}`,
+    description: configObj.metaDescription,
+    icons: [{ rel: "icon", url: configObj.metaIcon }],
+  };
+}
 
 export default async function Home() {
   const menu = await getMenu();

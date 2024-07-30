@@ -11,16 +11,21 @@ name: Publish Docker image
 
 on:
   workflow_dispatch:
+    inputs:
+      environment:
+        required: true
+        type: choice
+        options:
+          - aelf-docs-dev
+          - aefinder-docs-dev
+          - tomorrowdao-docs-dev
 
 jobs:
   build:
-    name: Build and Push Docker image to Docker Hub
+    name: Build and Push Docker image ${{inputs.environment}} to Docker Hub
     runs-on: ubuntu-latest
-    strategy:
-      matrix:
-        environment: [aelf-docs-dev, aefinder-docs-dev]
     environment: 
-      name: ${{ matrix.environment }}
+      name: ${{ inputs.environment }}
     permissions:
       contents: read
     steps:
@@ -57,7 +62,7 @@ jobs:
         with:
           images: ${{ secrets.DOCKER_USERNAME }}/${{ github.event.repository.name }}
           tags: |
-            type=raw,value=${{ matrix.environment }}-{{date 'YYYYMMDD-hhmmss' tz='Asia/Tokyo'}}
+            type=raw,value=${{ inputs.environment }}-{{date 'YYYYMMDD-hhmmss' tz='Asia/Tokyo'}}
 
       - name: Build and push Docker image
         id: push
@@ -80,7 +85,7 @@ jobs:
               workflow_id: 'docs-cms.yaml',
               ref: 'main',
               inputs: {
-                appName: '${{ matrix.environment }}',
+                appName: '${{ inputs.environment }}',
                 commit_sha: '${{ steps.meta.outputs.version }}',
               }
             })

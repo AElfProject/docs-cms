@@ -67,7 +67,7 @@ export default function Header({ menu, baseConfig }: Props) {
     <div className="wiki-drawer-content">
       <div
         onClick={() => setShowHome(true)}
-        className="font-bold text-[15px] px-[1.5rem] py-[0.5rem] bg-[#ebedf0] mx-[-10px]"
+        className="font-bold text-[15px] px-[1.5rem] py-[0.5rem] bg-card-border-color mx-[-10px]"
       >
         ← Back to main menu
       </div>
@@ -125,7 +125,7 @@ export default function Header({ menu, baseConfig }: Props) {
             <MenuFoldOutlined
               width={"30px"}
               height={"30px"}
-              className="text-[30px] !text-[#1c1e21]"
+              className="text-[30px] !text-primary"
             />
           </div>
         </Mobile>
@@ -133,7 +133,10 @@ export default function Header({ menu, baseConfig }: Props) {
           className="header-drawer-container"
           title={
             <CustomImage
-              src={baseConfig.logoLight}
+              src={getThemeConfig(theme, [
+                baseConfig.logoLight,
+                baseConfig.logoDark,
+              ])}
               width={115}
               height={59}
               alt="logo"
@@ -144,7 +147,7 @@ export default function Header({ menu, baseConfig }: Props) {
             <CloseOutlined
               width={"30px"}
               height={"30px"}
-              className="text-[30px] !text-[#1c1e21]"
+              className="text-[30px] !text-primary"
               onClick={() => {
                 setDrawerOpen(false);
                 setShowHome(!id);
