@@ -25,7 +25,7 @@ export async function generateMetadata(): Promise<Metadata> {
   const configObj = await getBaseConfig();
   return {
     title: `Home | ${configObj.metaTitle}`,
-    description: configObj.mataDescription,
+    description: configObj.metaDescription,
     icons: [{ rel: "icon", url: configObj.metaIcon }],
   };
 }

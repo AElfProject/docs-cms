@@ -13,7 +13,7 @@ import { getDocBlocks } from "@/services/get-doc-blocks";
 import { DateModified } from "@/components/date-modified";
 import { NodesData } from "@/services/larkServices";
 import { Aside } from "@/components/aside";
-import { getBaseConfig } from "../../../lib/getConfig";
+import { getBaseConfig } from "@/lib/getConfig";
 interface Props {
   params: {
     id: string[];
@@ -59,7 +59,7 @@ export async function generateMetadata({ params }: Props) {
   }
   return {
     title: `${titleArr?.[titleArr.length - 1]} | ${configObj.metaTitle}`,
-    description: description || configObj.mataDescription,
+    description: description || configObj.metaDescription,
     icons: [{ rel: "icon", url: configObj.metaIcon }],
   };
 }
