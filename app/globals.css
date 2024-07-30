@@ -37,6 +37,14 @@
     --footer-background: #f5f6f7;
 
     --color-text-link: #606770;
+
+    --collapse-button-bg: #fff;
+
+    --card-background-color: #fff;
+
+    --card-border-color: #ebedf0;
+
+    --card-hover-border-color: #127fff;
   }
 
   .dark {
@@ -71,6 +79,14 @@
     --footer-background: #1c1e21;
 
     --color-text-link: #606770;
+
+    --collapse-button-bg: #ffffff0d;
+
+    --card-background-color: #242526;
+
+    --card-border-color: #444950;
+
+    --card-hover-border-color: #127fff;
   }
 }
 

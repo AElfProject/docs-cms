@@ -9,11 +9,12 @@ import {
   findKeyInData,
   formatStringArray,
   findPathByTitles,
-  findIdByPath,
   findTitlesById,
 } from "../../lib/utils";
-import { Breadcrumb } from "antd";
+import { Breadcrumb, theme as antdTheme, ConfigProvider } from "antd";
 import { ItemType } from "antd/es/breadcrumb/Breadcrumb";
+import { useTheme } from "next-themes";
+import { getThemeConfig } from "../../lib/theme";
 
 interface Props {
   menu: NodesData;
@@ -58,11 +59,33 @@ export default function BreadcrumbComponent({ menu }: Props) {
       setItems([home, ...itemList]);
     }
   }, [id]);
+
+  // for dark mode
+  const { theme } = useTheme();
+  const [mounted, setMounted] = useState(false);
+
+  // useEffect only runs on the client, so now we can safely show the UI
+  useEffect(() => {
+    setMounted(true);
+  }, []);
+
+  if (!mounted) {
+    return <></>;
+  }
   return (
     <>
       {isKeyInMenu ? (
         <div className="my-4">
-          <Breadcrumb items={items}></Breadcrumb>
+          <ConfigProvider
+            theme={{
+              algorithm: getThemeConfig(theme, [
+                antdTheme.defaultAlgorithm,
+                antdTheme.darkAlgorithm,
+              ]),
+            }}
+          >
+            <Breadcrumb items={items}></Breadcrumb>
+          </ConfigProvider>
         </div>
       ) : (
         <></>

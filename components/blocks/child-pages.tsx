@@ -46,9 +46,9 @@ export async function ChildPages(props: ChildPages) {
   const data = await getData(props.wiki_catalog.wiki_token);
   return (
     <div className="grid lg:grid-cols-2 gap-2 my-8">
-      {data.map((i) => (
+      {data.map(i => (
         <Link key={key()} href={i.href}>
-          <Card className="hover:border-black h-full">
+          <Card className="border-card-border-color hover:border-card-hover-border-color h-full">
             <CardHeader>
               <CardTitle>{i.title}</CardTitle>
             </CardHeader>

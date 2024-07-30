@@ -3,7 +3,7 @@
 import { useParams } from "next/navigation";
 import Link from "next/link";
 import type { MenuProps } from "antd";
-import { Menu, ConfigProvider, theme } from "antd";
+import { Menu, ConfigProvider, theme as antdTheme } from "antd";
 import { NodesData, NodesItem } from "../../services/larkServices";
 import { useEffect, useState } from "react";
 import { DownOutlined, RightOutlined } from "@ant-design/icons";
@@ -18,6 +18,8 @@ import {
 } from "../../lib/utils";
 import "./index.css";
 import { Desktop } from "../provider";
+import { useTheme } from "next-themes";
+import { getThemeConfig } from "../../lib/theme";
 
 interface Props {
   menu: NodesData;
@@ -70,7 +72,7 @@ export default function Sidebar({ menu, closeDrawer = () => {} }: Props) {
       <div className="flex items-center justify-between">
         <Link
           href={`/wiki/${url}`}
-          className="w-[90%]"
+          className="w-[90%] dark:text-white"
           onClick={() => closeDrawer()}
         >
           <span>{title}</span>
@@ -133,6 +135,18 @@ export default function Sidebar({ menu, closeDrawer = () => {} }: Props) {
 
   const [showMenu, setShowMenu] = useState(true);
 
+  // for dark mode
+  const { theme } = useTheme();
+  const [mounted, setMounted] = useState(false);
+
+  // useEffect only runs on the client, so now we can safely show the UI
+  useEffect(() => {
+    setMounted(true);
+  }, []);
+
+  if (!mounted) {
+    return <></>;
+  }
   return (
     <>
       {isKeyInMenu ? (
@@ -140,15 +154,18 @@ export default function Sidebar({ menu, closeDrawer = () => {} }: Props) {
           <div className="sticky top-0 h-full max-h-full">
             <ConfigProvider
               theme={{
-                algorithm: theme.darkAlgorithm,
+                algorithm: getThemeConfig(theme, [
+                  antdTheme.defaultAlgorithm,
+                  antdTheme.darkAlgorithm,
+                ]),
                 token: {
                   colorLink: "#000",
                   fontFamily: "inherit",
                 },
                 components: {
                   Menu: {
-                    subMenuItemBg: "#fff",
-                    itemSelectedBg: "#fff",
+                    subMenuItemBg: getThemeConfig(theme, ["#fff", "#141414"]),
+                    itemSelectedBg: getThemeConfig(theme, ["#fff", "#141414"]),
                   },
                 },
               }}
@@ -174,10 +191,10 @@ export default function Sidebar({ menu, closeDrawer = () => {} }: Props) {
                     id="sidebar-toggle"
                     className={clsx(
                       !showMenu && "h-full",
-                      "absolute z-10 p-4 w-full bottom-0 h-10 flex justify-center items-center border-t-[1px] border-r-[1px]"
+                      "absolute z-10 p-4 w-full bottom-0 h-10 flex justify-center items-center border-t-[1px] border-r-[1px] bg-collapse-button-bg"
                     )}
                   >
-                    <span className="text-xl">{showMenu ? ">>" : "<<"}</span>
+                    <span className="text-xl">{showMenu ? "<<" : ">>"}</span>
                   </button>
                 </Desktop>
               </div>
