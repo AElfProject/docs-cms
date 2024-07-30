@@ -2,7 +2,7 @@ import { listFooterLinks } from "@/services/list-footer-links";
 import { key } from "@/lib/utils";
 import Link from "next/link";
 import CustomImage from "./customImage";
-import Image from 'next/image';
+import Image from "next/image";
 interface Props {
   baseConfig: { [key: string]: any };
 }
@@ -47,7 +47,7 @@ export async function Footer({ baseConfig }: Props) {
             {baseConfig?.footerTwitter && (
               <Link href={baseConfig.footerTwitter}>
                 <Image
-                  src="./twitter.svg"
+                  src="/twitter.svg"
                   alt="X"
                   width={24}
                   height={24}
@@ -57,7 +57,7 @@ export async function Footer({ baseConfig }: Props) {
             {baseConfig?.footerTelegram && (
               <Link href={baseConfig.footerTelegram}>
                 <Image
-                  src="./telegram.svg"
+                  src="/telegram.svg"
                   alt="telegram"
                   width={24}
                   height={24}
@@ -67,7 +67,7 @@ export async function Footer({ baseConfig }: Props) {
             {baseConfig?.footerDiscord && (
               <Link href={baseConfig.footerDiscord}>
                 <Image
-                  src="./discord.svg"
+                  src="/discord.svg"
                   alt="discord"
                   width={24}
                   height={24}
@@ -77,7 +77,7 @@ export async function Footer({ baseConfig }: Props) {
             {baseConfig?.footerGitHub && (
               <Link href={baseConfig.footerGitHub}>
                 <Image
-                  src="./github.svg"
+                  src="/github.svg"
                   alt="github"
                   width={24}
                   height={24}

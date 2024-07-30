@@ -13,6 +13,7 @@ import { getDocBlocks } from "@/services/get-doc-blocks";
 import { DateModified } from "@/components/date-modified";
 import { NodesData } from "@/services/larkServices";
 import { Aside } from "@/components/aside";
+import { getBaseConfig } from "../../../lib/getConfig";
 interface Props {
   params: {
     id: string[];
@@ -32,7 +33,36 @@ async function getData(id: string) {
     throw new Error("not supported");
   }
 }
-
+export async function generateMetadata({ params }: Props) {
+  const configObj = await getBaseConfig();
+  const menu = await getMenu();
+  const titleArr = formatStringArray(params.id);
+  const { lastItemId: id } = findPathByTitles(menu, titleArr);
+  if (!id) {
+    return {
+      title: configObj.metaTitle,
+      icons: [{ rel: "icon", url: configObj.metaIcon }],
+    };
+  }
+  const { data } = await getData(id!);
+  let description;
+  for (let block of data) {
+    if (
+      block.block_type === 2 &&
+      (block.text.elements[0].text_run.content === "Description" ||
+        block.text.elements[0].text_run.content === "description")
+    ) {
+      // delete colon
+      description = block.text.elements[1].text_run.content.slice(1);
+      break;
+    }
+  }
+  return {
+    title: `${titleArr?.[titleArr.length - 1]} | ${configObj.metaTitle}`,
+    description: description || configObj.mataDescription,
+    icons: [{ rel: "icon", url: configObj.metaIcon }],
+  };
+}
 export default async function Document({ params }: Props) {
   const menu = await getMenu();
   const titleArr = formatStringArray(params.id);

@@ -15,23 +15,6 @@ const fontSans = FontSans({
   weight: ["100", "200", "300", "400", "500", "600", "700", "800", "900"],
 });
 
-
-export async function generateMetadata(): Promise<Metadata> {
-
-  const nodes = await getNodeToken();
-  const appToken = nodes.items.find((ele: NodesItem) => {
-    return ele.title === "Configurations" && ele.obj_type === "bitable";
-  })?.obj_token;
-  const configObj: { [key: string]: any } = appToken
-    ? await getConfigContent(appToken, "Base")
-    : {};
-  return {
-    title: configObj.metaTitle,
-    description: configObj.mataDescription,
-    icons: [{ rel: "icon", url: configObj.metaIcon }],
-  };
-}
-
 export default async function RootLayout({
   children,
 }: Readonly<{
