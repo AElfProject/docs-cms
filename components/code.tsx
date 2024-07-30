@@ -75,7 +75,7 @@ export default function Code(props: CodeBlockProps) {
         </CodeBlock.Code>
 
         <button
-          className="bg-white rounded-full px-3.5 py-1.5 absolute top-2 right-2 text-sm font-semibold"
+          className=" rounded-full px-3.5 py-1.5 absolute top-2 right-2 text-sm font-semibold"
           onClick={copyCode}
         >
           {state ? "Copied!" : "Copy code"}

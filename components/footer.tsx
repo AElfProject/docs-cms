@@ -1,21 +1,47 @@
-import { listFooterLinks } from "@/services/list-footer-links";
+"use client";
 import { key } from "@/lib/utils";
 import Link from "next/link";
 import CustomImage from "./customImage";
 import Image from "next/image";
+import { useTheme } from "next-themes";
+import { getThemeConfig } from "../lib/theme";
+import { useEffect, useState } from "react";
+
+interface CategoryItem {
+  Category: string;
+  Label: string;
+  Link: {
+    link: string;
+    text: string;
+  };
+}
 interface Props {
   baseConfig: { [key: string]: any };
+  footerData: { [key in string]: CategoryItem[] };
 }
-export async function Footer({ baseConfig }: Props) {
-  const footerData = await listFooterLinks();
+export function Footer({ baseConfig, footerData }: Props) {
+  const [mounted, setMounted] = useState(false);
+  const { theme } = useTheme();
+
+  // useEffect only runs on the client, so now we can safely show the UI
+  useEffect(() => {
+    setMounted(true);
+  }, []);
+
+  if (!mounted) {
+    return null;
+  }
 
   return (
-    <footer className="bg-slate-100">
+    <footer className="bg-footer-background">
       <div className="container p-8 ">
         <div className="footer-links lg:grid grid-cols-5 gap-4">
           <div className="hidden lg:block">
             <CustomImage
-              src={baseConfig?.logoLight}
+              src={getThemeConfig(theme, [
+                baseConfig?.logoLight,
+                baseConfig?.logoDark,
+              ])}
               width={115}
               height={32}
               alt="logo"
@@ -28,7 +54,7 @@ export async function Footer({ baseConfig }: Props) {
                 {footerData[category].map(item => (
                   <li key={key()} className="leading-[32px]">
                     <Link
-                      className="hover:underline text-[#606770]"
+                      className="hover:underline text-link"
                       href={item.Link.link}
                     >
                       {item.Label}
@@ -45,7 +71,7 @@ export async function Footer({ baseConfig }: Props) {
           </span>
           <span className="social flex gap-3">
             {baseConfig?.footerTwitter && (
-              <Link href={baseConfig.footerTwitter}>
+              <Link href={baseConfig.footerTwitter} className="text-link">
                 <Image
                   src="/twitter.svg"
                   alt="X"

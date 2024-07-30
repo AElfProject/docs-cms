@@ -7,6 +7,8 @@ import Header from "@/components/Header";
 import { Suspense } from "react";
 import Loading from "./loading";
 import { getNodeToken, NodesItem } from "../services/larkServices";
+import { ThemeProvider } from "next-themes";
+import { listFooterLinks } from "../services/list-footer-links";
 
 const fontSans = FontSans({
   subsets: ["latin"],
@@ -27,6 +29,7 @@ export default async function RootLayout({
   let configObj: { [key: string]: any } = appToken
     ? await getConfigContent(appToken, "Base")
     : {};
+  const footerData = await listFooterLinks();
   return (
     <html lang="en">
       <body
@@ -35,11 +38,18 @@ export default async function RootLayout({
           fontSans.variable
         )}
       >
-        <AntdRegistry>
-          <Header menu={menu} baseConfig={configObj} />
-          <Suspense fallback={<Loading />}>{children}</Suspense>
-          <Footer baseConfig={configObj} />
-        </AntdRegistry>
+        <ThemeProvider
+          attribute="class"
+          defaultTheme="system"
+          enableSystem
+          disableTransitionOnChange
+        >
+          <AntdRegistry>
+            <Header menu={menu} baseConfig={configObj} />
+            <Suspense fallback={<Loading />}>{children}</Suspense>
+            <Footer baseConfig={configObj} footerData={footerData} />
+          </AntdRegistry>
+        </ThemeProvider>
       </body>
     </html>
   );

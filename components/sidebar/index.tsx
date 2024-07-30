@@ -3,7 +3,7 @@
 import { useParams } from "next/navigation";
 import Link from "next/link";
 import type { MenuProps } from "antd";
-import { Menu, ConfigProvider } from "antd";
+import { Menu, ConfigProvider, theme as antdTheme } from "antd";
 import { NodesData, NodesItem } from "../../services/larkServices";
 import { useEffect, useState } from "react";
 import { DownOutlined, RightOutlined } from "@ant-design/icons";
@@ -18,6 +18,8 @@ import {
 } from "../../lib/utils";
 import "./index.css";
 import { Desktop } from "../provider";
+import { useTheme } from "next-themes";
+import { getThemeConfig } from "../../lib/theme";
 
 interface Props {
   menu: NodesData;
@@ -52,12 +54,12 @@ export default function Sidebar({ menu, closeDrawer = () => {} }: Props) {
   let temp: any = {};
   temp.items = findTopLevelItems(menu, id as string);
   const [openKeys, setOpenKeys] = useState(
-    findPathByKey(temp, id as string)?.map((ele) => ele.node_token)
+    findPathByKey(temp, id as string)?.map(ele => ele.node_token)
   );
   // click icon to open or close submenu
   const onIconClick = ({ key }: { key: string }) => {
     if (openKeys.includes(key)) {
-      setOpenKeys(openKeys.filter((openKey) => openKey !== key));
+      setOpenKeys(openKeys.filter(openKey => openKey !== key));
     } else {
       setOpenKeys([...openKeys, key]);
     }
@@ -70,7 +72,7 @@ export default function Sidebar({ menu, closeDrawer = () => {} }: Props) {
       <div className="flex items-center justify-between">
         <Link
           href={`/wiki/${url}`}
-          className="w-[90%]"
+          className="w-[90%] dark:text-white"
           onClick={() => closeDrawer()}
         >
           <span>{title}</span>
@@ -78,14 +80,14 @@ export default function Sidebar({ menu, closeDrawer = () => {} }: Props) {
         {hasChild &&
           (openKeys.includes(key) ? (
             <DownOutlined
-              onClick={(e) => {
+              onClick={e => {
                 e.stopPropagation();
                 onIconClick({ key });
               }}
             />
           ) : (
             <RightOutlined
-              onClick={(e) => {
+              onClick={e => {
                 e.stopPropagation();
                 onIconClick({ key });
               }}
@@ -125,7 +127,7 @@ export default function Sidebar({ menu, closeDrawer = () => {} }: Props) {
     setisKeyInMenu(keyFlag);
     if (keyFlag) {
       const defaultOpenKeys = findPathByKey(temp, id as string)?.map(
-        (ele) => ele.node_token
+        ele => ele.node_token
       );
       setOpenKeys(defaultOpenKeys!);
     }
@@ -133,29 +135,55 @@ export default function Sidebar({ menu, closeDrawer = () => {} }: Props) {
 
   const [showMenu, setShowMenu] = useState(true);
 
+  // for dark mode
+  const { theme } = useTheme();
+  const [mounted, setMounted] = useState(false);
+
+  // useEffect only runs on the client, so now we can safely show the UI
+  useEffect(() => {
+    setMounted(true);
+  }, []);
+
+  if (!mounted) {
+    return <></>;
+  }
   return (
     <>
       {isKeyInMenu ? (
-        <aside className="z-30 relative shrink-0 block sm:max-w-[300px]">
-          <div className="sticky top-0 h-full max-h-full">
+        <aside className="z-30 shrink-0 block sm:max-w-[300px]">
+          <div className="sticky top-0 h-full max-h-[100vh]">
             <ConfigProvider
               theme={{
+                algorithm: getThemeConfig(theme, [
+                  antdTheme.defaultAlgorithm,
+                  antdTheme.darkAlgorithm,
+                ]),
                 token: {
                   colorLink: "#000",
                   fontFamily: "inherit",
                 },
                 components: {
                   Menu: {
-                    subMenuItemBg: "#fff",
-                    itemSelectedBg: "#fff",
+                    itemBg: getThemeConfig(theme, [
+                      "#fff",
+                      "hsl(var(--background))",
+                    ]),
+                    subMenuItemBg: getThemeConfig(theme, [
+                      "#fff",
+                      "hsl(var(--background))",
+                    ]),
+                    itemSelectedBg: getThemeConfig(theme, [
+                      "#fff",
+                      "hsl(var(--background))",
+                    ]),
                   },
                 },
               }}
             >
-              <div className=" h-full  min-w-8 sm:!pt-[60px]">
-                <div className="overflow-y-auto overflow-x-hidden h-[calc(100%-40px)] thin-scrollbar">
+              <div className=" h-full  min-w-8 sm:!pt-[60px] flex flex-col">
+                <div className="overflow-y-auto overflow-x-hidden thin-scrollbar pb-12 flex-grow sm:border-r">
                   <Menu
-                    className={clsx(!showMenu && "hidden", "h-full side-bar")}
+                    className={clsx(!showMenu && "hidden", "side-bar")}
                     openKeys={openKeys}
                     defaultOpenKeys={openKeys}
                     inlineCollapsed={false}
@@ -173,10 +201,10 @@ export default function Sidebar({ menu, closeDrawer = () => {} }: Props) {
                     id="sidebar-toggle"
                     className={clsx(
                       !showMenu && "h-full",
-                      "absolute z-10 p-4 w-full bottom-0 h-10 flex justify-center items-center border-t-[1px] border-r-[1px]"
+                      "sticky z-10 p-4 w-full bottom-0 h-10 flex justify-center items-center border-t-[1px] border-r-[1px] bg-collapse-button-bg"
                     )}
                   >
-                    <span className="text-xl">{showMenu ? ">>" : "<<"}</span>
+                    <span className="text-xl">{showMenu ? "<<" : ">>"}</span>
                   </button>
                 </Desktop>
               </div>

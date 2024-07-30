@@ -56,6 +56,12 @@ const config = {
           DEFAULT: "hsl(var(--card))",
           foreground: "hsl(var(--card-foreground))",
         },
+        link: "var(--color-text-secondary)",
+        "footer-background": "var(--footer-background)",
+        "collapse-button-bg": "var(--collapse-button-bg)",
+        "card-background-color": "var(--card-background-color)",
+        "card-border-color": "var(--card-border-color)",
+        "card-hover-border-color": "var(--card-hover-border-color)",
       },
       borderRadius: {
         lg: "var(--radius)",
