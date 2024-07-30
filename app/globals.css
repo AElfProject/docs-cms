@@ -33,6 +33,10 @@
     --ring: 216 8.2% 12%;
 
     --radius: 0.5rem;
+
+    --footer-background: #f5f6f7;
+
+    --color-text-link: #606770;
   }
 
   .dark {
@@ -63,6 +67,10 @@
     --border: 217.2 32.6% 17.5%;
     --input: 217.2 32.6% 17.5%;
     --ring: 212.7 26.8% 83.9%;
+
+    --footer-background: #1c1e21;
+
+    --color-text-link: #606770;
   }
 }
 

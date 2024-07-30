@@ -34,7 +34,7 @@ export default async function Home() {
   const emojiObj = appToken ? await getConfigContent(appToken, "Emoji") : {};
   return (
     <main className="pt-8 container min-h-[calc(100vh-225px)]">
-      <div className="sm:mt-[60px] mt-10 bg-white">
+      <div className="sm:mt-[60px] mt-10 ">
         <div className="relative w-full sm:h-[322px] h-[82px] mb-6">
           <CustomImage
             src={configObj.image}
@@ -44,7 +44,7 @@ export default async function Home() {
           />
         </div>
         <h1 className="text-4xl font-bold mb-4">{configObj.title}</h1>
-        <p className="text-gray-700">{configObj.description}</p>
+        <p>{configObj.description}</p>
       </div>
       <div className="grid grid-flow-row-dense grid-cols-1 md:grid-cols-2 lg:grid-cols-3 mt-20 mb-16">
         {menu.items.map(ele => {

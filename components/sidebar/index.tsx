@@ -3,7 +3,7 @@
 import { useParams } from "next/navigation";
 import Link from "next/link";
 import type { MenuProps } from "antd";
-import { Menu, ConfigProvider } from "antd";
+import { Menu, ConfigProvider, theme } from "antd";
 import { NodesData, NodesItem } from "../../services/larkServices";
 import { useEffect, useState } from "react";
 import { DownOutlined, RightOutlined } from "@ant-design/icons";
@@ -52,12 +52,12 @@ export default function Sidebar({ menu, closeDrawer = () => {} }: Props) {
   let temp: any = {};
   temp.items = findTopLevelItems(menu, id as string);
   const [openKeys, setOpenKeys] = useState(
-    findPathByKey(temp, id as string)?.map((ele) => ele.node_token)
+    findPathByKey(temp, id as string)?.map(ele => ele.node_token)
   );
   // click icon to open or close submenu
   const onIconClick = ({ key }: { key: string }) => {
     if (openKeys.includes(key)) {
-      setOpenKeys(openKeys.filter((openKey) => openKey !== key));
+      setOpenKeys(openKeys.filter(openKey => openKey !== key));
     } else {
       setOpenKeys([...openKeys, key]);
     }
@@ -78,14 +78,14 @@ export default function Sidebar({ menu, closeDrawer = () => {} }: Props) {
         {hasChild &&
           (openKeys.includes(key) ? (
             <DownOutlined
-              onClick={(e) => {
+              onClick={e => {
                 e.stopPropagation();
                 onIconClick({ key });
               }}
             />
           ) : (
             <RightOutlined
-              onClick={(e) => {
+              onClick={e => {
                 e.stopPropagation();
                 onIconClick({ key });
               }}
@@ -125,7 +125,7 @@ export default function Sidebar({ menu, closeDrawer = () => {} }: Props) {
     setisKeyInMenu(keyFlag);
     if (keyFlag) {
       const defaultOpenKeys = findPathByKey(temp, id as string)?.map(
-        (ele) => ele.node_token
+        ele => ele.node_token
       );
       setOpenKeys(defaultOpenKeys!);
     }
@@ -140,6 +140,7 @@ export default function Sidebar({ menu, closeDrawer = () => {} }: Props) {
           <div className="sticky top-0 h-full max-h-full">
             <ConfigProvider
               theme={{
+                algorithm: theme.darkAlgorithm,
                 token: {
                   colorLink: "#000",
                   fontFamily: "inherit",

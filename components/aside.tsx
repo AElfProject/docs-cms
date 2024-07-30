@@ -2,7 +2,7 @@
 
 import { AnyItem } from "@/components/blocks/renderer";
 import TableOfContents from "@/components/blocks/table-of-contents";
-import { Collapse, ConfigProvider } from "antd";
+import { Collapse, ConfigProvider, theme } from "antd";
 import { Desktop, Mobile } from "./provider";
 interface Props {
   data: AnyItem[];
@@ -25,6 +25,7 @@ export function Aside({ data }: Props) {
         {ifShowCollapse ? (
           <ConfigProvider
             theme={{
+              algorithm: theme.darkAlgorithm,
               token: {
                 colorLink: "#000",
                 fontFamily: "inherit",
