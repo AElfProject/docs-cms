@@ -1,5 +1,4 @@
 import { AntdRegistry } from "@ant-design/nextjs-registry";
-import type { Metadata, ResolvingMetadata } from "next";
 import "./globals.css";
 import { cn, getConfigContent, getMenu } from "@/lib/utils";
 import { Poppins as FontSans } from "next/font/google";
