@@ -28,6 +28,7 @@ export interface NodesItem {
   space_id: string;
   title: string;
   children: NodesData[];
+  url_path: string;
 }
 // get the list of child nodes
 export async function getNodeToken(token?: string) {

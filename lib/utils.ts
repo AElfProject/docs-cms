@@ -9,7 +9,6 @@ import {
 } from "../services/larkServices";
 import { nanoid } from "nanoid";
 import { convertArrToUrl } from "./url";
-import { AnyItem } from "../components/blocks/renderer";
 
 export function cn(...inputs: ClassValue[]) {
   return twMerge(clsx(inputs));
@@ -98,6 +97,7 @@ export async function getFileByFolderToken(folderNodes?: NodesItem[]) {
   }
 
   for (let i = 0; i < items?.length; i++) {
+    items[i].url_path = toKebabCase(items[i].title);
     if (!items[i].children) {
       items[i].children = [];
     }
@@ -125,17 +125,25 @@ export function key() {
   return nanoid();
 }
 
-export function formatStringArray(ids: string[]): string[] {
-  return ids?.map(id => {
-    return id
-      .split("-")
-      .map(word => {
-        // URL cannot contain a # symbol
-        word = word.replace("csharp", "c#");
-        return word.charAt(0).toUpperCase() + word.slice(1);
-      })
-      .join(" ");
-  });
+export function findDeepestTitles(node: NodesItem) {
+  let titles: string[] = [];
+
+  function traverse(currentNode: NodesItem) {
+    if (
+      Array.isArray(currentNode.children) &&
+      currentNode.children[0]?.items &&
+      currentNode.children[0]?.items.length > 0
+    ) {
+      currentNode.children[0].items.forEach(child => {
+        traverse(child);
+      });
+    } else {
+      titles.push(currentNode.title);
+    }
+  }
+
+  traverse(node);
+  return titles;
 }
 interface FindPathByTitlesResult {
   path: NodesItem | null;
@@ -143,19 +151,19 @@ interface FindPathByTitlesResult {
 }
 export function findPathByTitles(
   data: NodesData,
-  targetTitles: string[]
+  ids: string[]
 ): FindPathByTitlesResult {
   function search(
     nodesData: NodesData,
     targetIndex: number
   ): FindPathByTitlesResult {
-    if (targetIndex >= targetTitles?.length || !Array.isArray(targetTitles)) {
+    if (targetIndex >= ids?.length || !Array.isArray(ids)) {
       return { path: null, lastItemId: null };
     }
 
     for (const item of nodesData.items) {
-      if (capitalizeFirstLetter(item.title) === targetTitles?.[targetIndex]) {
-        if (targetIndex === targetTitles?.length - 1) {
+      if (item.url_path === ids?.[targetIndex]) {
+        if (targetIndex === ids?.length - 1) {
           return {
             path: { ...item, children: [] },
             lastItemId: item.node_token,

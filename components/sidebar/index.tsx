@@ -14,7 +14,6 @@ import {
   findPathByTitles,
   findTitlesById,
   findTopLevelItems,
-  formatStringArray,
 } from "../../lib/utils";
 import "./index.css";
 import { Desktop } from "../provider";
@@ -46,8 +45,7 @@ const MenuItem = ({ item }: { item: NodesItem }) => {
 type MenuItem = Required<MenuProps>["items"][number];
 export default function Sidebar({ menu, closeDrawer = () => {} }: Props) {
   const params = useParams();
-  const titleArr = formatStringArray(params.id as string[]);
-  const { lastItemId: id } = findPathByTitles(menu, titleArr);
+  const { lastItemId: id } = findPathByTitles(menu, params.id as string[]);
   const [isKeyInMenu, setisKeyInMenu] = useState(
     findKeyInData(menu, id as string)
   );

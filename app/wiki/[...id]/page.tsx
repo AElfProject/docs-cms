@@ -2,8 +2,8 @@ import Renderer, { AnyItem } from "@/components/blocks/renderer";
 import GithubSlugger from "github-slugger";
 import { redirect } from "next/navigation";
 import {
+  findDeepestTitles,
   findPathByTitles,
-  formatStringArray,
   getMenu,
   toKebabCase,
 } from "@/lib/utils";
@@ -36,8 +36,8 @@ async function getData(id: string) {
 export async function generateMetadata({ params }: Props) {
   const configObj = await getBaseConfig();
   const menu = await getMenu();
-  const titleArr = formatStringArray(params.id);
-  const { lastItemId: id } = findPathByTitles(menu, titleArr);
+  const { lastItemId: id, path } = findPathByTitles(menu, params.id);
+  const title = findDeepestTitles(path!);
   if (!id) {
     return {
       title: configObj.metaTitle,
@@ -58,15 +58,14 @@ export async function generateMetadata({ params }: Props) {
     }
   }
   return {
-    title: `${titleArr?.[titleArr.length - 1]} | ${configObj.metaTitle}`,
+    title: `${title} | ${configObj.metaTitle}`,
     description: description || configObj.metaDescription,
     icons: [{ rel: "icon", url: configObj.metaIcon }],
   };
 }
 export default async function Document({ params }: Props) {
   const menu = await getMenu();
-  const titleArr = formatStringArray(params.id);
-  const { lastItemId: id } = findPathByTitles(menu, titleArr);
+  const { lastItemId: id } = findPathByTitles(menu, params.id);
   if (!id) {
     redirect("/404");
   }
