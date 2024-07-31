@@ -53,7 +53,7 @@ export async function generateMetadata({ params }: Props) {
         block.text.elements[0].text_run.content === "description")
     ) {
       // delete colon
-      description = block.text.elements[1].text_run.content.slice(1);
+      description = block.text.elements[1]?.text_run.content.slice(1);
       break;
     }
   }
