@@ -18,11 +18,11 @@ import {
 } from "@ant-design/icons";
 import "./index.css";
 import Sidebar from "../sidebar";
-import { Desktop, Mobile } from "../provider";
 import CustomImage from "../customImage";
 import ThemeToggler from "../themeToggler";
 import { useTheme } from "next-themes";
 import { getThemeConfig } from "../../lib/theme";
+import { Skeleton } from "../ui/skeleton";
 interface Props {
   menu: NodesData;
   baseConfig: { [key: string]: any };
@@ -40,7 +40,7 @@ export default function Header({ menu, baseConfig }: Props) {
     const url = titles?.join("/");
     let obj: any = {};
     obj.label = (
-      <Link href={`/wiki/${url}`} className="font-bold">
+      <Link href={`/wiki/${url}/`} className="font-bold">
         {ele.title}
       </Link>
     );
@@ -84,7 +84,7 @@ export default function Header({ menu, baseConfig }: Props) {
             className="px-3 py-[6px] text-lg"
             onClick={() => setDrawerOpen(false)}
           >
-            <Link href={`/wiki/${url}`}>{item.title}</Link>
+            <Link href={`/wiki/${url}/`}>{item.title}</Link>
           </div>
         );
       })}
@@ -93,14 +93,19 @@ export default function Header({ menu, baseConfig }: Props) {
   // for dark mode
   const { theme } = useTheme();
   const [mounted, setMounted] = useState(false);
-
   // useEffect only runs on the client, so now we can safely show the UI
   useEffect(() => {
     setMounted(true);
   }, []);
 
   if (!mounted) {
-    return <></>;
+    return (
+      <div className="fixed w-full z-50 flex px-5 h-[60px] border-b-[1px] items-center bg-background">
+        <div className="block sm:hidden">
+          <Skeleton className="h-8 w-[calc(100vw-50px)]" />
+        </div>
+      </div>
+    );
   }
   return (
     <ConfigProvider
@@ -109,24 +114,20 @@ export default function Header({ menu, baseConfig }: Props) {
           antdTheme.defaultAlgorithm,
           antdTheme.darkAlgorithm,
         ]),
-        token: {
-          colorBgContainer: "hsl(var(--background))",
-        },
       }}
     >
       <div className="fixed w-full z-50 flex px-5 h-[60px] border-b-[1px] items-center bg-background">
-        <Mobile>
-          <div
-            className="flex w-[30px] mr-2"
-            onClick={() => setDrawerOpen(true)}
-          >
-            <MenuFoldOutlined
-              width={"30px"}
-              height={"30px"}
-              className="text-[30px] !text-primary"
-            />
-          </div>
-        </Mobile>
+        <div
+          className="flex sm:hidden w-[30px] mr-2 "
+          onClick={() => setDrawerOpen(true)}
+        >
+          <MenuFoldOutlined
+            width={"30px"}
+            height={"30px"}
+            className="text-[30px] !text-primary"
+          />
+        </div>
+
         <Drawer
           className="header-drawer-container"
           title={
@@ -136,21 +137,24 @@ export default function Header({ menu, baseConfig }: Props) {
                 baseConfig.logoDark,
               ])}
               width={115}
-              height={59}
+              height={32}
               alt="logo"
             ></CustomImage>
           }
           closeIcon={false}
           extra={
-            <CloseOutlined
-              width={"30px"}
-              height={"30px"}
-              className="text-[30px] !text-primary"
-              onClick={() => {
-                setDrawerOpen(false);
-                setShowHome(!id);
-              }}
-            />
+            <span className="flex justify-between">
+              <ThemeToggler />
+              <CloseOutlined
+                width={"24px"}
+                height={"24px"}
+                className="text-[24px] !text-primary"
+                onClick={() => {
+                  setDrawerOpen(false);
+                  setShowHome(!id);
+                }}
+              />
+            </span>
           }
           open={drawerOpen}
           placement="left"
@@ -165,34 +169,38 @@ export default function Header({ menu, baseConfig }: Props) {
             ])}
             width={115}
             height={32}
+            className="h-8"
             alt="logo"
           ></CustomImage>
         </Link>
-        <Desktop>
+        <div className="hidden sm:flex w-full items-center">
           <Menu
-            className="w-full flex items-center header-menu"
+            className="header-menu flex w-full"
             onClick={onClick}
             selectedKeys={[current]}
             mode="horizontal"
             items={menuItems}
           />
-        </Desktop>
+        </div>
+
         <div className="flex items-center space-x-4 justify-end md:mr-5">
           {baseConfig.blog && (
             <a
               href={baseConfig.blog}
               target="_blank"
-              className="hover:text-blue-500 text-[18px]"
+              className="hover:text-blue-500 text-[20px]"
             >
               Blog
             </a>
           )}
           {baseConfig.github && (
             <a href={baseConfig.github} target="_blank">
-              <GithubOutlined className="text-[18px] hover:text-blue-500" />
+              <GithubOutlined className="text-[20px] hover:text-blue-500" />
             </a>
           )}
-          <ThemeToggler />
+          <span className="hidden sm:inline-block">
+            <ThemeToggler />
+          </span>
         </div>
         <div className="flex flex-1 items-center space-x-2 justify-end">
           <Search />

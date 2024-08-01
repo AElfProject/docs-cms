@@ -10,7 +10,7 @@ export async function Server({ id }: { id: string }) {
     <div className="flex py-8">
       {prevNode ? (
         <Link
-          href={`/node/${prevNode.node_token}`}
+          href={`/node/${prevNode.node_token}/`}
           className="flex-1 p-4 rounded-lg border-2 border-gray-100 h-24 hover:border-black text-left"
         >
           Previous
@@ -23,7 +23,7 @@ export async function Server({ id }: { id: string }) {
       <div className="w-8"></div>
       {nextNode ? (
         <Link
-          href={`/node/${nextNode.node_token}`}
+          href={`/node/${nextNode.node_token}/`}
           className="flex-1 p-4 rounded-lg border-2 border-gray-100 h-24 hover:border-black text-right"
         >
           Next

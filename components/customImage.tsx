@@ -15,6 +15,7 @@ interface ImageProps {
   placeholder?: "blur" | "empty";
   blurDataURL?: string;
   objectFit?: string;
+  className?: string;
 }
 
 export default function CustomImage(props: ImageProps) {

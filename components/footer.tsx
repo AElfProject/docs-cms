@@ -66,10 +66,10 @@ export function Footer({ baseConfig, footerData }: Props) {
           ))}
         </div>
         <div className="footer-bottom flex justify-between">
-          <span className="copyright">
+          <span className="copyright hidden sm:inline-block">
             Copyright © {new Date().getFullYear()} {baseConfig?.copyright}
           </span>
-          <span className="social flex gap-3">
+          <span className="social gap-3 hidden sm:flex">
             {baseConfig?.footerTwitter && (
               <Link href={baseConfig.footerTwitter} className="text-link">
                 <Image

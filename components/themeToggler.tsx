@@ -6,17 +6,24 @@ const ThemeToggler = () => {
 
   return (
     <button
-      className="w-8 h-8  rounded-lg dark:bg-slate-800 flex items-center justify-center transition-all duration-300 focus:outline-none"
+      className="rounded-lg flex items-center justify-center transition-all duration-300 focus:outline-none hover:text-blue-500 text-[20px]"
       onClick={() => {
-        console.log(theme);
         setTheme(theme === "light" || !theme ? "dark" : "light");
       }}
       aria-label="Toggle Dark Mode"
     >
       {theme === "light" || !theme ? (
-        <SunOutlined className="text-blue-500 w-5 h-5" />
+        <SunOutlined
+          className="text-blue-500 w-6 h-6 "
+          width={24}
+          height={24}
+        />
       ) : (
-        <MoonOutlined className="text-blue-400 w-5 h-5" />
+        <MoonOutlined
+          className="text-blue-400  w-6 h-6 "
+          width={24}
+          height={24}
+        />
       )}
     </button>
   );

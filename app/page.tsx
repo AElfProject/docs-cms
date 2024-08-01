@@ -9,7 +9,7 @@ const getChildList = (ele: NodesItem, index: number, url: string = "") => {
   index++;
   return ele.children.map(element => {
     return element.items.map(item => {
-      const newUrl = `${url}/${toKebabCase(item.title)}`;
+      const newUrl = `${url}/${item.url_path}/`;
       return (
         <li className="ml-4" key={item.node_token}>
           <Link href={newUrl} className="text-blue-500">
@@ -56,16 +56,14 @@ export default async function Home() {
       </div>
       <div className="grid grid-flow-row-dense grid-cols-1 md:grid-cols-2 lg:grid-cols-3 mt-20 mb-16">
         {menu.items.map(ele => {
-          const url = `/wiki/${toKebabCase(ele.title)}`;
+          const url = `/wiki/${ele.url_path}/`;
           return (
             <ul key={ele.node_token} className="m-4 list-disc">
               <h2 className="font-bold text-[20px] mb-4 ">
                 {emojiObj[ele.title] && (
                   <span className="mr-2">{emojiObj[ele.title]}</span>
                 )}
-                <Link href={`/wiki/${toKebabCase(ele.title)}`}>
-                  {ele.title}
-                </Link>
+                <Link href={`/wiki${ele.url_path}/}`}>{ele.title}</Link>
               </h2>
               {ele.has_child && getChildList(ele, 0, url)}
             </ul>
