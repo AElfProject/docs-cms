@@ -7,7 +7,6 @@ import {
   findTopLevelItems,
   findPathByKey,
   findKeyInData,
-  formatStringArray,
   findPathByTitles,
   findTitlesById,
 } from "../../lib/utils";
@@ -37,8 +36,7 @@ const getitemsById = (menu: NodesData, id: string) => {
 };
 export default function BreadcrumbComponent({ menu }: Props) {
   const params = useParams();
-  const titleArr = formatStringArray(params.id as string[]);
-  const { lastItemId: id } = findPathByTitles(menu, titleArr);
+  const { lastItemId: id } = findPathByTitles(menu, params.id as string[]);
   const [isKeyInMenu, setisKeyInMenu] = useState(
     findKeyInData(menu, id as string)
   );

@@ -9,7 +9,6 @@ import {
   findPathByTitles,
   findTitlesById,
   findTopLevelItems,
-  formatStringArray,
 } from "../../lib/utils";
 import Search from "../search";
 import {
@@ -32,8 +31,7 @@ type MenuItem = Required<MenuProps>["items"][number];
 
 export default function Header({ menu, baseConfig }: Props) {
   const params = useParams();
-  const titleArr = formatStringArray(params.id as string[]);
-  const { lastItemId: id } = findPathByTitles(menu, titleArr);
+  const { lastItemId: id } = findPathByTitles(menu, params.id as string[]);
   let temp: any = {};
   temp.items = findTopLevelItems(menu, id as string) as NodesItem[];
   const items = menu.items;
