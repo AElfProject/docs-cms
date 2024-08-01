@@ -19,3 +19,14 @@
 .header-menu.ant-menu-horizontal {
   border-bottom: 0;
 }
+.header-drawer-container {
+  .ant-drawer-header {
+    padding: 8px 16px !important;
+    .ant-drawer-header-title {
+      height: 42px;
+    }
+  }
+  .ant-drawer-extra {
+    width: 60%;
+  }
+}

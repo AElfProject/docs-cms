@@ -115,11 +115,11 @@ export async function generateStaticParams() {
 }
 
 async function getPath(id: string, path: string[] = []) {
-  const { parent_node_token, title } = await getNode(id);
+  const { parent_node_token, url_path } = await getNode(id);
 
   if (parent_node_token) {
-    return await getPath(parent_node_token, [toKebabCase(title), ...path]);
+    return await getPath(parent_node_token, [url_path, ...path]);
   } else {
-    return [toKebabCase(title), ...path];
+    return [url_path, ...path];
   }
 }

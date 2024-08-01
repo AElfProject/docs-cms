@@ -228,7 +228,7 @@ export function findTitlesById(menu: NodesData, id: string) {
     currentPath: string[]
   ): string[] | null {
     for (const item of nodesData.items) {
-      const newPath = [...currentPath, toKebabCase(item.title)];
+      const newPath = [...currentPath, item.url_path];
       if (item.node_token === id || item.obj_token === id) {
         return newPath;
       }

@@ -14,6 +14,7 @@ import { Breadcrumb, theme as antdTheme, ConfigProvider } from "antd";
 import { ItemType } from "antd/es/breadcrumb/Breadcrumb";
 import { useTheme } from "next-themes";
 import { getThemeConfig } from "../../lib/theme";
+import { Skeleton } from "../ui/skeleton";
 
 interface Props {
   menu: NodesData;
@@ -68,7 +69,11 @@ export default function BreadcrumbComponent({ menu }: Props) {
   }, []);
 
   if (!mounted) {
-    return <></>;
+    return (
+      <div className="my-4">
+        <Skeleton className="h-[22px] w-32" />
+      </div>
+    );
   }
   return (
     <>

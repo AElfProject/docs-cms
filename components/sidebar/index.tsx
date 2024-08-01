@@ -16,9 +16,10 @@ import {
   findTopLevelItems,
 } from "../../lib/utils";
 import "./index.css";
-import { Desktop } from "../provider";
+import { Desktop, Mobile } from "../provider";
 import { useTheme } from "next-themes";
 import { getThemeConfig } from "../../lib/theme";
+import { Skeleton } from "../ui/skeleton";
 
 interface Props {
   menu: NodesData;
@@ -69,7 +70,7 @@ export default function Sidebar({ menu, closeDrawer = () => {} }: Props) {
     return (
       <div className="flex items-center justify-between">
         <Link
-          href={`/wiki/${url}`}
+          href={`/wiki/${url}/`}
           className="w-[90%] dark:text-white"
           onClick={() => closeDrawer()}
         >
@@ -143,7 +144,24 @@ export default function Sidebar({ menu, closeDrawer = () => {} }: Props) {
   }, []);
 
   if (!mounted) {
-    return <></>;
+    return (
+      <div>
+        <Desktop>
+          <aside className="z-30 shrink-0 block sm:w-[300px]">
+            <div className="sticky top-0 h-full ">
+              <div className="mt-[60px]">
+                <Skeleton className="h-8 w-64" />
+                <div className="mt-4 space-y-4">
+                  <Skeleton className="h-6 w-full" />
+                  <Skeleton className="h-6 w-full" />
+                  <Skeleton className="h-6 w-full" />
+                </div>
+              </div>
+            </div>
+          </aside>
+        </Desktop>
+      </div>
+    );
   }
   return (
     <>
@@ -179,7 +197,7 @@ export default function Sidebar({ menu, closeDrawer = () => {} }: Props) {
               }}
             >
               <div className=" h-full  min-w-8 sm:!pt-[60px] flex flex-col">
-                <div className="overflow-y-auto overflow-x-hidden thin-scrollbar pb-12 flex-grow sm:border-r">
+                <div className="overflow-y-auto overflow-x-hidden thin-scrollbar flex-grow sm:border-r">
                   <Menu
                     className={clsx(!showMenu && "hidden", "side-bar")}
                     openKeys={openKeys}
@@ -199,7 +217,7 @@ export default function Sidebar({ menu, closeDrawer = () => {} }: Props) {
                     id="sidebar-toggle"
                     className={clsx(
                       !showMenu && "h-full",
-                      "sticky z-10 p-4 w-full bottom-0 h-10 flex justify-center items-center border-t-[1px] border-r-[1px] bg-collapse-button-bg"
+                      "sticky z-10 w-full bottom-0 h-10 flex justify-center items-center border-t-[1px] border-r-[1px] bg-collapse-button-bg"
                     )}
                   >
                     <span className="text-xl">{showMenu ? "<<" : ">>"}</span>

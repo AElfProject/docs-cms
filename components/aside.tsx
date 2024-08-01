@@ -46,7 +46,7 @@ export function Aside({ data }: Props) {
                 antdTheme.darkAlgorithm,
               ]),
               token: {
-                colorLink: "#000",
+                colorLink: getThemeConfig(theme, ["#000", "#fff"]),
                 fontFamily: "inherit",
               },
               components: {
