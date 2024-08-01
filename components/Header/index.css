@@ -1,6 +1,6 @@
 .home-drawer-content {
   a {
-    color: black;
+    color: hsl(var(--primary));
   }
 }
 .wiki-drawer-content {

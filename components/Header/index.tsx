@@ -18,7 +18,6 @@ import {
 } from "@ant-design/icons";
 import "./index.css";
 import Sidebar from "../sidebar";
-import { Desktop, Mobile } from "../provider";
 import CustomImage from "../customImage";
 import ThemeToggler from "../themeToggler";
 import { useTheme } from "next-themes";
@@ -102,11 +101,9 @@ export default function Header({ menu, baseConfig }: Props) {
   if (!mounted) {
     return (
       <div className="fixed w-full z-50 flex px-5 h-[60px] border-b-[1px] items-center bg-background">
-        <Desktop>
-          <div>
-            <Skeleton className="h-8 w-[calc(100vw-50px)]" />
-          </div>
-        </Desktop>
+        <div className="block sm:hidden">
+          <Skeleton className="h-8 w-[calc(100vw-50px)]" />
+        </div>
       </div>
     );
   }
@@ -120,18 +117,17 @@ export default function Header({ menu, baseConfig }: Props) {
       }}
     >
       <div className="fixed w-full z-50 flex px-5 h-[60px] border-b-[1px] items-center bg-background">
-        <Mobile>
-          <div
-            className="flex w-[30px] mr-2"
-            onClick={() => setDrawerOpen(true)}
-          >
-            <MenuFoldOutlined
-              width={"30px"}
-              height={"30px"}
-              className="text-[30px] !text-primary"
-            />
-          </div>
-        </Mobile>
+        <div
+          className="flex sm:hidden w-[30px] mr-2 "
+          onClick={() => setDrawerOpen(true)}
+        >
+          <MenuFoldOutlined
+            width={"30px"}
+            height={"30px"}
+            className="text-[30px] !text-primary"
+          />
+        </div>
+
         <Drawer
           className="header-drawer-container"
           title={
@@ -177,15 +173,16 @@ export default function Header({ menu, baseConfig }: Props) {
             alt="logo"
           ></CustomImage>
         </Link>
-        <Desktop>
+        <div className="hidden sm:flex w-full items-center">
           <Menu
-            className="w-full flex items-center header-menu"
+            className="header-menu flex w-full"
             onClick={onClick}
             selectedKeys={[current]}
             mode="horizontal"
             items={menuItems}
           />
-        </Desktop>
+        </div>
+
         <div className="flex items-center space-x-4 justify-end md:mr-5">
           {baseConfig.blog && (
             <a
@@ -201,9 +198,9 @@ export default function Header({ menu, baseConfig }: Props) {
               <GithubOutlined className="text-[20px] hover:text-blue-500" />
             </a>
           )}
-          <Desktop>
+          <span className="hidden sm:inline-block">
             <ThemeToggler />
-          </Desktop>
+          </span>
         </div>
         <div className="flex flex-1 items-center space-x-2 justify-end">
           <Search />

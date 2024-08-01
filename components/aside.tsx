@@ -5,7 +5,6 @@ import TableOfContents from "@/components/blocks/table-of-contents";
 import { Collapse, ConfigProvider, theme as antdTheme } from "antd";
 import { useTheme } from "next-themes";
 import { useEffect, useState } from "react";
-import { Desktop, Mobile } from "./provider";
 import { getThemeConfig } from "../lib/theme";
 interface Props {
   data: AnyItem[];
@@ -37,7 +36,7 @@ export function Aside({ data }: Props) {
   }
   return (
     <aside className="sm:w-1/3 w-full">
-      <Mobile>
+      <div className="block sm:hidden">
         {ifShowCollapse ? (
           <ConfigProvider
             theme={{
@@ -62,12 +61,11 @@ export function Aside({ data }: Props) {
             ></Collapse>
           </ConfigProvider>
         ) : null}
-      </Mobile>
-      <Desktop>
-        <div className="overflow-y-auto max-h-[calc(100vh-60px)] sticky top-20">
-          <TableOfContents allItems={data} />
-        </div>
-      </Desktop>
+      </div>
+
+      <div className="overflow-y-auto max-h-[calc(100vh-60px)] sticky top-20 hidden sm:block">
+        <TableOfContents allItems={data} />
+      </div>
     </aside>
   );
 }

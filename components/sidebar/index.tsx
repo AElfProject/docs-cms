@@ -16,7 +16,6 @@ import {
   findTopLevelItems,
 } from "../../lib/utils";
 import "./index.css";
-import { Desktop, Mobile } from "../provider";
 import { useTheme } from "next-themes";
 import { getThemeConfig } from "../../lib/theme";
 import { Skeleton } from "../ui/skeleton";
@@ -146,20 +145,18 @@ export default function Sidebar({ menu, closeDrawer = () => {} }: Props) {
   if (!mounted) {
     return (
       <div>
-        <Desktop>
-          <aside className="z-30 shrink-0 block sm:w-[300px]">
-            <div className="sticky top-0 h-full ">
-              <div className="mt-[60px]">
-                <Skeleton className="h-8 w-64" />
-                <div className="mt-4 space-y-4">
-                  <Skeleton className="h-6 w-full" />
-                  <Skeleton className="h-6 w-full" />
-                  <Skeleton className="h-6 w-full" />
-                </div>
+        <aside className="z-30 shrink-0 hidden sm:block sm:w-[300px]">
+          <div className="sticky top-0 h-full ">
+            <div className="mt-[60px]">
+              <Skeleton className="h-8 w-64" />
+              <div className="mt-4 space-y-4">
+                <Skeleton className="h-6 w-full" />
+                <Skeleton className="h-6 w-full" />
+                <Skeleton className="h-6 w-full" />
               </div>
             </div>
-          </aside>
-        </Desktop>
+          </div>
+        </aside>
       </div>
     );
   }
@@ -211,18 +208,16 @@ export default function Sidebar({ menu, closeDrawer = () => {} }: Props) {
                   />
                 </div>
 
-                <Desktop>
-                  <button
-                    onClick={() => setShowMenu(!showMenu)}
-                    id="sidebar-toggle"
-                    className={clsx(
-                      !showMenu && "h-full",
-                      "sticky z-10 w-full bottom-0 h-10 flex justify-center items-center border-t-[1px] border-r-[1px] bg-collapse-button-bg"
-                    )}
-                  >
-                    <span className="text-xl">{showMenu ? "<<" : ">>"}</span>
-                  </button>
-                </Desktop>
+                <button
+                  onClick={() => setShowMenu(!showMenu)}
+                  id="sidebar-toggle"
+                  className={clsx(
+                    !showMenu && "h-full",
+                    "sticky z-10 w-full bottom-0 h-10 hidden sm:flex justify-center items-center border-t-[1px] border-r-[1px] bg-collapse-button-bg"
+                  )}
+                >
+                  <span className="text-xl">{showMenu ? "<<" : ">>"}</span>
+                </button>
               </div>
             </ConfigProvider>
           </div>

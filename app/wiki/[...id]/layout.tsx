@@ -3,7 +3,6 @@ import Sidebar from "@/components/sidebar/index";
 import Breadcrumb from "@/components/Breadcrumb";
 import { Suspense } from "react";
 import Loading from "./loading";
-import { Desktop } from "../../../components/provider";
 
 export default async function WikiLayout({
   children,
@@ -15,9 +14,9 @@ export default async function WikiLayout({
     <main>
       <div className="flex">
         <div className="flex w-full">
-          <Desktop>
+          <div className="hidden sm:flex">
             <Sidebar menu={menu} />
-          </Desktop>
+          </div>
           <div className="container pt-[60px] min-h-[calc(100vh-225px)] break-words">
             <Breadcrumb menu={menu}></Breadcrumb>
             <Suspense fallback={<Loading />}>{children}</Suspense>
