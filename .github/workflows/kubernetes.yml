@@ -19,6 +19,7 @@ on:
           - aelf-docs-dev
           - aefinder-docs-dev
           - tomorrowdao-docs-dev
+          - tomorrowdao-docs-prod
 
 jobs:
   build:
