@@ -18,6 +18,7 @@
 }
 .header-menu.ant-menu-horizontal {
   border-bottom: 0;
+  font-size: 16px;
   .ant-menu-item {
     display: flex;
     align-items: center;

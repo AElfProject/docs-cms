@@ -113,11 +113,11 @@ html {
 }
 
 ul > .active {
-  font-weight: bold;
+  color: #127fff;
 }
 
 ul > .active ~ .active {
-  font-weight: normal;
+  color: inherit;
 }
 
 html[class="dark"] {

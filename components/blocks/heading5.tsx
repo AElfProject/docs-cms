@@ -12,12 +12,12 @@ export interface Heading5 extends Item {
 
 export function Heading5(props: Heading5) {
   const anchor = props.slugger.slug(
-    props.heading5.elements.map((i) => i.text_run.content).join(" ")
+    props.heading5.elements.map(i => i.text_run.content).join(" ")
   );
 
   return (
-    <h5 className="text-lg font-bold tracking-tight" id={anchor}>
-      {props.heading5.elements.map((i) => (
+    <h5 className="mt-[1.5rem] mb-[1rem] font-bold tracking-tight" id={anchor}>
+      {props.heading5.elements.map(i => (
         <Element key={key()} {...i} />
       ))}
       <Anchor anchor={anchor} />

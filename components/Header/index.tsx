@@ -101,7 +101,7 @@ export default function Header({ menu, baseConfig }: Props) {
   if (!mounted) {
     return (
       <div className="fixed w-full z-50 flex px-5 h-[60px] border-b-[1px] items-center bg-background">
-        <div className="block sm:hidden">
+        <div className="block lg:hidden">
           <Skeleton className="h-8 w-[calc(100vw-50px)]" />
         </div>
       </div>
@@ -114,11 +114,14 @@ export default function Header({ menu, baseConfig }: Props) {
           antdTheme.defaultAlgorithm,
           antdTheme.darkAlgorithm,
         ]),
+        token: {
+          fontFamily: "Poppins-Regular",
+        },
       }}
     >
       <div className="fixed w-full z-50 flex px-5 h-[60px] border-b-[1px] items-center bg-background">
         <div
-          className="flex sm:hidden w-[30px] mr-2 "
+          className="flex lg:hidden w-[30px] mr-2 "
           onClick={() => setDrawerOpen(true)}
         >
           <MenuFoldOutlined
@@ -173,7 +176,7 @@ export default function Header({ menu, baseConfig }: Props) {
             alt="logo"
           ></CustomImage>
         </Link>
-        <div className="hidden sm:flex w-full items-center">
+        <div className="hidden lg:flex w-full items-center">
           <Menu
             className="header-menu flex w-full"
             onClick={onClick}
@@ -183,12 +186,12 @@ export default function Header({ menu, baseConfig }: Props) {
           />
         </div>
 
-        <div className="flex items-center space-x-4 justify-end ml-auto sm:mr-5">
+        <div className="flex items-center space-x-4 justify-end ml-auto lg:mr-5">
           {baseConfig.blog && (
             <a
               href={baseConfig.blog}
               target="_blank"
-              className="hover:text-blue-500 text-[20px]"
+              className="hover:text-blue-500 text-[16px]"
             >
               Blog
             </a>
@@ -198,7 +201,7 @@ export default function Header({ menu, baseConfig }: Props) {
               <GithubOutlined className="text-[20px] hover:text-blue-500" />
             </a>
           )}
-          <span className="hidden sm:inline-block">
+          <span className="hidden lg:inline-block">
             <ThemeToggler />
           </span>
         </div>
