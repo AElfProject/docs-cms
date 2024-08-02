@@ -169,7 +169,7 @@ export default function Header({ menu, baseConfig }: Props) {
             ])}
             width={115}
             height={32}
-            className="h-8"
+            className="w-[107px] max-w-fit"
             alt="logo"
           ></CustomImage>
         </Link>
@@ -183,7 +183,7 @@ export default function Header({ menu, baseConfig }: Props) {
           />
         </div>
 
-        <div className="flex items-center space-x-4 justify-end md:mr-5">
+        <div className="flex items-center space-x-4 justify-end ml-auto sm:mr-5">
           {baseConfig.blog && (
             <a
               href={baseConfig.blog}
@@ -202,7 +202,7 @@ export default function Header({ menu, baseConfig }: Props) {
             <ThemeToggler />
           </span>
         </div>
-        <div className="flex flex-1 items-center space-x-2 justify-end">
+        <div className="flex items-center justify-end ml-0">
           <Search />
         </div>
       </div>

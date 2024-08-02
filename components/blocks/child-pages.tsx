@@ -48,7 +48,7 @@ export async function ChildPages(props: ChildPages) {
     <div className="grid lg:grid-cols-2 gap-2 my-8">
       {data.map(i => (
         <Link key={key()} href={i.href}>
-          <Card className="border-card-border-color hover:border-card-hover-border-color h-full">
+          <Card className="h-full">
             <CardHeader>
               <CardTitle>{i.title}</CardTitle>
             </CardHeader>

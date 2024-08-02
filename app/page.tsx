@@ -63,7 +63,7 @@ export default async function Home() {
                 {emojiObj[ele.title] && (
                   <span className="mr-2">{emojiObj[ele.title]}</span>
                 )}
-                <Link href={`/wiki${ele.url_path}/}`}>{ele.title}</Link>
+                <Link href={`/wiki/${ele.url_path}/`}>{ele.title}</Link>
               </h2>
               {ele.has_child && getChildList(ele, 0, url)}
             </ul>
