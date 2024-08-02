@@ -23,6 +23,11 @@
     display: flex;
     align-items: center;
     height: 60px;
+    .ant-menu-title-content {
+      .font-bold {
+        font-weight: 400;
+      }
+    }
   }
 }
 .header-drawer-container {

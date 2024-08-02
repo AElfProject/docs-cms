@@ -11,8 +11,8 @@ export interface Ordered extends Item {
 
 export function Ordered(props: Ordered) {
   return (
-    <li>
-      {props.ordered.elements.map((i) => (
+    <li className="leading-[1.75rem]">
+      {props.ordered.elements.map(i => (
         <Element key={key()} {...i} />
       ))}
     </li>
