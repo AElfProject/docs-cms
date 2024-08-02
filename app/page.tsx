@@ -43,12 +43,14 @@ export default async function Home() {
   return (
     <main className="pt-8 container min-h-[calc(100vh-225px)]">
       <div className="sm:mt-[60px] mt-10 ">
-        <div className="relative w-full sm:h-[322px] h-[82px] mb-6">
+        <div className="relative w-full mb-6">
           <CustomImage
             src={configObj.image}
             alt="Banner Image"
-            layout="fill"
-            objectFit="fill"
+            width={0}
+            height={0}
+            sizes="100vw"
+            className="w-full h-auto"
           />
         </div>
         <h1 className="text-4xl font-bold mb-4">{configObj.title}</h1>

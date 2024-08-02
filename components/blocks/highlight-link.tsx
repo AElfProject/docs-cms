@@ -20,10 +20,10 @@ export function HighlightLink({
     const el1 = document.getElementById(anchor);
 
     const observer = new IntersectionObserver(
-      (entries) => {
+      entries => {
         // do something with the entries
 
-        entries.forEach((entry) => {
+        entries.forEach(entry => {
           setIsIntersecting(entry.isIntersecting);
         });
       },

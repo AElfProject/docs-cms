@@ -10,8 +10,8 @@ export interface Text extends Item {
 
 export function Text(props: Text) {
   return (
-    <p className="leading-7 [&:not(:first-child)]:mt-6">
-      {props.text.elements.map((i) => (
+    <p className="leading-7 mb-5">
+      {props.text.elements.map(i => (
         <Element key={key()} {...i} />
       ))}
     </p>

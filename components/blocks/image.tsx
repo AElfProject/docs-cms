@@ -32,6 +32,7 @@ export async function Image(props: Image) {
       alt=""
       width={props.image.width}
       height={props.image.height}
+      className="my-[1rem]"
     />
   );
 }
