@@ -115,7 +115,7 @@ export default function Header({ menu, baseConfig }: Props) {
           antdTheme.darkAlgorithm,
         ]),
         token: {
-          fontFamily: "Poppins-Regular",
+          fontFamily: "inherit",
         },
       }}
     >
