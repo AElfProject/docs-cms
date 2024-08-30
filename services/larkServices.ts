@@ -1,7 +1,7 @@
 import { SPACE_ID } from "@/environment";
-import { getLink } from "../components/blocks/image";
 import { fetcher } from "../lib/api";
 import { getFileTokens } from "../lib/utils";
+import { getLink } from "./get-link";
 
 export interface NodesData {
   has_more: boolean;
