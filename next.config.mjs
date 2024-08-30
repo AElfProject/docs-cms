@@ -1,14 +1,16 @@
+import withExportImages from "next-export-optimize-images";
+
 /** @type {import('next').NextConfig} */
 const nextConfig = {
   staticPageGenerationTimeout: 10000,
   images: {
     remotePatterns: [
-      {
-        protocol: "https",
-        hostname: "internal-api-drive-stream-sg.larksuite.com",
-        port: "",
-        pathname: "**",
-      },
+      // {
+      //   protocol: "https",
+      //   hostname: "internal-api-drive-stream-sg.larksuite.com",
+      //   port: "",
+      //   pathname: "**",
+      // },
       {
         protocol: "https",
         hostname: "docs.aelf.dev",
@@ -16,7 +18,6 @@ const nextConfig = {
         pathname: "**",
       },
     ],
-    unoptimized: true,
   },
   experimental: {
     workerThreads: false,
@@ -26,4 +27,4 @@ const nextConfig = {
   trailingSlash: true,
 };
 
-export default nextConfig;
+export default withExportImages(nextConfig);

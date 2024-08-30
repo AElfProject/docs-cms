@@ -4,6 +4,7 @@ import { cn, getConfigContent, getMenu } from "@/lib/utils";
 import { Poppins as FontSans } from "next/font/google";
 import { Footer } from "@/components/footer";
 import Header from "@/components/Header";
+import { Logo } from "@/components/logo";
 import { Suspense } from "react";
 import Loading from "./loading";
 import { getNodeToken, NodesItem } from "../services/larkServices";
@@ -44,9 +45,20 @@ export default async function RootLayout({
           disableTransitionOnChange
         >
           <AntdRegistry>
-            <Header menu={menu} baseConfig={configObj} />
+            <Header
+              menu={menu}
+              baseConfig={configObj}
+              logo={<Logo baseConfig={configObj} />}
+              drawerLogo={
+                <Logo baseConfig={configObj} className="w-[107px] max-w-fit" />
+              }
+            />
             <Suspense fallback={<Loading />}>{children}</Suspense>
-            <Footer baseConfig={configObj} footerData={footerData} />
+            <Footer
+              baseConfig={configObj}
+              footerData={footerData}
+              logo={<Logo baseConfig={configObj} />}
+            />
           </AntdRegistry>
         </ThemeProvider>
       </body>
