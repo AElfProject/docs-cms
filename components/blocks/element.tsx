@@ -24,7 +24,9 @@ export function Element(props: Element) {
 
   if (inline_code)
     return (
-      <span className="inline p-1 bg-slate-300 rounded-md">{content}</span>
+      <span className="inline p-[2px] bg-card-border-color rounded-md">
+        {content}
+      </span>
     );
 
   if (link && link?.url) {

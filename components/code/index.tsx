@@ -1,9 +1,14 @@
 "use client";
-
-import { useCopyToClipboard } from "@/hooks/useCopyToClipboard";
-import { CodeBlock } from "react-code-block";
 import { Prism } from "prism-react-renderer";
 import { useLayoutEffect } from "react";
+import SyntaxHighlighter from "react-syntax-highlighter";
+import {
+  defaultStyle,
+  darcula,
+} from "react-syntax-highlighter/dist/esm/styles/hljs";
+import { useTheme } from "next-themes";
+import { getThemeConfig } from "../../lib/theme";
+import CopyButton from "./CopyButton";
 
 interface CodeBlockProps {
   code: string;
@@ -31,16 +36,10 @@ function getLanguage(lang: number) {
 }
 
 export default function Code(props: CodeBlockProps) {
-  const [state, copyToClipboard] = useCopyToClipboard();
-
+  const { theme } = useTheme();
   const { code } = props;
 
   const language = getLanguage(props.language);
-
-  const copyCode = () => {
-    // Logic to copy `code`
-    copyToClipboard(props.code);
-  };
 
   useLayoutEffect(() => {
     (typeof global !== "undefined" ? global : window).Prism = Prism;
@@ -63,24 +62,15 @@ export default function Code(props: CodeBlockProps) {
   }, [language]);
 
   return (
-    <CodeBlock code={code} language={language}>
-      <div className="relative my-4">
-        <CodeBlock.Code className="bg-gray-900 !p-6 rounded-xl shadow-lg overflow-auto">
-          <div className="table-row">
-            <CodeBlock.LineNumber className="table-cell pr-4 text-sm text-gray-500 text-right select-none" />
-            <CodeBlock.LineContent className="table-cell text-wrap">
-              <CodeBlock.Token />
-            </CodeBlock.LineContent>
-          </div>
-        </CodeBlock.Code>
-
-        <button
-          className=" rounded-full px-3.5 py-1.5 absolute top-2 right-2 text-sm font-semibold"
-          onClick={copyCode}
-        >
-          {state ? "Copied!" : "Copy code"}
-        </button>
-      </div>
-    </CodeBlock>
+    <div className="relative my-2">
+      <CopyButton code={code} />
+      <SyntaxHighlighter
+        language={language}
+        style={getThemeConfig(theme, [defaultStyle, darcula])}
+        className="rounded-lg"
+      >
+        {code}
+      </SyntaxHighlighter>
+    </div>
   );
 }

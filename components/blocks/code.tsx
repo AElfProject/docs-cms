@@ -1,5 +1,5 @@
 import { Item, Element } from "./common";
-import CodeBlock from "@/components/code";
+import CodeBlock from "@/components/code/index";
 
 export interface Code extends Item {
   block_type: 14;
@@ -15,7 +15,7 @@ export interface Code extends Item {
 export function Code(props: Code) {
   return (
     <CodeBlock
-      code={props.code.elements.map((i) => i.text_run.content).join("")}
+      code={props.code.elements.map(i => i.text_run.content).join("")}
       language={props.code.style.language}
     />
   );

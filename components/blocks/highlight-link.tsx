@@ -49,7 +49,7 @@ export function HighlightLink({
           active: isIntersecting,
         },
         className,
-        "leading-[1.75rem]"
+        "leading-[1.75rem] hover:text-[#127fff]"
       )}
     >
       <Link href={`#${anchor}`}>{title}</Link>

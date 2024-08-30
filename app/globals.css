@@ -118,6 +118,9 @@ ul > .active {
 
 ul > .active ~ .active {
   color: inherit;
+  &:hover {
+    color: #127fff;
+  }
 }
 
 html[class="dark"] {
