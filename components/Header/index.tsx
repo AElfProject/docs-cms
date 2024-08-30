@@ -2,7 +2,7 @@
 import type { MenuProps } from "antd";
 import { Drawer, Menu, theme as antdTheme, ConfigProvider } from "antd";
 import { NodesData, NodesItem } from "../../services/larkServices";
-import { useEffect, useState } from "react";
+import { useEffect, useState, ReactNode } from "react";
 import Link from "next/link";
 import { useParams } from "next/navigation";
 import {
@@ -26,16 +26,18 @@ import { Skeleton } from "../ui/skeleton";
 interface Props {
   menu: NodesData;
   baseConfig: { [key: string]: any };
+  logo: ReactNode;
+  drawerLogo: ReactNode;
 }
 type MenuItem = Required<MenuProps>["items"][number];
 
-export default function Header({ menu, baseConfig }: Props) {
+export default function Header({ menu, baseConfig, logo, drawerLogo }: Props) {
   const params = useParams();
   const { lastItemId: id } = findPathByTitles(menu, params.id as string[]);
   let temp: any = {};
   temp.items = findTopLevelItems(menu, id as string) as NodesItem[];
   const items = menu.items;
-  const menuItems: MenuItem[] = items.map(ele => {
+  const menuItems: MenuItem[] = items.map((ele) => {
     const titles = findTitlesById(menu, ele.node_token);
     const url = titles?.join("/");
     let obj: any = {};
@@ -53,7 +55,7 @@ export default function Header({ menu, baseConfig }: Props) {
   useEffect(() => {
     setCurrent(temp.items && temp.items[0]?.node_token);
   }, [id]);
-  const onClick: MenuProps["onClick"] = e => {
+  const onClick: MenuProps["onClick"] = (e) => {
     setCurrent(e.key);
   };
   const [drawerOpen, setDrawerOpen] = useState(false);
@@ -75,7 +77,7 @@ export default function Header({ menu, baseConfig }: Props) {
   );
   const homeDrawerContent = (
     <div className="home-drawer-content">
-      {menu.items.map(item => {
+      {menu.items.map((item) => {
         const titles = findTitlesById(menu, item.node_token);
         const url = titles?.join("/");
         return (
@@ -133,17 +135,7 @@ export default function Header({ menu, baseConfig }: Props) {
 
         <Drawer
           className="header-drawer-container"
-          title={
-            <CustomImage
-              src={getThemeConfig(theme, [
-                baseConfig.logoLight,
-                baseConfig.logoDark,
-              ])}
-              width={115}
-              height={32}
-              alt="logo"
-            ></CustomImage>
-          }
+          title={drawerLogo}
           closeIcon={false}
           extra={
             <span className="flex justify-between">
@@ -165,16 +157,7 @@ export default function Header({ menu, baseConfig }: Props) {
           {showHome ? homeDrawerContent : drawerContent}
         </Drawer>
         <Link href="/" className="mr-8 flex">
-          <CustomImage
-            src={getThemeConfig(theme, [
-              baseConfig.logoLight,
-              baseConfig.logoDark,
-            ])}
-            width={115}
-            height={32}
-            className="w-[107px] max-w-fit"
-            alt="logo"
-          ></CustomImage>
+          {logo}
         </Link>
         <div className="hidden lg:flex w-full items-center">
           <Menu
