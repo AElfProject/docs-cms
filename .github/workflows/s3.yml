@@ -16,7 +16,9 @@ on:
 jobs:
 
   build:
-    environment: ${{ github.ref == 'refs/heads/main' && 'production' || 'development' }}
+    environment:
+      name: ${{ inputs.environment }}
+      url: https://${{ vars.SITE_URL }}
     permissions:
       contents: read
     runs-on: ubuntu-latest
