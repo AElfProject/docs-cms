@@ -42,6 +42,10 @@ jobs:
         echo NEXT_PUBLIC_SITE_URL=${{ vars.SITE_URL }} >> .env
 
     - run: npm run build
+
+    - name: Save environment variable to JSON
+      run: |
+        echo "{\"index\": \"${{ vars.TYPESENSE_INDEX }}\", \"host\": \"${{ vars.TYPESENSE_HOST }}\", \"apikey\": \"${{ vars.TYPESENSE_SEARCH_API_KEY }}\"}" > ./out/api/search
     
     - name: Configure AWS Credentials
       uses: aws-actions/configure-aws-credentials@v2
