@@ -9,7 +9,7 @@ const getChildList = (ele: NodesItem, index: number, url: string = "") => {
   index++;
   return ele.children.map(element => {
     return element.items.map(item => {
-      const newUrl = `${url}/${item.url_path}/`;
+      const newUrl = `${url}${item.url_path}/`;
       return (
         <li className="ml-4" key={item.node_token}>
           <Link href={newUrl} className="text-blue-500">
