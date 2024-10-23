@@ -45,42 +45,6 @@ npm run dev
 
 Open http://localhost:3000 with your browser to see the result.
 
-### Search
-
-Search is using Typesense.
-
-#### Updating the search index
-
-The scraper configuration is at [scraper/typesense.json](./scraper/typesense.json).
-
-Minimum you need to edit the following:
-
-```json
-{
-  "index_name": "docs-cms-three-vercel-app",
-  "start_urls": [
-    "https://docs-cms-three.vercel.app/wiki/quick-start"
-  ],
-  "sitemap_urls": [
-    "https://docs-cms-three.vercel.app/sitemap.xml"
-  ],
-  // ...
-}
-```
-
-To scrape the site and update the index:
-
-First, copy the default example and edit it:
-
-```bash
-cd scraper
-cp .env.typesense.example .env.typesense
-```
-
-Thereafter, run `docker compose up`.
-
-This can be automated, or run on demand.
-
 ## Learn More
 
 To learn more about Next.js, take a look at the following resources:

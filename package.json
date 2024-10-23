@@ -5,14 +5,16 @@
   "type": "module",
   "scripts": {
     "dev": "next dev",
-    "build": "next build && next-export-optimize-images",
+    "build": "next build && next-export-optimize-images && npm run generate-pagefind",
     "start": "next start",
     "lint": "next lint",
-    "test": "vitest"
+    "test": "vitest",
+    "generate-pagefind": "pagefind --site out --output-path out/pagefind"
   },
   "dependencies": {
     "@ant-design/icons": "^5.3.7",
     "@ant-design/nextjs-registry": "^1.0.0",
+    "@getcanary/web": "^1.0.10",
     "@radix-ui/react-dialog": "^1.1.1",
     "@radix-ui/react-separator": "^1.1.0",
     "@radix-ui/react-slot": "^1.1.0",
@@ -28,11 +30,11 @@
     "date-fns": "^3.6.0",
     "exponential-backoff": "^3.1.1",
     "github-slugger": "^2.0.0",
-    "iron-session": "^8.0.2",
     "lucide-react": "^0.408.0",
     "nanoid": "^5.0.7",
-    "next": "14.2.4",
+    "next": "^14.2.16",
     "next-themes": "^0.3.0",
+    "pagefind": "^1.1.1",
     "prism-react-renderer": "^2.3.1",
     "prismjs": "^1.29.0",
     "react": "^18",
@@ -43,8 +45,6 @@
     "slugify": "^1.6.6",
     "tailwind-merge": "^2.3.0",
     "tailwindcss-animate": "^1.0.7",
-    "typesense-docsearch-css": "^0.4.1",
-    "typesense-docsearch-react": "^3.4.1",
     "url-slug": "^4.0.1",
     "zod": "^3.23.8"
   },
