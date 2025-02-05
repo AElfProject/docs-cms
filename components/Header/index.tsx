@@ -118,6 +118,7 @@ export default function Header({ menu, baseConfig, logo, drawerLogo }: Props) {
         ]),
         token: {
           fontFamily: "inherit",
+          colorPrimary: '#6E81FF',  // Primary color
         },
       }}
     >
@@ -159,7 +160,7 @@ export default function Header({ menu, baseConfig, logo, drawerLogo }: Props) {
         <Link href="/" className="mr-8 flex">
           {logo}
         </Link>
-        <div className="hidden lg:flex w-full items-center">
+        <div className="hidden lg:flex w-full items-center font-unbounded">
           <Menu
             className="header-menu flex w-full"
             onClick={onClick}

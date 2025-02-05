@@ -35,7 +35,7 @@ export function Element(props: Element) {
         href={decodeURIComponent(link.url)}
         target="_blank"
         rel="noopener noreferrer"
-        className="hover:underline no-underline text-[#127fff]"
+        className="hover:underline no-underline text-[var(--color-text-secondary)]"
       >
         {content}
       </Link>

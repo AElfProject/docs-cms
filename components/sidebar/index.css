@@ -3,8 +3,17 @@
   > .ant-menu-submenu-title
   > .ant-menu-title-content
   a {
-  color: #1677ff !important;
+  color: var(--color-text-secondary) !important;
 }
+
+.ant-menu-light .ant-menu-item {
+  color: #989DA0 !important;
+}
+
+.ant-menu-submenu-selected >.ant-menu-submenu-title, .ant-menu-item-selected a, .ant-menu-light>.ant-menu .ant-menu-submenu-selected >.ant-menu-submenu-title{
+  color: var(--color-text-secondary) !important;
+}
+
 .side-bar .ant-menu-title-content {
   overflow-x: auto !important;
   scrollbar-width: none;

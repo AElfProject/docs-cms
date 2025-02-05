@@ -83,7 +83,8 @@ const config = {
         "accordion-up": "accordion-up 0.2s ease-out",
       },
       fontFamily: {
-        sans: ["var(--font-sans)", ...fontFamily.sans],
+        unbounded: "var(--font-unbounded)",
+        montserrat: "var(--font-montserrat)",
       },
     },
   },

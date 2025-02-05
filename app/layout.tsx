@@ -1,7 +1,7 @@
 import { AntdRegistry } from "@ant-design/nextjs-registry";
 import "./globals.css";
 import { cn, getConfigContent, getMenu } from "@/lib/utils";
-import { Poppins as FontSans } from "next/font/google";
+import { Poppins as FontSans, Montserrat, Unbounded } from "next/font/google";
 import { Footer } from "@/components/footer";
 import Header from "@/components/Header";
 import { Logo } from "@/components/logo";
@@ -15,6 +15,18 @@ const fontSans = FontSans({
   subsets: ["latin"],
   variable: "--font-sans",
   weight: ["100", "200", "300", "400", "500", "600", "700", "800", "900"],
+});
+
+const fontUnbounded = Unbounded({
+  subsets: ["latin"],
+  weight: ["300"], // Light
+  variable: "--font-unbounded",
+});
+
+const fontMontserrat = Montserrat({
+  subsets: ["latin"],
+  weight: ["400"], // Regular
+  variable: "--font-montserrat",
 });
 
 export default async function RootLayout({
@@ -35,13 +47,14 @@ export default async function RootLayout({
     <html lang="en">
       <body
         className={cn(
-          "min-h-screen bg-background font-sans antialiased",
-          fontSans.variable
+          "min-h-screen bg-background font-montserrat antialiased",
+          fontUnbounded.variable,
+          fontMontserrat.variable
         )}
       >
         <ThemeProvider
           attribute="class"
-          defaultTheme="light"
+          defaultTheme="dark"
           disableTransitionOnChange
         >
           <AntdRegistry>

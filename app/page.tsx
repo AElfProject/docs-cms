@@ -53,7 +53,7 @@ export default async function Home() {
             className="w-full h-auto"
           />
         </div>
-        <h1 className="text-4xl font-bold mb-4">{configObj.title}</h1>
+        <h1 className="text-4xl font-bold mb-4 ">{configObj.title}</h1>
         <p>{configObj.description}</p>
       </div>
       <div className="grid grid-flow-row-dense grid-cols-1 md:grid-cols-2 lg:grid-cols-3 mt-20 mb-16">

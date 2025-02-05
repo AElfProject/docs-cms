@@ -44,12 +44,15 @@
 
     --card-border-color: #ebedf0;
 
-    --card-hover-border-color: #127fff;
+    --card-hover-border-color: #6E81FF;
+
+    --color-text-secondary: #6E81FF 
+
   }
 
   .dark {
-    --background: 216 8.2% 12%;
-    --foreground: 210 40% 98%;
+    --background: 0, 0%, 9%;
+    --foreground: 60, 100%, 98%;
 
     --card: 216 8.2% 12%;
     --card-foreground: 210 40% 98%;
@@ -86,7 +89,9 @@
 
     --card-border-color: #444950;
 
-    --card-hover-border-color: #127fff;
+    --card-hover-border-color: #6E81FF;
+
+    --color-text-secondary: #6E81FF 
   }
 }
 
@@ -113,14 +118,18 @@ html {
 }
 
 ul > .active {
-  color: #127fff;
+  color: var(--color-text-secondary);
 }
 
 ul > .active ~ .active {
   color: inherit;
   &:hover {
-    color: #127fff;
+    color: var(--color-text-secondary);
   }
+}
+
+h1, h2, h3, h4, h5, h6 {
+  font-family: var(--font-unbounded);
 }
 
 html[class="dark"] {
