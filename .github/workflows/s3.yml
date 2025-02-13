@@ -7,11 +7,6 @@ on:
         required: true
         type: choice
         options:
-          - aelf-docs-dev
-          - aefinder-docs-dev
-          - aefinder-docs-prod
-          - tomorrowdao-docs-dev
-          - tomorrowdao-docs-prod
           - docs-aevatar-dev
           - docs-aevatar-prod
 
