@@ -12,6 +12,7 @@ export function SsrLogo({ src, className }: Props) {
       height={32}
       alt="logo"
       className={className}
+      unoptimized={true}
     />
   );
 }

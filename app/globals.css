@@ -49,6 +49,8 @@
     --highlight-color: #3451b2;
 
     --title-color: #000000;
+
+    --menu-unselected-item-color: #000000;
   }
 
   .dark {
@@ -95,6 +97,8 @@
     --highlight-color: #ffffff;
 
     --title-color: #ffffff;
+
+    --menu-unselected-item-color: #b9b9b9;
   }
 }
 

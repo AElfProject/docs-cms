@@ -51,6 +51,7 @@ export default async function Home() {
             height={0}
             sizes="100vw"
             className="w-full h-auto"
+            unoptimized={true}
           />
         </div>
         <h1 className="text-4xl font-semibold mb-4 text-title-color">

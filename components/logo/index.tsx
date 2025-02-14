@@ -7,6 +7,7 @@ interface Props {
   theme?: string;
 }
 export function Logo({ baseConfig, className }: Props) {
+  console.log(baseConfig.logoLight, "baseConfig.logoLight");
   return (
     <>
       {baseConfig?.logoLight ? (
@@ -17,17 +18,19 @@ export function Logo({ baseConfig, className }: Props) {
             height={32}
             alt="logo"
             className={className}
+            unoptimized={true}
           />
         </Light>
       ) : null}
       {baseConfig?.logoDark ? (
         <Dark>
           <CustomImage
-            src={baseConfig.logoLight}
+            src={baseConfig.logoDark}
             width={115}
             height={32}
             alt="logo"
             className={className}
+            unoptimized={true}
           />
         </Dark>
       ) : null}

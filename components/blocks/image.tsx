@@ -24,6 +24,7 @@ export async function Image(props: Image) {
       width={props.image.width}
       height={props.image.height}
       className="my-[1rem]"
+      unoptimized={true}
     />
   );
 }

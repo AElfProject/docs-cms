@@ -16,6 +16,7 @@ interface ImageProps {
   objectFit?: string;
   className?: string;
   sizes?: string;
+  unoptimized?: boolean;
 }
 
 export default function CustomImage(props: ImageProps) {

@@ -177,7 +177,7 @@ export default function Sidebar({ menu, closeDrawer = () => {} }: Props) {
                 },
                 components: {
                   Menu: {
-                    itemBg: "var(--background)",
+                    itemColor: "var( --menu-unselected-item-color)",
                     subMenuItemBg: "var(--background)",
                     itemSelectedBg: "var(--background)",
                     itemSelectedColor: "var(--highlight-color)",
