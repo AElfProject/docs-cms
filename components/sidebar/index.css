@@ -3,7 +3,7 @@
   > .ant-menu-submenu-title
   > .ant-menu-title-content
   a {
-  color: #1677ff !important;
+  color: var(--highlight-color) !important;
 }
 .side-bar .ant-menu-title-content {
   overflow-x: auto !important;

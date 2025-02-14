@@ -26,7 +26,7 @@ const config = {
         input: "hsl(var(--input))",
         ring: "hsl(var(--ring))",
         background: "hsl(var(--background))",
-        foreground: "hsl(var(--foreground))",
+        foreground: "var(--foreground)",
         primary: {
           DEFAULT: "hsl(var(--primary))",
           foreground: "hsl(var(--primary-foreground))",
@@ -61,7 +61,8 @@ const config = {
         "card-background-color": "var(--card-background-color)",
         "card-border-color": "var(--card-border-color)",
         "card-hover-border-color": "var(--card-hover-border-color)",
-        "hightlight-color": "var(--highlight-color)",
+        "highlight-color": "var(--highlight-color)",
+        "title-color": "var(--title-color)",
       },
       borderRadius: {
         lg: "var(--radius)",

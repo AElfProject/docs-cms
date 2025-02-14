@@ -5,7 +5,7 @@
 @layer base {
   :root {
     --background: 0 0% 100%;
-    --foreground: 216 8.2% 12%;
+    --foreground: #3c3c4c;
 
     --card: 0 0% 100%;
     --card-foreground: 216 8.2% 12%;
@@ -47,11 +47,13 @@
     --card-hover-border-color: #127fff;
 
     --highlight-color: #3451b2;
+
+    --title-color: #000000;
   }
 
   .dark {
     --background: #1b1b0b;
-    --foreground: 210 40% 98%;
+    --foreground: #b9b9b9;
 
     --card: 216 8.2% 12%;
     --card-foreground: 210 40% 98%;
@@ -91,6 +93,8 @@
     --card-hover-border-color: #127fff;
 
     --highlight-color: #ffffff;
+
+    --title-color: #ffffff;
   }
 }
 

@@ -177,18 +177,10 @@ export default function Sidebar({ menu, closeDrawer = () => {} }: Props) {
                 },
                 components: {
                   Menu: {
-                    itemBg: getThemeConfig(theme, [
-                      "#fff",
-                      "hsl(var(--background))",
-                    ]),
-                    subMenuItemBg: getThemeConfig(theme, [
-                      "#fff",
-                      "hsl(var(--background))",
-                    ]),
-                    itemSelectedBg: getThemeConfig(theme, [
-                      "#fff",
-                      "hsl(var(--background))",
-                    ]),
+                    itemBg: "var(--background)",
+                    subMenuItemBg: "var(--background)",
+                    itemSelectedBg: "var(--background)",
+                    itemSelectedColor: "var(--highlight-color)",
                   },
                 },
               }}
