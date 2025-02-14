@@ -12,7 +12,7 @@ const getChildList = (ele: NodesItem, index: number, url: string = "") => {
       const newUrl = `${url}${item.url_path}/`;
       return (
         <li className="ml-4" key={item.node_token}>
-          <Link href={newUrl} className="text-blue-500">
+          <Link href={newUrl} className="text-hightlight-color">
             {item.title}
           </Link>
         </li>
@@ -53,7 +53,7 @@ export default async function Home() {
             className="w-full h-auto"
           />
         </div>
-        <h1 className="text-4xl font-bold mb-4">{configObj.title}</h1>
+        <h1 className="text-4xl font-semibold mb-4">{configObj.title}</h1>
         <p>{configObj.description}</p>
       </div>
       <div className="grid grid-flow-row-dense grid-cols-1 md:grid-cols-2 lg:grid-cols-3 mt-20 mb-16">
@@ -61,7 +61,7 @@ export default async function Home() {
           const url = `/wiki/${ele.url_path}/`;
           return (
             <ul key={ele.node_token} className="m-4 list-disc">
-              <h2 className="font-bold text-[20px] mb-4 ">
+              <h2 className="font-semibold text-[20px] mb-4 ">
                 {emojiObj[ele.title] && (
                   <span className="mr-2">{emojiObj[ele.title]}</span>
                 )}

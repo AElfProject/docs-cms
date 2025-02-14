@@ -1,5 +1,4 @@
 import type { Config } from "tailwindcss";
-import { fontFamily } from "tailwindcss/defaultTheme";
 
 const config = {
   darkMode: ["class"],
@@ -62,6 +61,7 @@ const config = {
         "card-background-color": "var(--card-background-color)",
         "card-border-color": "var(--card-border-color)",
         "card-hover-border-color": "var(--card-hover-border-color)",
+        "hightlight-color": "var(--highlight-color)",
       },
       borderRadius: {
         lg: "var(--radius)",

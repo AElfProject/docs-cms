@@ -45,6 +45,8 @@
     --card-border-color: #ebedf0;
 
     --card-hover-border-color: #127fff;
+
+    --highlight-color: #3451b2;
   }
 
   .dark {
@@ -87,6 +89,8 @@
     --card-border-color: #444950;
 
     --card-hover-border-color: #127fff;
+
+    --highlight-color: #ffffff;
   }
 }
 

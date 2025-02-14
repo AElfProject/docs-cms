@@ -17,7 +17,7 @@ export function Heading1(props: Heading1) {
 
   return (
     <h1
-      className="text-4xl font-bold tracking-tight mt-[1.5rem] mb-[1rem]"
+      className="text-4xl font-semibold tracking-tight mt-[1.5rem] mb-[1rem]"
       id={anchor}
     >
       {props.heading1.elements.map(i => (

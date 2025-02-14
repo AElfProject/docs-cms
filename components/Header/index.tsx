@@ -121,9 +121,9 @@ export default function Header({ menu, baseConfig, logo, drawerLogo }: Props) {
         },
         components: {
           Menu: {
-            itemColor: "#B9B9B9",
-            itemSelectedColor: "#fff",
-            itemHoverColor: "#fff",
+            itemColor: getThemeConfig(theme, ["#3c3c4c", "#B9B9B9"]),
+            itemSelectedColor: getThemeConfig(theme, ["#3451B2", "#fff"]),
+            itemHoverColor: getThemeConfig(theme, ["#3451B2", "#fff"]),
           },
         },
       }}

@@ -17,7 +17,7 @@ export function Heading2(props: Heading2) {
 
   return (
     <h2
-      className="font-bold tracking-tight mt-[1.5rem] mb-[1rem] text-[24px] leading-10"
+      className="font-semibold tracking-tight mt-[1.5rem] mb-[1rem] text-[24px] leading-10"
       id={anchor}
     >
       {props.heading2.elements.map(i => (
