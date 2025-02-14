@@ -1,7 +1,7 @@
 import { AntdRegistry } from "@ant-design/nextjs-registry";
 import "./globals.css";
 import { cn, getConfigContent, getMenu } from "@/lib/utils";
-import { Poppins as FontSans } from "next/font/google";
+import { Poppins as FontSans, Inter } from "next/font/google";
 import { Footer } from "@/components/footer";
 import Header from "@/components/Header";
 import { Logo } from "@/components/logo";
@@ -14,6 +14,12 @@ import { listFooterLinks } from "../services/list-footer-links";
 const fontSans = FontSans({
   subsets: ["latin"],
   variable: "--font-sans",
+  weight: ["100", "200", "300", "400", "500", "600", "700", "800", "900"],
+});
+
+const inter = Inter({
+  subsets: ["latin"],
+  variable: "--font-inter",
   weight: ["100", "200", "300", "400", "500", "600", "700", "800", "900"],
 });
 
@@ -35,8 +41,8 @@ export default async function RootLayout({
     <html lang="en">
       <body
         className={cn(
-          "min-h-screen bg-background font-sans antialiased",
-          fontSans.variable
+          "min-h-screen bg-background flex flex-col font-sans antialiased",
+          inter.variable
         )}
       >
         <ThemeProvider
