@@ -70,7 +70,7 @@ export default function Sidebar({ menu, closeDrawer = () => {} }: Props) {
       <div className="flex items-center justify-between">
         <Link
           href={`/wiki/${url}/`}
-          className="w-[90%] dark:text-white"
+          className="w-[90%] text-inherit"
           onClick={() => closeDrawer()}
         >
           <span>{title}</span>

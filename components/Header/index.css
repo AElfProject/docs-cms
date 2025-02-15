@@ -28,6 +28,11 @@
         font-weight: 400;
       }
     }
+    &.ant-menu-item-selected {
+      .ant-menu-title-content {
+        color: var(--highlight-color);
+      }
+    }
   }
 }
 .header-drawer-container {

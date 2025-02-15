@@ -36,7 +36,7 @@ export function Footer({ baseConfig, footerData, logo }: Props) {
           <div className="hidden lg:block">{logo}</div>
           {Object.keys(footerData).map(category => (
             <div key={category} className="mb-4">
-              <h3 className="font-bold mb-4">{category}</h3>
+              <h3 className="font-bold mb-4 text-title-color">{category}</h3>
               <ul>
                 {footerData[category].map(item => (
                   <li key={key()} className="leading-[32px]">
