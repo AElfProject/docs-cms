@@ -51,6 +51,8 @@
     --title-color: #000000;
 
     --menu-unselected-item-color: #000000;
+
+    --header-color: #ffffff;
   }
 
   .dark {
@@ -99,6 +101,8 @@
     --title-color: #ffffff;
 
     --menu-unselected-item-color: #b9b9b9;
+
+    --header-color: #1b1b0b;
   }
 }
 

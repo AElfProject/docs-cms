@@ -128,7 +128,7 @@ export default function Header({ menu, baseConfig, logo, drawerLogo }: Props) {
         },
       }}
     >
-      <div className="fixed w-full z-50 flex px-5 h-[60px] border-b-[1px] items-center bg-background">
+      <div className="fixed w-full z-50 flex px-5 h-[60px] border-b-[1px] items-center bg-header-color">
         <div
           className="flex lg:hidden w-[30px] mr-2 "
           onClick={() => setDrawerOpen(true)}

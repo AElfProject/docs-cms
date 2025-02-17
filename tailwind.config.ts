@@ -63,6 +63,8 @@ const config = {
         "card-hover-border-color": "var(--card-hover-border-color)",
         "highlight-color": "var(--highlight-color)",
         "title-color": "var(--title-color)",
+        "menu-unselected-item-color": "var(--menu-unselected-item-color)",
+        "header-color": "var(--header-color)",
       },
       borderRadius: {
         lg: "var(--radius)",
