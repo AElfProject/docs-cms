@@ -124,6 +124,14 @@ export default function Header({ menu, baseConfig, logo, drawerLogo }: Props) {
             itemColor: getThemeConfig(theme, ["#3c3c4c", "#B9B9B9"]),
             itemSelectedColor: getThemeConfig(theme, ["#3451B2", "#fff"]),
             itemHoverColor: getThemeConfig(theme, ["#3451B2", "#fff"]),
+            horizontalItemHoverColor: getThemeConfig(theme, [
+              "#3451B2",
+              "#fff",
+            ]),
+            horizontalItemSelectedColor: getThemeConfig(theme, [
+              "#3451B2",
+              "#fff",
+            ]),
           },
         },
       }}
@@ -181,21 +189,21 @@ export default function Header({ menu, baseConfig, logo, drawerLogo }: Props) {
             <a
               href={baseConfig.blog}
               target="_blank"
-              className="hover:text-blue-500 text-[16px]"
+              className="hover:text-highlight-color text-[16px]"
             >
               Blog
             </a>
           )}
           {baseConfig.github && (
             <a href={baseConfig.github} target="_blank">
-              <GithubOutlined className="text-[20px] hover:text-blue-500" />
+              <GithubOutlined className="text-[20px] hover:text-highlight-color" />
             </a>
           )}
           {baseConfig.aboutUs && (
             <a
               href={baseConfig.aboutUs}
               target="_blank"
-              className="hover:text-blue-500 text-[16px] whitespace-nowrap"
+              className="hover:text-highlight-color text-[16px] whitespace-nowrap"
             >
               About Us
             </a>
