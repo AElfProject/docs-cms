@@ -129,13 +129,13 @@ html {
 }
 
 ul > .active {
-  color: #127fff;
+  color: var(--hightlight-color);
 }
 
 ul > .active ~ .active {
   color: inherit;
   &:hover {
-    color: #127fff;
+    color: var(--hightlight-color);
   }
 }
 
