@@ -178,7 +178,7 @@ export default function Sidebar({ menu, closeDrawer = () => {} }: Props) {
                 components: {
                   Menu: {
                     itemColor: "var( --menu-unselected-item-color)",
-                    subMenuItemBg: "var(--background)",
+                    subMenuItemBg: "var(--footer-background)",
                     itemSelectedBg: "var(--background)",
                     itemSelectedColor: "var(--highlight-color)",
                   },
@@ -186,7 +186,7 @@ export default function Sidebar({ menu, closeDrawer = () => {} }: Props) {
               }}
             >
               <div className=" h-full  min-w-8 sm:!pt-[60px] flex flex-col">
-                <div className="overflow-y-auto overflow-x-hidden thin-scrollbar flex-grow sm:border-r">
+                <div className="overflow-y-auto overflow-x-hidden thin-scrollbar flex-grow sm:border-r bg-footer-background">
                   <Menu
                     className={clsx(!showMenu && "hidden", "side-bar")}
                     openKeys={openKeys}

@@ -14,14 +14,14 @@ export interface Bullet extends Item {
 export function Bullet(props: Bullet) {
   return (
     <li>
-      {props.bullet.elements.map((i) => (
+      {props.bullet.elements.map(i => (
         <Element key={key()} {...i} />
       ))}
       {props.children ? (
         <ul>
           {props.allItems
-            .filter((i) => props.children?.includes(i.block_id))
-            .map((j) => (
+            .filter(i => props.children?.includes(i.block_id))
+            .map(j => (
               <Renderer
                 key={j.block_id}
                 {...j}

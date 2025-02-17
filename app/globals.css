@@ -44,7 +44,7 @@
 
     --card-border-color: #ebedf0;
 
-    --card-hover-border-color: #127fff;
+    --card-hover-border-color: #3451b2;
 
     --highlight-color: #3451b2;
 
@@ -94,7 +94,7 @@
 
     --card-border-color: #444950;
 
-    --card-hover-border-color: #127fff;
+    --card-hover-border-color: #ffffff;
 
     --highlight-color: #ffffff;
 
@@ -129,13 +129,13 @@ html {
 }
 
 ul > .active {
-  color: var(--hightlight-color);
+  color: var(--highlight-color);
 }
 
 ul > .active ~ .active {
   color: inherit;
   &:hover {
-    color: var(--hightlight-color);
+    color: var(--highlight-color);
   }
 }
 
