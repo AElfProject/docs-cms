@@ -1,5 +1,10 @@
 import Link from "next/link";
-import { getConfigContent, getMenu, toKebabCase } from "../lib/utils";
+import {
+  getConfigContent,
+  getMenu,
+  getMenuShow,
+  toKebabCase,
+} from "../lib/utils";
 import { getNodeToken, NodesItem } from "../services/larkServices";
 import CustomImage from "../components/customImage";
 import type { Metadata } from "next";
@@ -31,7 +36,7 @@ export async function generateMetadata(): Promise<Metadata> {
 }
 
 export default async function Home() {
-  const menu = await getMenu();
+  const menu = await getMenuShow();
   const nodes = await getNodeToken();
   const appToken = nodes.items.find((ele: NodesItem) => {
     return ele.title === "Configurations" && ele.obj_type === "bitable";
