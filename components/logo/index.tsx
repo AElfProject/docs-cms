@@ -7,7 +7,6 @@ interface Props {
   theme?: string;
 }
 export function Logo({ baseConfig, className }: Props) {
-  console.log(baseConfig.logoLight, "baseConfig.logoLight");
   return (
     <>
       {baseConfig?.logoLight ? (

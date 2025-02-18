@@ -1,6 +1,6 @@
 import { AntdRegistry } from "@ant-design/nextjs-registry";
 import "./globals.css";
-import { cn, getConfigContent, getMenu } from "@/lib/utils";
+import { cn, getConfigContent, getMenu, getMenuShow } from "@/lib/utils";
 import { Poppins as FontSans, Inter } from "next/font/google";
 import { Footer } from "@/components/footer";
 import Header from "@/components/Header";
@@ -29,6 +29,7 @@ export default async function RootLayout({
   children: React.ReactNode;
 }>) {
   const menu = await getMenu();
+  const menuShow = await getMenuShow();
   const nodes = await getNodeToken();
   const appToken = nodes.items.find((ele: NodesItem) => {
     return ele.title === "Configurations" && ele.obj_type === "bitable";
@@ -52,7 +53,7 @@ export default async function RootLayout({
         >
           <AntdRegistry>
             <Header
-              menu={menu}
+              menu={menuShow}
               baseConfig={configObj}
               logo={<Logo baseConfig={configObj} />}
               drawerLogo={
