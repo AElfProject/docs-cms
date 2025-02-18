@@ -13,7 +13,7 @@ export interface Bullet extends Item {
 
 export function Bullet(props: Bullet) {
   return (
-    <li>
+    <li className="mb-3">
       {props.bullet.elements.map(i => (
         <Element key={key()} {...i} />
       ))}
