@@ -37,20 +37,18 @@ export default function Header({ menu, baseConfig, logo, drawerLogo }: Props) {
   let temp: any = {};
   temp.items = findTopLevelItems(menu, id as string) as NodesItem[];
   const items = menu.items;
-  const menuItems: MenuItem[] = id
-    ? items.map(ele => {
-        const titles = findTitlesById(menu, ele.node_token);
-        const url = titles?.join("/");
-        let obj: any = {};
-        obj.label = (
-          <Link href={`/wiki/${url}/`} className="font-bold">
-            {ele.title}
-          </Link>
-        );
-        obj.key = ele.node_token;
-        return obj;
-      })
-    : [];
+  const menuItems: MenuItem[] = items.map(ele => {
+    const titles = findTitlesById(menu, ele.node_token);
+    const url = titles?.join("/");
+    let obj: any = {};
+    obj.label = (
+      <Link href={`/wiki/${url}/`} className="font-bold">
+        {ele.title}
+      </Link>
+    );
+    obj.key = ele.node_token;
+    return obj;
+  });
   const [current, setCurrent] = useState(
     temp.items && temp.items[0]?.node_token
   );
