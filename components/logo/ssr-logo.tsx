@@ -12,7 +12,7 @@ export function SsrLogo({ src, className }: Props) {
       height={32}
       alt="logo"
       className={className}
-      unoptimized={true}
+      unoptimized={process.env.NODE_ENV === "development" ? true : false}
     />
   );
 }
