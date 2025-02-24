@@ -9,6 +9,7 @@ import {
 } from "../services/larkServices";
 import { nanoid } from "nanoid";
 import { convertArrToUrl } from "./url";
+import { listHiddenMenu } from "../services/list-hidden-menu";
 
 export function cn(...inputs: ClassValue[]) {
   return twMerge(clsx(inputs));
@@ -121,6 +122,33 @@ export async function getMenu() {
   return data;
 }
 
+function filterRecursively(
+  data: NodesData,
+  labelsExcludeItems: string[] | null
+) {
+  if (!labelsExcludeItems) {
+    return data;
+  }
+  const filteredItems = data.items.filter(
+    item => !labelsExcludeItems.includes(item.title)
+  );
+  const filteredItemsWithChildren = filteredItems.map(item => {
+    if (item.children && item.children.length > 0) {
+      item.children = item.children.map(childData =>
+        filterRecursively(childData, labelsExcludeItems)
+      );
+    }
+    return item;
+  });
+  return { ...data, items: filteredItemsWithChildren };
+}
+
+export async function getMenuShow() {
+  const data = await getFileByFolderToken();
+  const labelsExcludeItems = await listHiddenMenu();
+  const filteredData = filterRecursively(data, labelsExcludeItems);
+  return filteredData;
+}
 export function key() {
   return nanoid();
 }

@@ -70,7 +70,7 @@ export default function Sidebar({ menu, closeDrawer = () => {} }: Props) {
       <div className="flex items-center justify-between">
         <Link
           href={`/wiki/${url}/`}
-          className="w-[90%] dark:text-white"
+          className="w-[90%] text-inherit"
           onClick={() => closeDrawer()}
         >
           <span>{title}</span>
@@ -177,24 +177,16 @@ export default function Sidebar({ menu, closeDrawer = () => {} }: Props) {
                 },
                 components: {
                   Menu: {
-                    itemBg: getThemeConfig(theme, [
-                      "#fff",
-                      "hsl(var(--background))",
-                    ]),
-                    subMenuItemBg: getThemeConfig(theme, [
-                      "#fff",
-                      "hsl(var(--background))",
-                    ]),
-                    itemSelectedBg: getThemeConfig(theme, [
-                      "#fff",
-                      "hsl(var(--background))",
-                    ]),
+                    itemColor: "var( --menu-unselected-item-color)",
+                    subMenuItemBg: "var(--header-color)",
+                    itemSelectedBg: "var(--background)",
+                    itemSelectedColor: "var(--highlight-color)",
                   },
                 },
               }}
             >
               <div className=" h-full  min-w-8 sm:!pt-[60px] flex flex-col">
-                <div className="overflow-y-auto overflow-x-hidden thin-scrollbar flex-grow sm:border-r">
+                <div className="overflow-y-auto overflow-x-hidden thin-scrollbar flex-grow sm:border-r bg-header-color">
                   <Menu
                     className={clsx(!showMenu && "hidden", "side-bar")}
                     openKeys={openKeys}

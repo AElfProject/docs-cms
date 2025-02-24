@@ -6,7 +6,7 @@ const ThemeToggler = () => {
 
   return (
     <button
-      className="rounded-lg flex items-center justify-center transition-all duration-300 focus:outline-none hover:text-blue-500 text-[20px]"
+      className="rounded-lg flex items-center justify-center transition-all duration-300 focus:outline-none hover:text-highlight-color text-[20px]"
       onClick={() => {
         setTheme(theme === "light" || !theme ? "dark" : "light");
       }}
@@ -14,13 +14,13 @@ const ThemeToggler = () => {
     >
       {theme === "light" || !theme ? (
         <SunOutlined
-          className="text-blue-500 w-6 h-6 "
+          className="text-highlight-color w-6 h-6 "
           width={24}
           height={24}
         />
       ) : (
         <MoonOutlined
-          className="text-blue-400  w-6 h-6 "
+          className="text-highlight-color  w-6 h-6 "
           width={24}
           height={24}
         />

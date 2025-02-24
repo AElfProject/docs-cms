@@ -1,5 +1,4 @@
 import type { Config } from "tailwindcss";
-import { fontFamily } from "tailwindcss/defaultTheme";
 
 const config = {
   darkMode: ["class"],
@@ -26,8 +25,8 @@ const config = {
         border: "hsl(var(--border))",
         input: "hsl(var(--input))",
         ring: "hsl(var(--ring))",
-        background: "hsl(var(--background))",
-        foreground: "hsl(var(--foreground))",
+        background: "var(--background)",
+        foreground: "var(--foreground)",
         primary: {
           DEFAULT: "hsl(var(--primary))",
           foreground: "hsl(var(--primary-foreground))",
@@ -62,6 +61,10 @@ const config = {
         "card-background-color": "var(--card-background-color)",
         "card-border-color": "var(--card-border-color)",
         "card-hover-border-color": "var(--card-hover-border-color)",
+        "highlight-color": "var(--highlight-color)",
+        "title-color": "var(--title-color)",
+        "menu-unselected-item-color": "var(--menu-unselected-item-color)",
+        "header-color": "var(--header-color)",
       },
       borderRadius: {
         lg: "var(--radius)",
@@ -83,7 +86,7 @@ const config = {
         "accordion-up": "accordion-up 0.2s ease-out",
       },
       fontFamily: {
-        sans: ["var(--font-sans)", ...fontFamily.sans],
+        sans: ["var(--font-inter)", "sans-serif"],
       },
     },
   },

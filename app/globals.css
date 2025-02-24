@@ -5,7 +5,7 @@
 @layer base {
   :root {
     --background: 0 0% 100%;
-    --foreground: 216 8.2% 12%;
+    --foreground: #3c3c4c;
 
     --card: 0 0% 100%;
     --card-foreground: 216 8.2% 12%;
@@ -44,12 +44,20 @@
 
     --card-border-color: #ebedf0;
 
-    --card-hover-border-color: #127fff;
+    --card-hover-border-color: #3451b2;
+
+    --highlight-color: #3451b2;
+
+    --title-color: #000000;
+
+    --menu-unselected-item-color: #000000;
+
+    --header-color: #ffffff;
   }
 
   .dark {
-    --background: 216 8.2% 12%;
-    --foreground: 210 40% 98%;
+    --background: #1b1b1b;
+    --foreground: #b9b9b9;
 
     --card: 216 8.2% 12%;
     --card-foreground: 210 40% 98%;
@@ -76,17 +84,25 @@
     --input: 217.2 32.6% 17.5%;
     --ring: 212.7 26.8% 83.9%;
 
-    --footer-background: #1c1e21;
+    --footer-background: #161618;
 
     --color-text-link: #606770;
 
-    --collapse-button-bg: #ffffff0d;
+    --collapse-button-bg: #2e2e32;
 
     --card-background-color: #242526;
 
-    --card-border-color: #444950;
+    --card-border-color: #2e2e32;
 
-    --card-hover-border-color: #127fff;
+    --card-hover-border-color: #ffffff;
+
+    --highlight-color: #ffffff;
+
+    --title-color: #ffffff;
+
+    --menu-unselected-item-color: #b9b9b9;
+
+    --header-color: #161618;
   }
 }
 
@@ -113,13 +129,13 @@ html {
 }
 
 ul > .active {
-  color: #127fff;
+  color: var(--highlight-color);
 }
 
 ul > .active ~ .active {
   color: inherit;
   &:hover {
-    color: #127fff;
+    color: var(--highlight-color);
   }
 }
 

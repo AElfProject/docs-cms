@@ -1,5 +1,10 @@
 import Link from "next/link";
-import { getConfigContent, getMenu, toKebabCase } from "../lib/utils";
+import {
+  getConfigContent,
+  getMenu,
+  getMenuShow,
+  toKebabCase,
+} from "../lib/utils";
 import { getNodeToken, NodesItem } from "../services/larkServices";
 import CustomImage from "../components/customImage";
 import type { Metadata } from "next";
@@ -12,7 +17,7 @@ const getChildList = (ele: NodesItem, index: number, url: string = "") => {
       const newUrl = `${url}${item.url_path}/`;
       return (
         <li className="ml-4" key={item.node_token}>
-          <Link href={newUrl} className="text-blue-500">
+          <Link href={newUrl} className="text-highlight-color">
             {item.title}
           </Link>
         </li>
@@ -31,7 +36,7 @@ export async function generateMetadata(): Promise<Metadata> {
 }
 
 export default async function Home() {
-  const menu = await getMenu();
+  const menu = await getMenuShow();
   const nodes = await getNodeToken();
   const appToken = nodes.items.find((ele: NodesItem) => {
     return ele.title === "Configurations" && ele.obj_type === "bitable";
@@ -51,9 +56,12 @@ export default async function Home() {
             height={0}
             sizes="100vw"
             className="w-full h-auto"
+            unoptimized={process.env.NODE_ENV === "development" ? true : false}
           />
         </div>
-        <h1 className="text-4xl font-bold mb-4">{configObj.title}</h1>
+        <h1 className="text-4xl font-semibold mb-4 text-title-color">
+          {configObj.title}
+        </h1>
         <p>{configObj.description}</p>
       </div>
       <div className="grid grid-flow-row-dense grid-cols-1 md:grid-cols-2 lg:grid-cols-3 mt-20 mb-16">
@@ -61,7 +69,7 @@ export default async function Home() {
           const url = `/wiki/${ele.url_path}/`;
           return (
             <ul key={ele.node_token} className="m-4 list-disc">
-              <h2 className="font-bold text-[20px] mb-4 ">
+              <h2 className="font-semibold text-[20px] mb-4 text-title-color">
                 {emojiObj[ele.title] && (
                   <span className="mr-2">{emojiObj[ele.title]}</span>
                 )}

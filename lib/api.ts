@@ -13,7 +13,7 @@ export const fetcher = async <T = any>(
       headers: {
         Authorization: `Bearer ${tenantAccessToken}`,
       },
-      next: { revalidate: 6000, ...next },
+      next: { revalidate: 1000, ...next },
     })
   );
   const endTime = new Date().getTime();

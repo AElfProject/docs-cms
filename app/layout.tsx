@@ -1,7 +1,7 @@
 import { AntdRegistry } from "@ant-design/nextjs-registry";
 import "./globals.css";
-import { cn, getConfigContent, getMenu } from "@/lib/utils";
-import { Poppins as FontSans } from "next/font/google";
+import { cn, getConfigContent, getMenu, getMenuShow } from "@/lib/utils";
+import { Poppins as FontSans, Inter } from "next/font/google";
 import { Footer } from "@/components/footer";
 import Header from "@/components/Header";
 import { Logo } from "@/components/logo";
@@ -17,12 +17,19 @@ const fontSans = FontSans({
   weight: ["100", "200", "300", "400", "500", "600", "700", "800", "900"],
 });
 
+const inter = Inter({
+  subsets: ["latin"],
+  variable: "--font-inter",
+  weight: ["100", "200", "300", "400", "500", "600", "700", "800", "900"],
+});
+
 export default async function RootLayout({
   children,
 }: Readonly<{
   children: React.ReactNode;
 }>) {
   const menu = await getMenu();
+  const menuShow = await getMenuShow();
   const nodes = await getNodeToken();
   const appToken = nodes.items.find((ele: NodesItem) => {
     return ele.title === "Configurations" && ele.obj_type === "bitable";
@@ -35,8 +42,8 @@ export default async function RootLayout({
     <html lang="en">
       <body
         className={cn(
-          "min-h-screen bg-background font-sans antialiased",
-          fontSans.variable
+          "min-h-screen bg-background flex flex-col font-sans antialiased",
+          inter.variable
         )}
       >
         <ThemeProvider
@@ -46,7 +53,7 @@ export default async function RootLayout({
         >
           <AntdRegistry>
             <Header
-              menu={menu}
+              menu={menuShow}
               baseConfig={configObj}
               logo={<Logo baseConfig={configObj} />}
               drawerLogo={

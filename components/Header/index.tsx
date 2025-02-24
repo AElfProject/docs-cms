@@ -37,7 +37,7 @@ export default function Header({ menu, baseConfig, logo, drawerLogo }: Props) {
   let temp: any = {};
   temp.items = findTopLevelItems(menu, id as string) as NodesItem[];
   const items = menu.items;
-  const menuItems: MenuItem[] = items.map((ele) => {
+  const menuItems: MenuItem[] = items.map(ele => {
     const titles = findTitlesById(menu, ele.node_token);
     const url = titles?.join("/");
     let obj: any = {};
@@ -55,7 +55,7 @@ export default function Header({ menu, baseConfig, logo, drawerLogo }: Props) {
   useEffect(() => {
     setCurrent(temp.items && temp.items[0]?.node_token);
   }, [id]);
-  const onClick: MenuProps["onClick"] = (e) => {
+  const onClick: MenuProps["onClick"] = e => {
     setCurrent(e.key);
   };
   const [drawerOpen, setDrawerOpen] = useState(false);
@@ -77,7 +77,7 @@ export default function Header({ menu, baseConfig, logo, drawerLogo }: Props) {
   );
   const homeDrawerContent = (
     <div className="home-drawer-content">
-      {menu.items.map((item) => {
+      {menu.items.map(item => {
         const titles = findTitlesById(menu, item.node_token);
         const url = titles?.join("/");
         return (
@@ -119,9 +119,24 @@ export default function Header({ menu, baseConfig, logo, drawerLogo }: Props) {
         token: {
           fontFamily: "inherit",
         },
+        components: {
+          Menu: {
+            itemColor: getThemeConfig(theme, ["#3c3c4c", "#B9B9B9"]),
+            itemSelectedColor: getThemeConfig(theme, ["#3451B2", "#fff"]),
+            itemHoverColor: getThemeConfig(theme, ["#3451B2", "#fff"]),
+            horizontalItemHoverColor: getThemeConfig(theme, [
+              "#3451B2",
+              "#fff",
+            ]),
+            horizontalItemSelectedColor: getThemeConfig(theme, [
+              "#3451B2",
+              "#fff",
+            ]),
+          },
+        },
       }}
     >
-      <div className="fixed w-full z-50 flex px-5 h-[60px] border-b-[1px] items-center bg-background">
+      <div className="fixed w-full z-50 flex px-5 h-[60px] border-b-[1px] items-center bg-header-color">
         <div
           className="flex lg:hidden w-[30px] mr-2 "
           onClick={() => setDrawerOpen(true)}
@@ -169,19 +184,28 @@ export default function Header({ menu, baseConfig, logo, drawerLogo }: Props) {
           />
         </div>
 
-        <div className="flex items-center space-x-4 justify-end ml-auto lg:mr-5">
+        <div className="flex items-center space-x-4 justify-end ml-auto lg:mr-5 ">
           {baseConfig.blog && (
             <a
               href={baseConfig.blog}
               target="_blank"
-              className="hover:text-blue-500 text-[16px]"
+              className="hover:text-highlight-color text-[16px]"
             >
               Blog
             </a>
           )}
           {baseConfig.github && (
             <a href={baseConfig.github} target="_blank">
-              <GithubOutlined className="text-[20px] hover:text-blue-500" />
+              <GithubOutlined className="text-[20px] hover:text-highlight-color" />
+            </a>
+          )}
+          {baseConfig.aboutUs && (
+            <a
+              href={baseConfig.aboutUs}
+              target="_blank"
+              className="hover:text-highlight-color text-[16px] whitespace-nowrap"
+            >
+              About Us
             </a>
           )}
           <span className="hidden lg:inline-block">

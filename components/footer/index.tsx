@@ -30,15 +30,15 @@ export function Footer({ baseConfig, footerData, logo }: Props) {
   }
 
   return (
-    <footer className="bg-footer-background">
+    <footer className="bg-footer-background flex-1">
       <div className="container p-8 ">
         <div className="footer-links lg:grid grid-cols-5 gap-4">
           <div className="hidden lg:block">{logo}</div>
-          {Object.keys(footerData).map((category) => (
+          {Object.keys(footerData).map(category => (
             <div key={category} className="mb-4">
-              <h3 className="font-bold mb-4">{category}</h3>
+              <h3 className="font-bold mb-4 text-title-color">{category}</h3>
               <ul>
-                {footerData[category].map((item) => (
+                {footerData[category].map(item => (
                   <li key={key()} className="leading-[32px]">
                     <Link
                       className="hover:underline text-link"
